@@ -1,0 +1,214 @@
+
+<!-- Temperature alarm - show warning icon -->
+<div ng-if="itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+    <div class="row">
+	    <div class="text-center"> 
+            <span style="color:yellow; background-color:grey; "><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span>
+        </div>
+    </div>
+    <div class="row">
+        <widget-icon iconset="'eclipse-smarthome-classic'" icon="'error'" inline="true"></widget-icon>
+    </div>    
+</div>
+
+<div class="row">
+    <!-- Normal temperature -->
+    <div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)">
+        <div class="text-center">
+    		<span style="color: orange; ">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> 
+        </div>
+    </div>
+    <!-- Temperature alarm -->
+    <div ng-if="itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+        <div class="text-center">
+            <span style="color: red; "><strong>{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</strong></span> 
+        </div>
+    </div>
+</div>
+
+<!-- Show humidity only when temperature is normal -->
+<div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)">
+    <div class="row">
+	    <div class="text-center">
+		    <span style="color: aqua; ">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> 
+        </div>
+    </div>  
+</div>  
+<!-- Show tunnel number and remining time only when tenperature is normal -->
+<div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)">
+    <div class="row">
+    	<div class="text-center" ng-style="{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }">
+            <span style="color:yellow; background-color:grey; "><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style="font-size: 12pt"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span>  
+        </div>
+    </div>
+</div>
+<!-- Show in temperature & humidity only when temperature is normal -->
+<div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)">    
+    <div class="row">
+    	<div class="text-center">
+    		<span style="color: orange; ">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> 
+      </div>
+    </div>
+    <div class="row">
+    	<div class="text-center">
+    		<span style="color: aqua; ">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> 
+      </div>
+    </div>  
+</div>  
+
+<!-- Temperature alarm - show thermometer icon -->
+<div ng-if="itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+    <div class="row">
+        <widget-icon iconset="'eclipse-smarthome-classic'" icon="'temperature_hot'" inline="true"></widget-icon>
+    </div>    
+</div>
+
+<!-- 
+<div class="row">
+    <div ng-if="itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+        <div class="col-xs-4"> 
+            <table>
+                <tr>
+                    <td><widget-icon iconset="'eclipse-smarthome-classic'" icon="'error'" size="50" inline="true"></widget-icon></td>
+                    <td><widget-icon iconset="'eclipse-smarthome-classic'" icon="'temperature_hot'" size="50" inline="true"></widget-icon></td>
+                </tr>
+            </table>
+        </div>        
+    </div>    
+</div>
+
+<div class="row">
+    <div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)">
+        <div class="text-center">
+    		<span style="color: orange; ">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> 
+        </div>
+    </div>
+    <div ng-if="itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+        <div class="text-center">
+            <span style="color: red; "><strong>{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</strong></span> 
+        </div>
+    </div>
+</div>
+<div class="row">
+	<div class="text-center">
+		<span style="color: aqua; ">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> 
+  </div>
+</div>  
+<div class="row">
+    <div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)">    
+	    <div class="text-center" ng-style="{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }">
+            <span style="color:yellow; background-color:grey; "><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style="font-size: 12pt"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span> 
+        </div> 
+    </div>
+    <div ng-if="itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+        <div class="text-center" ng-style="{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }">
+            <span style="color:yellow; background-color:grey; "><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style="font-size: 12pt"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span> 
+        </div>        
+    </div>
+</div>
+<div class="row">
+	<div class="text-center">
+		<span style="color: orange; ">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> 
+  </div>
+</div>
+<div class="row">
+	<div class="text-center">
+		<span style="color: aqua; ">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> 
+  </div>
+</div>  
+
+ -->
+
+<!-- VERSION NO ALARM -->
+<!-- <div class="row">
+	<div class="text-center">
+		<span style="color: orange; ">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> 
+  </div>
+</div>
+<div class="row">
+	<div class="text-center">
+		<span style="color: aqua; ">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> 
+  </div>
+</div>  
+<div class="row">
+	<div class="text-center" ng-style="{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }">
+    <span style="color:yellow; background-color:grey; "><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style="font-size: 12pt"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span> 
+  </div> 
+</div>
+<div class="row">
+	<div class="text-center">
+		<span style="color: orange; ">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> 
+  </div>
+</div>
+<div class="row">
+	<div class="text-center">
+		<span style="color: aqua; ">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> 
+  </div>
+</div>   -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- VERSION WITH TEMPERATURE ALARM -->
+<!-- <div class="row">
+    <div ng-if="itemValue(config.tnl_current_temperature) >= itemValue(config.temperature_alarm_setpoint)">
+        <div class="col-xs-4"> 
+            <table>
+                <tr>
+                  <td><widget-icon iconset="'eclipse-smarthome-classic'" icon="'error'" size="50" inline="true"></widget-icon></td>
+                  <td><span style="color: cyan; font-size: 50pt">{{config.tnl_number}}</span></td>
+                  <td><widget-icon iconset="'eclipse-smarthome-classic'" icon="'temperature_hot'" size="50" inline="true"></widget-icon></td>
+                  <td><span style="color: red; font-size: 40pt"><strong>&nbsp;&nbsp;{{'%.1f°C' | sprintf:itemValue(config.tnl_current_temperature)}}</strong></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div ng-if="itemValue(config.temperature_alarm_setpoint) > itemValue(config.tnl_current_temperature)">
+        <div class="col-xs-4"><span style="color: cyan; font-size: 50pt">{{config.tnl_number}}</span></div>
+    </div>
+</div>  
+
+<div class="row">
+    <div class="text-center" ng-style="{ color: (itemState(config.tnl_enable_item)=='OFF')?'grey':(itemValue(config.tnl_timer_item) > itemValue(config.tnl_timer_warn_item)*1.0 ?'lime':itemValue(config.tnl_timer_item) > 0 ?'yellow':'red') }">
+          <span style="font-size: 130pt">{{'%.0f' | sprintf:itemValue(config.tnl_timer_item).split('.')[0]}}</span> 
+    </div>
+</div> -->
+<!-- temperature_alarm_setpoint
+tnl_current_temperature -->
+
+<!-- VERSION NO ALARM -->
+<!-- <div class="row">
+
+    <div class="col-xs-4"> 
+  <table>
+    <tr>
+      <td><widget-icon iconset="'eclipse-smarthome-classic'" icon="'error'" size="50" inline="true"></widget-icon></td>
+      <td><span style="color: cyan; font-size: 50pt">{{config.tnl_number}}</span></td>
+      <td><widget-icon iconset="'eclipse-smarthome-classic'" icon="'temperature_hot'" size="50" inline="true"></widget-icon></td>
+      <td><span style="color: red; font-size: 40pt"><strong>&nbsp;&nbsp;{{'%.1f' | sprintf:itemValue(config.tnl_current_temperature)}}</strong></span></td>
+    </tr>
+  </table>
+      </div>
+  </div>
+  
+  <div class="row">
+  <div class="text-center" ng-style="{ color: (itemState(config.tnl_enable_item)=='OFF')?'grey':(itemValue(config.tnl_timer_item) > itemValue(config.tnl_timer_warn_item)*1.0 ?'lime':itemValue(config.tnl_timer_item) > 0 ?'yellow':'red') }">
+          <span style="font-size: 130pt">{{'%.0f' | sprintf:itemValue(config.tnl_timer_item).split('.')[0]}}</span> 
+  
+    </div>
+  </div> -->

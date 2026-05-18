@@ -1,0 +1,945 @@
+{
+    "dashboards": [
+        {
+            "id": "УЕСТ АГРО ГРУП ЕООД",
+            "name": "T-Rh-Timer-T-Alarm",
+            "row": 2,
+            "col": 0,
+            "tile": {},
+            "sizeX": 6,
+            "widgets": [
+                {
+                    "name": "1",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-alarm",
+                    "row": 5,
+                    "col": 9,
+                    "config": {
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value",
+                        "tnl_number": "1",
+                        "tnl_enable_item": "tnl_1_btnctrl_enable",
+                        "tnl_timer_item": "tnl_1_current_timer_value",
+                        "temperature_alarm_setpoint": "default_tnl_temperature_alarm_value",
+                        "tnl_current_temperature": "out_1_Temperature"
+                    },
+                    "type": "template",
+                    "$$hashKey": "object:993"
+                },
+                {
+                    "name": "1",
+                    "sizeX": 1,
+                    "sizeY": 3,
+                    "customwidget": "T-Rh-Timer-T-Alarm",
+                    "row": 0,
+                    "col": 9,
+                    "config": {
+                        "tnl_number": 1,
+                        "in_temperature": "in_1_Temperature",
+                        "in_humidity": "in_1_Humidity",
+                        "out_temperature": "out_1_Temperature",
+                        "out_humidity": "out_1_Humidity",
+                        "tnl_btnctrl_enable": "tnl_1_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_1_current_timer_value",
+                        "temperature_alarm_setpoint": "default_tnl_temperature_alarm_value"
+                    },
+                    "type": "template",
+                    "$$hashKey": "object:994"
+                },
+                {
+                    "name": "22",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer-T-Alarm",
+                    "row": 0,
+                    "col": 10,
+                    "config": {
+                        "tnl_number": 1,
+                        "in_temperature": "in_1_Temperature",
+                        "in_humidity": "in_1_Humidity",
+                        "out_temperature": "out_1_Temperature",
+                        "out_humidity": "out_1_Humidity",
+                        "tnl_btnctrl_enable": "tnl_1_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_1_current_timer_value",
+                        "temperature_alarm_setpoint": "default_tnl_temperature_alarm_value"
+                    },
+                    "type": "template",
+                    "$$hashKey": "object:995"
+                }
+            ],
+            "$$hashKey": "object:23"
+        },
+        {
+            "id": "Влажност-телефон",
+            "name": "T-Rh-Timer sample",
+            "row": 0,
+            "col": 0,
+            "sizeX": 6,
+            "tile": {},
+            "widgets": [
+                {
+                    "name": "1",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "row": 0,
+                    "col": 0,
+                    "config": {
+                        "tnl_btnctrl_enable": "tnl_1_btnctrl_enable",
+                        "in_temperature": "in_1_Temperature",
+                        "in_humidity": "in_1_Humidity",
+                        "out_temperature": "out_1_Temperature",
+                        "out_humidity": "out_1_Humidity",
+                        "tnl_current_timer": "tnl_9_displayCurrentTimerValue",
+                        "tnl_number": 1,
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_1_current_timer_value"
+                    },
+                    "type": "template"
+                }
+            ],
+            "$$hashKey": "object:21"
+        },
+        {
+            "id": "DISPLAY",
+            "name": "СВЕТЛИННА СИГНАЛИЗАЦИЯ И ТАЙМЕРИ",
+            "row": 7,
+            "col": 0,
+            "sizeX": 6,
+            "sizeY": 1,
+            "widgets": [
+                {
+                    "name": "1",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value",
+                        "tnl_number": "1",
+                        "tnl_enable_item": "tnl_1_btnctrl_enable",
+                        "tnl_timer_item": "tnl_1_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 0,
+                    "type": "template"
+                },
+                {
+                    "name": "2",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value",
+                        "tnl_number": "2",
+                        "tnl_enable_item": "tnl_2_btnctrl_enable",
+                        "tnl_timer_item": "tnl_2_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 2,
+                    "type": "template"
+                },
+                {
+                    "name": "3",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value",
+                        "tnl_number": "3",
+                        "tnl_enable_item": "tnl_3_btnctrl_enable",
+                        "tnl_timer_item": "tnl_3_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 4,
+                    "type": "template"
+                },
+                {
+                    "name": "4",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value",
+                        "tnl_number": "4",
+                        "tnl_enable_item": "tnl_4_btnctrl_enable",
+                        "tnl_timer_item": "tnl_4_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 6,
+                    "type": "template"
+                },
+                {
+                    "name": "5",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_5_btnctrl_enable",
+                        "tnl_timer_item": "tnl_5_current_timer_value",
+                        "tnl_number": "5",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 0,
+                    "col": 8,
+                    "type": "template"
+                },
+                {
+                    "name": "6",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_6_btnctrl_enable",
+                        "tnl_timer_item": "tnl_6_current_timer_value",
+                        "tnl_number": "6",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 0,
+                    "col": 10,
+                    "type": "template"
+                },
+                {
+                    "name": "7",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_7_btnctrl_enable",
+                        "tnl_timer_item": "tnl_7_current_timer_value",
+                        "tnl_number": "7",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 2,
+                    "col": 0,
+                    "type": "template"
+                },
+                {
+                    "name": "8",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_8_btnctrl_enable",
+                        "tnl_timer_item": "tnl_8_current_timer_value",
+                        "tnl_number": "8",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 2,
+                    "col": 2,
+                    "type": "template"
+                },
+                {
+                    "name": "9",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_9_btnctrl_enable",
+                        "tnl_timer_item": "tnl_9_current_timer_value",
+                        "tnl_number": "9",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 2,
+                    "col": 4,
+                    "type": "template"
+                },
+                {
+                    "name": "10",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_10_btnctrl_enable",
+                        "tnl_timer_item": "tnl_10_current_timer_value",
+                        "tnl_number": "10",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 2,
+                    "col": 6,
+                    "type": "template"
+                },
+                {
+                    "name": "11",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_11_btnctrl_enable",
+                        "tnl_timer_item": "tnl_11_current_timer_value",
+                        "tnl_number": "11",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 2,
+                    "col": 8,
+                    "type": "template"
+                },
+                {
+                    "name": "12",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_12_btnctrl_enable",
+                        "tnl_timer_item": "tnl_12_current_timer_value",
+                        "tnl_number": "12",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 2,
+                    "col": 10,
+                    "type": "template"
+                },
+                {
+                    "name": "13",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_13_btnctrl_enable",
+                        "tnl_timer_item": "tnl_13_current_timer_value",
+                        "tnl_number": "13",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 4,
+                    "col": 0,
+                    "type": "template"
+                },
+                {
+                    "name": "14",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_14_btnctrl_enable",
+                        "tnl_timer_item": "tnl_14_current_timer_value",
+                        "tnl_number": "14",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 4,
+                    "col": 2,
+                    "type": "template"
+                },
+                {
+                    "name": "15",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_15_btnctrl_enable",
+                        "tnl_timer_item": "tnl_15_current_timer_value",
+                        "tnl_number": "15",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 4,
+                    "col": 4,
+                    "type": "template"
+                },
+                {
+                    "name": "16",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_16_btnctrl_enable",
+                        "tnl_timer_item": "tnl_16_current_timer_value",
+                        "tnl_number": "16",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 4,
+                    "col": 6,
+                    "type": "template"
+                },
+                {
+                    "name": "17",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_17_btnctrl_enable",
+                        "tnl_timer_item": "tnl_17_current_timer_value",
+                        "tnl_number": "17",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 4,
+                    "col": 8,
+                    "type": "template"
+                },
+                {
+                    "name": "18",
+                    "sizeX": 2,
+                    "sizeY": 2,
+                    "customwidget": "tnl-timer-display-box",
+                    "config": {
+                        "tnl_enable_item": "tnl_18_btnctrl_enable",
+                        "tnl_timer_item": "tnl_18_current_timer_value",
+                        "tnl_number": "18",
+                        "tnl_timer_warn_item": "default_tnl_warn_timer_value"
+                    },
+                    "row": 4,
+                    "col": 10,
+                    "type": "template"
+                }
+            ],
+            "$$hashKey": "object:28"
+        },
+        {
+            "id": "t-rh-time-phone",
+            "name": "t-rh-time-phone",
+            "row": 8,
+            "col": 0,
+            "sizeX": 6,
+            "widgets": [
+                {
+                    "name": "1",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "row": 0,
+                    "col": 0,
+                    "config": {
+                        "tnl_number": 1,
+                        "in_temperature": "in_1_Temperature",
+                        "in_humidity": "in_1_Humidity",
+                        "out_temperature": "out_1_Temperature",
+                        "out_humidity": "out_1_Humidity",
+                        "tnl_btnctrl_enable": "tnl_1_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_1_current_timer_value"
+                    },
+                    "type": "template"
+                },
+                {
+                    "name": "2",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 2,
+                        "in_temperature": "in_2_Temperature",
+                        "in_humidity": "in_2_Humidity",
+                        "out_temperature": "out_2_Temperature",
+                        "out_humidity": "out_2_Humidity",
+                        "tnl_btnctrl_enable": "tnl_2_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_2_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 1,
+                    "type": "template"
+                },
+                {
+                    "name": "3",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 3,
+                        "in_temperature": "in_3_Temperature",
+                        "in_humidity": "in_3_Humidity",
+                        "out_temperature": "out_3_Temperature",
+                        "out_humidity": "out_3_Humidity",
+                        "tnl_btnctrl_enable": "tnl_3_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_3_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 2,
+                    "type": "template"
+                },
+                {
+                    "name": "4",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 4,
+                        "in_temperature": "in_4_Temperature",
+                        "in_humidity": "in_4_Humidity",
+                        "out_temperature": "out_4_Temperature",
+                        "out_humidity": "out_4_Humidity",
+                        "tnl_btnctrl_enable": "tnl_4_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_4_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 3,
+                    "type": "template"
+                },
+                {
+                    "name": "5",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 5,
+                        "in_temperature": "in_5_Temperature",
+                        "in_humidity": "in_5_Humidity",
+                        "out_temperature": "out_5_Temperature",
+                        "out_humidity": "out_5_Humidity",
+                        "tnl_btnctrl_enable": "tnl_5_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_5_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 4,
+                    "type": "template"
+                },
+                {
+                    "name": "6",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 6,
+                        "in_temperature": "in_6_Temperature",
+                        "in_humidity": "in_6_Humidity",
+                        "out_temperature": "out_6_Temperature",
+                        "out_humidity": "out_6_Humidity",
+                        "tnl_btnctrl_enable": "tnl_6_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_6_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 5,
+                    "type": "template"
+                },
+                {
+                    "name": "7",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 7,
+                        "in_temperature": "in_7_Temperature",
+                        "in_humidity": "in_7_Humidity",
+                        "out_temperature": "out_7_Temperature",
+                        "out_humidity": "out_7_Humidity",
+                        "tnl_btnctrl_enable": "tnl_7_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_7_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 6,
+                    "type": "template"
+                },
+                {
+                    "name": "8",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 8,
+                        "in_temperature": "in_8_Temperature",
+                        "in_humidity": "in_8_Humidity",
+                        "out_temperature": "out_8_Temperature",
+                        "out_humidity": "out_8_Humidity",
+                        "tnl_btnctrl_enable": "tnl_8_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_8_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 7,
+                    "type": "template"
+                },
+                {
+                    "name": "9",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 9,
+                        "in_temperature": "in_9_Temperature",
+                        "in_humidity": "in_9_Humidity",
+                        "out_temperature": "out_9_Temperature",
+                        "out_humidity": "out_9_Humidity",
+                        "tnl_btnctrl_enable": "tnl_9_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_9_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 8,
+                    "type": "template"
+                },
+                {
+                    "name": "10",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 10,
+                        "in_temperature": "in_10_Temperature",
+                        "in_humidity": "in_10_Humidity",
+                        "out_temperature": "out_10_Temperature",
+                        "out_humidity": "out_10_Humidity",
+                        "tnl_btnctrl_enable": "tnl_10_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_10_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 9,
+                    "type": "template"
+                },
+                {
+                    "name": "11",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 11,
+                        "in_temperature": "in_11_Temperature",
+                        "in_humidity": "in_11_Humidity",
+                        "out_temperature": "out_11_Temperature",
+                        "out_humidity": "out_11_Humidity",
+                        "tnl_btnctrl_enable": "tnl_11_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_11_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 10,
+                    "type": "template"
+                },
+                {
+                    "name": "12",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 12,
+                        "in_temperature": "in_12_Temperature",
+                        "in_humidity": "in_12_Humidity",
+                        "out_temperature": "out_12_Temperature",
+                        "out_humidity": "out_12_Humidity",
+                        "tnl_btnctrl_enable": "tnl_12_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_12_current_timer_value"
+                    },
+                    "row": 0,
+                    "col": 11,
+                    "type": "template"
+                },
+                {
+                    "name": "13",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 13,
+                        "in_temperature": "in_13_Temperature",
+                        "in_humidity": "in_13_Humidity",
+                        "out_temperature": "out_13_Temperature",
+                        "out_humidity": "out_13_Humidity",
+                        "tnl_btnctrl_enable": "tnl_13_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_13_current_timer_value"
+                    },
+                    "row": 2,
+                    "col": 0,
+                    "type": "template"
+                },
+                {
+                    "name": "14",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 14,
+                        "in_temperature": "in_14_Temperature",
+                        "in_humidity": "in_14_Humidity",
+                        "out_temperature": "out_14_Temperature",
+                        "out_humidity": "out_14_Humidity",
+                        "tnl_btnctrl_enable": "tnl_14_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_14_current_timer_value"
+                    },
+                    "row": 2,
+                    "col": 1,
+                    "type": "template"
+                },
+                {
+                    "name": "15",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 15,
+                        "in_temperature": "in_15_Temperature",
+                        "in_humidity": "in_15_Humidity",
+                        "out_temperature": "out_15_Temperature",
+                        "out_humidity": "out_15_Humidity",
+                        "tnl_btnctrl_enable": "tnl_15_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_15_current_timer_value"
+                    },
+                    "row": 2,
+                    "col": 2,
+                    "type": "template"
+                },
+                {
+                    "name": "16",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 16,
+                        "in_temperature": "in_16_Temperature",
+                        "in_humidity": "in_16_Humidity",
+                        "out_temperature": "out_16_Temperature",
+                        "out_humidity": "out_16_Humidity",
+                        "tnl_btnctrl_enable": "tnl_16_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_16_current_timer_value"
+                    },
+                    "row": 2,
+                    "col": 3,
+                    "type": "template"
+                },
+                {
+                    "name": "17",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 17,
+                        "in_temperature": "in_17_Temperature",
+                        "in_humidity": "in_17_Humidity",
+                        "out_temperature": "out_17_Temperature",
+                        "out_humidity": "out_17_Humidity",
+                        "tnl_btnctrl_enable": "tnl_17_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_17_current_timer_value"
+                    },
+                    "row": 2,
+                    "col": 4,
+                    "type": "template"
+                },
+                {
+                    "name": "18",
+                    "sizeX": 1,
+                    "sizeY": 2,
+                    "customwidget": "T-Rh-Timer",
+                    "config": {
+                        "tnl_number": 18,
+                        "in_temperature": "in_18_Temperature",
+                        "in_humidity": "in_18_Humidity",
+                        "out_temperature": "out_18_Temperature",
+                        "out_humidity": "out_18_Humidity",
+                        "tnl_btnctrl_enable": "tnl_18_btnctrl_enable",
+                        "tnl_timer_warn": "default_tnl_warn_timer_value",
+                        "tnl_timer": "tnl_18_current_timer_value"
+                    },
+                    "row": 2,
+                    "col": 5,
+                    "type": "template"
+                }
+            ],
+            "$$hashKey": "object:29"
+        }
+    ],
+    "menucolumns": 6,
+    "default": true,
+    "settings": {
+        "theme": "default",
+        "hide_speak_button": true,
+        "show_header_clock": true,
+        "panel_name": "УЕСТ АГРО ГРУП ЕООД"
+    },
+    "customwidgets": {
+        "tnl-timer-display-box": {
+            "template": "<div class=\"row\">\n  <div class=\"col-xs-4\"><span style=\"color: cyan; font-size: 50pt\">{{config.tnl_number}}</span></div>\n</div>\n\n<div class=\"row\">\n<div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_enable_item)=='OFF')?'grey':(itemValue(config.tnl_timer_item) > itemValue(config.tnl_timer_warn_item)*1.0 ?'lime':itemValue(config.tnl_timer_item) > 0 ?'yellow':'red') }\">\n\t\t<span style=\"font-size: 130pt\">{{'%.0f' | sprintf:itemValue(config.tnl_timer_item).split('.')[0]}}</span> \n\n  </div>\n</div>",
+            "name": "Tunnel timer display box",
+            "author": "St",
+            "id": "tnl-timer-display-box",
+            "description": "Hardcoded 10.0 insted of comparing with itemValue(config.tnl_timer_warn_item) - comparison doesen't work with that???",
+            "settings": [
+                {
+                    "id": "tnl_timer_warn_item",
+                    "label": "Color value in yellow setpoint",
+                    "default": "default_tnl_warn_timer_value",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_number",
+                    "label": "Tunnel number",
+                    "default": "1",
+                    "type": "string"
+                },
+                {
+                    "id": "tnl_enable_item",
+                    "label": "Tunnel btnctrl enable",
+                    "default": "tnl_1_btnctrl_enable",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_timer_item",
+                    "label": "Tunnel current timer",
+                    "default": "tnl_1_current_timer_value",
+                    "type": "item"
+                }
+            ]
+        },
+        "T-Rh-Timer": {
+            "name": "Timer, T & Rh",
+            "author": "St",
+            "template": "\n\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> \n  </div>\n</div>\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> \n  </div>\n</div>  \n<div class=\"row\">\n\t<div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }\">\n    <span style=\"color:yellow; background-color:grey; \"><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style=\"font-size: 12pt\"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span> \n  </div> \n</div>\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> \n  </div>\n</div>\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> \n  </div>\n</div>  ",
+            "id": "T-Rh-Timer",
+            "settings": [
+                {
+                    "id": "tnl_number",
+                    "label": "Tunnel number",
+                    "default": "1",
+                    "type": "number"
+                },
+                {
+                    "id": "in_temperature",
+                    "label": "in_xx_Temperature",
+                    "default": "in_1_Temperature",
+                    "type": "item"
+                },
+                {
+                    "id": "in_humidity",
+                    "label": "in_xx_Humidity",
+                    "default": "in_1_Humidity",
+                    "type": "item"
+                },
+                {
+                    "id": "out_temperature",
+                    "label": "out_xx_Temperature",
+                    "default": "out_1_Temperature",
+                    "type": "item"
+                },
+                {
+                    "id": "out_humidity",
+                    "label": "out_xx_Humidity",
+                    "default": "out_1_Humidity",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_btnctrl_enable",
+                    "label": "tnl_xx_btnctrl_enable",
+                    "default": "tnl_1_btnctrl_enable",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_timer_warn",
+                    "label": "tnl_timer_warn",
+                    "default": "default_tnl_warn_timer_value",
+                    "type": "item"
+                },
+                {
+                    "label": "tnl_xx_current_timer_value",
+                    "id": "tnl_timer",
+                    "default": "tnl_1_current_timer_value",
+                    "type": "item"
+                }
+            ]
+        },
+        "tnl-timer-display-alarm": {
+            "template": "<div class=\"row\">\n    <div ng-if=\"itemValue(config.tnl_current_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n        <div class=\"col-xs-4\"> \n            <table>\n                <tr>\n                  <td><widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'error'\" size=\"50\" inline=\"true\"></widget-icon></td>\n                  <td><span style=\"color: cyan; font-size: 50pt\">{{config.tnl_number}}</span></td>\n                  <td><widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'temperature_hot'\" size=\"50\" inline=\"true\"></widget-icon></td>\n                  <td><span style=\"color: red; font-size: 40pt\"><strong>&nbsp;&nbsp;{{'%.1f°C' | sprintf:itemValue(config.tnl_current_temperature)}}</strong></span></td>\n                </tr>\n            </table>\n        </div>\n    </div>\n    <div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.tnl_current_temperature)\">\n        <div class=\"col-xs-4\"><span style=\"color: cyan; font-size: 50pt\">{{config.tnl_number}}</span></div>\n    </div>\n</div>  \n\n<div class=\"row\">\n    <div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_enable_item)=='OFF')?'grey':(itemValue(config.tnl_timer_item) > itemValue(config.tnl_timer_warn_item)*1.0 ?'lime':itemValue(config.tnl_timer_item) > 0 ?'yellow':'red') }\">\n          <span style=\"font-size: 130pt\">{{'%.0f' | sprintf:itemValue(config.tnl_timer_item).split('.')[0]}}</span> \n    </div>\n</div>",
+            "name": "Tunnel timer display with alarms",
+            "author": "St",
+            "id": "tnl-timer-display-alarm",
+            "description": "Box for the large display with displaying alarm situations",
+            "settings": [
+                {
+                    "id": "tnl_timer_warn_item",
+                    "label": "Color value in yellow setpoint",
+                    "default": "default_tnl_warn_timer_value",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_number",
+                    "label": "Tunnel number",
+                    "default": "1",
+                    "type": "string"
+                },
+                {
+                    "id": "tnl_enable_item",
+                    "label": "Tunnel btnctrl enable",
+                    "default": "tnl_1_btnctrl_enable",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_timer_item",
+                    "label": "Tunnel current timer",
+                    "default": "tnl_1_current_timer_value",
+                    "type": "item"
+                },
+                {
+                    "label": "Temperature alarm setpoint",
+                    "default": "default_tnl_temperature_alarm_value",
+                    "id": "temperature_alarm_setpoint",
+                    "type": "item"
+                },
+                {
+                    "label": "Current tnl out temperature",
+                    "id": "tnl_current_temperature",
+                    "default": "out_1_Temperature",
+                    "type": "item"
+                }
+            ]
+        },
+        "T-Rh-Timer-T-Alarm": {
+            "name": "Timer, T & Rh + Temp alarm",
+            "author": "St",
+            "template": "\n<!-- Temperature alarm - show warning icon -->\n<div ng-if=\"itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n    <div class=\"row\">\n\t    <div class=\"text-center\"> \n            <span style=\"color:yellow; background-color:grey; \"><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span>\n        </div>\n    </div>\n    <div class=\"row\">\n        <widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'error'\" inline=\"true\"></widget-icon>\n    </div>    \n</div>\n\n<div class=\"row\">\n    <!-- Normal temperature -->\n    <div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">\n        <div class=\"text-center\">\n    \t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> \n        </div>\n    </div>\n    <!-- Temperature alarm -->\n    <div ng-if=\"itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n        <div class=\"text-center\">\n            <span style=\"color: red; \"><strong>{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</strong></span> \n        </div>\n    </div>\n</div>\n\n<!-- Show humidity only when temperature is normal -->\n<div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">\n    <div class=\"row\">\n\t    <div class=\"text-center\">\n\t\t    <span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> \n        </div>\n    </div>  \n</div>  \n<!-- Show tunnel number and remining time only when tenperature is normal -->\n<div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">\n    <div class=\"row\">\n    \t<div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }\">\n            <span style=\"color:blue; background-color:grey; \"><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style=\"font-size: 12pt\"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span>  \n        </div>\n    </div>\n</div>\n<!-- Show in temperature & humidity only when temperature is normal -->\n<div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">    \n    <div class=\"row\">\n    \t<div class=\"text-center\">\n    \t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> \n      </div>\n    </div>\n    <div class=\"row\">\n    \t<div class=\"text-center\">\n    \t\t<span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> \n      </div>\n    </div>  \n</div>  \n\n<!-- Temperature alarm - show thermometer icon -->\n<div ng-if=\"itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n    <div class=\"row\">\n        <widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'temperature_hot'\" inline=\"true\"></widget-icon>\n    </div>    \n</div>",
+            "id": "T-Rh-Timer-T-Alarm",
+            "settings": [
+                {
+                    "id": "tnl_number",
+                    "label": "Tunnel number",
+                    "default": "1",
+                    "type": "number"
+                },
+                {
+                    "id": "in_temperature",
+                    "label": "in_xx_Temperature",
+                    "default": "in_1_Temperature",
+                    "type": "item"
+                },
+                {
+                    "id": "in_humidity",
+                    "label": "in_xx_Humidity",
+                    "default": "in_1_Humidity",
+                    "type": "item"
+                },
+                {
+                    "id": "out_temperature",
+                    "label": "out_xx_Temperature",
+                    "default": "out_1_Temperature",
+                    "type": "item"
+                },
+                {
+                    "id": "out_humidity",
+                    "label": "out_xx_Humidity",
+                    "default": "out_1_Humidity",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_btnctrl_enable",
+                    "label": "tnl_xx_btnctrl_enable",
+                    "default": "tnl_1_btnctrl_enable",
+                    "type": "item"
+                },
+                {
+                    "id": "tnl_timer_warn",
+                    "label": "tnl_timer_warn",
+                    "default": "default_tnl_warn_timer_value",
+                    "type": "item"
+                },
+                {
+                    "label": "tnl_xx_current_timer_value",
+                    "id": "tnl_timer",
+                    "default": "tnl_1_current_timer_value",
+                    "type": "item"
+                },
+                {
+                    "id": "temperature_alarm_setpoint",
+                    "label": "Temperature alarm setpoint",
+                    "default": "default_tnl_temperature_alarm_value",
+                    "type": "item"
+                }
+            ]
+        }
+    }
+}

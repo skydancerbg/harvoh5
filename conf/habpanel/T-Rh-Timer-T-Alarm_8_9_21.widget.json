@@ -1,0 +1,62 @@
+{
+    "name": "Timer, T & Rh + Temp alarm",
+    "author": "St",
+    "template": "\n<!-- Temperature alarm - show warning icon -->\n<div ng-if=\"itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n    <div class=\"row\">\n\t    <div class=\"text-center\"> \n            <span style=\"color:yellow; background-color:grey; \"><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span>\n        </div>\n    </div>\n    <div class=\"row\">\n        <widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'error'\" inline=\"true\"></widget-icon>\n    </div>    \n</div>\n\n<div class=\"row\">\n    <!-- Normal temperature -->\n    <div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">\n        <div class=\"text-center\">\n    \t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> \n        </div>\n    </div>\n    <!-- Temperature alarm -->\n    <div ng-if=\"itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n        <div class=\"text-center\">\n            <span style=\"color: red; \"><strong>{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</strong></span> \n        </div>\n    </div>\n</div>\n\n<!-- Show humidity only when temperature is normal -->\n<div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">\n    <div class=\"row\">\n\t    <div class=\"text-center\">\n\t\t    <span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> \n        </div>\n    </div>  \n</div>  \n<!-- Show tunnel number and remining time only when tenperature is normal -->\n<div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">\n    <div class=\"row\">\n    \t<div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }\">\n            <span style=\"color:blue; background-color:grey; \"><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style=\"font-size: 12pt\"><strong>&nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span>  \n        </div>\n    </div>\n</div>\n<!-- Show in temperature & humidity only when temperature is normal -->\n<div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.out_temperature)\">    \n    <div class=\"row\">\n    \t<div class=\"text-center\">\n    \t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> \n      </div>\n    </div>\n    <div class=\"row\">\n    \t<div class=\"text-center\">\n    \t\t<span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> \n      </div>\n    </div>  \n</div>  \n\n<!-- Temperature alarm - show thermometer icon -->\n<div ng-if=\"itemValue(config.out_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n    <div class=\"row\">\n        <widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'temperature_hot'\" inline=\"true\"></widget-icon>\n    </div>    \n</div>",
+    "id": "T-Rh-Timer-T-Alarm",
+    "settings": [
+        {
+            "id": "tnl_number",
+            "label": "Tunnel number",
+            "default": "1",
+            "type": "number"
+        },
+        {
+            "id": "in_temperature",
+            "label": "in_xx_Temperature",
+            "default": "in_1_Temperature",
+            "type": "item"
+        },
+        {
+            "id": "in_humidity",
+            "label": "in_xx_Humidity",
+            "default": "in_1_Humidity",
+            "type": "item"
+        },
+        {
+            "id": "out_temperature",
+            "label": "out_xx_Temperature",
+            "default": "out_1_Temperature",
+            "type": "item"
+        },
+        {
+            "id": "out_humidity",
+            "label": "out_xx_Humidity",
+            "default": "out_1_Humidity",
+            "type": "item"
+        },
+        {
+            "id": "tnl_btnctrl_enable",
+            "label": "tnl_xx_btnctrl_enable",
+            "default": "tnl_1_btnctrl_enable",
+            "type": "item"
+        },
+        {
+            "id": "tnl_timer_warn",
+            "label": "tnl_timer_warn",
+            "default": "default_tnl_warn_timer_value",
+            "type": "item"
+        },
+        {
+            "label": "tnl_xx_current_timer_value",
+            "id": "tnl_timer",
+            "default": "tnl_1_current_timer_value",
+            "type": "item"
+        },
+        {
+            "id": "temperature_alarm_setpoint",
+            "label": "Temperature alarm setpoint",
+            "default": "default_tnl_temperature_alarm_value",
+            "type": "item"
+        }
+    ]
+}

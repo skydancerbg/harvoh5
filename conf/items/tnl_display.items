@@ -1,0 +1,5 @@
+Number default_tnl_warn_timer_value (gPersist_On_Every_Change)
+Switch sw_init_default_tnl_warn_timer_setpoint // init default_tnl_warn_timer_value. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using
+
+Number default_tnl_temperature_alarm_value (gPersist_On_Every_Change)
+Switch sw_init_default_tnl_temperature_alarm_setpoint // init default_tnl_temperature_alarm_value. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using

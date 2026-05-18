@@ -1,0 +1,56 @@
+{
+    "name": "Timer, T & Rh",
+    "author": "St",
+    "template": "\n\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.out_temperature)}} °C</span> \n  </div>\n</div>\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.out_humidity)}} %</span> \n  </div>\n</div>  \n<div class=\"row\">\n\t<div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_btnctrl_enable)=='OFF')?'grey':(itemValue(config.tnl_timer) > itemValue(config.tnl_timer_warn)*1.0 ?'lime':itemValue(config.tnl_timer) > 0 ?'yellow':'red') }\">\n    <span style=\"color:yellow; background-color:grey; \"><strong>&nbsp;{{config.tnl_number}}&nbsp;</strong></span><span style=\"font-size: 12pt\"><strong> &nbsp;{{'%.0f' | sprintf:itemValue(config.tnl_timer).split('.')[0]}}</strong></span> \n  </div> \n</div>\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: orange; \">{{'%.1f' | sprintf:itemValue(config.in_temperature)}} °C</span> \n  </div>\n</div>\n<div class=\"row\">\n\t<div class=\"text-center\">\n\t\t<span style=\"color: aqua; \">{{'%.1f' | sprintf:itemValue(config.in_humidity)}} %</span> \n  </div>\n</div>  ",
+    "id": "T-Rh-Timer",
+    "settings": [
+        {
+            "id": "tnl_number",
+            "label": "Tunnel number",
+            "default": "1",
+            "type": "number"
+        },
+        {
+            "id": "in_temperature",
+            "label": "in_xx_Temperature",
+            "default": "in_1_Temperature",
+            "type": "item"
+        },
+        {
+            "id": "in_humidity",
+            "label": "in_xx_Humidity",
+            "default": "in_1_Humidity",
+            "type": "item"
+        },
+        {
+            "id": "out_temperature",
+            "label": "out_xx_Temperature",
+            "default": "out_1_Temperature",
+            "type": "item"
+        },
+        {
+            "id": "out_humidity",
+            "label": "out_xx_Humidity",
+            "default": "out_1_Humidity",
+            "type": "item"
+        },
+        {
+            "id": "tnl_btnctrl_enable",
+            "label": "tnl_xx_btnctrl_enable",
+            "default": "tnl_1_btnctrl_enable",
+            "type": "item"
+        },
+        {
+            "id": "tnl_timer_warn",
+            "label": "tnl_timer_warn",
+            "default": "default_tnl_warn_timer_value",
+            "type": "item"
+        },
+        {
+            "label": "tnl_xx_current_timer_value",
+            "id": "tnl_timer",
+            "default": "tnl_1_current_timer_value",
+            "type": "item"
+        }
+    ]
+}

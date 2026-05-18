@@ -1,0 +1,96 @@
+// https://community.openhab.org/t/what-is-the-best-method-to-start-executing-the-rules-when-all-bindings-are-loaded/5815/2
+
+var Timer startedTimer = null
+var Timer delayUpdateTimer = null
+
+rule "Init Items on startup" 
+when System started 
+then 
+logInfo("system_started", "on_startup.rules executed")
+      // if not yet initialized or restored
+
+    // tnl_Timers_Set_Default_Setpoint.postUpdate(110)   // send a default value
+    // tnl_Timers_Set_Default_Setpoint_sw.sendCommand(OFF)
+
+
+    // gTunnelTimerEnable.allMembers.forEach [ item | item.sendCommand(OFF) ]
+    // gTunnelTimerSetpoints.allMembers.forEach [ item | item.postUpdate(110) ]
+    // tnl_Timers_Set_Default_Setpoint_sw.sendCommand(OFF)
+    // gTnlLights.allMembers.forEach [ item | item.sendCommand(OFF) ]
+    // gBtnLights.allMembers.forEach [ item | item.sendCommand(OFF) ]
+    
+    // delayUpdateTimer = createTimer(now.plusMinutes(1), [| .....   ])
+end
+
+// This rule are for dealyed Init Items on startup Switch!
+rule "System Started"
+when
+    System started
+then
+    SystemStarting.sendCommand(ON)
+    startedTimer = createTimer(now.plusMinutes(1), [| SystemStarting.sendCommand(OFF)])
+end
+
+rule "Rule that should not run until bindings are loaded"
+when
+//    Item RuleTriggerItem received upadte
+   Item SystemStarting received command OFF
+then
+    if(SystemStarting.state == OFF) {
+    // gTunnelTimerCurrentValues.allMembers.forEach [ item | item.postUpdate(110) ] //! set the  tnl_Timers_Default_Value here
+    // gTunnelTimerCurrentValues.allMembers.forEach [ item | item.postUpdate(tnl_Timers_Default_Value.state as DecimalType) ] 
+    // gTunnelTimerEnable.allMembers.forEach [ item | item.sendCommand(OFF) ]
+    // gTunnelTimerEnable.allMembers.forEach [ item | item.postUpdate(OFF) ]
+    // tnl_Timers_Default_Value.postUpdate(110)
+    // gTunnelTimerSetpoints.allMembers.forEach [ item | item.postUpdate(110) ] // no need from this - it is persisted in the DB
+    // gTunnelTimerSetpoints.allMembers.forEach [ item | item.postUpdate(tnl_Timers_Default_Value.state as DecimalType) ] // not working...???
+    // tnl_Timers_Set_Default_Setpoint_sw.sendCommand(OFF)
+    // tnl_Timers_Set_Default_Setpoint_sw.postUpdate(ON)
+    oneMinuteTriggerSwitch.sendCommand(OFF)
+    gTnlLights.allMembers.forEach [ item | item.sendCommand(OFF) ]
+    gBtnLights.allMembers.forEach [ item | item.sendCommand(OFF) ]
+    logInfo("delayedOnStartup", "Delayed OnStartUp Init Items rule executed")        // rule logic
+    }
+end
+
+
+
+// Number tnl_Timers_Default_Value (gPersist_On_Change)
+// Switch tnl_Timers_Set_Default_Setpoint_sw
+// Group  g_tnl_51_Status_Display    "Тунел 51 Система Бутони:"  
+// Number tnl_51_Timer_Setpoint (gTunnelTimerSetpoints)  
+// Number tnl_51_Timer_Current_Value 
+// Switch tnl_51_Timer_Enable
+// Group gTnlLights                "Group Tunnel Lights"             
+// Group gBtnLights                "Group Button Lights" 
+
+
+
+
+
+
+
+// SECURITY:
+//    Alarm_Detected.sendCommand(OFF) //??????????? алармата се нулира!!!!!!!!!!
+
+//    Gr_Sequrity_System_Motion.sendCommand(OFF)
+
+// HEATING:
+   //GF_OF_Heating_Enable.sendCommand(ON)
+//?????????? RAZKOMENTARI EVENTUALNO?????:
+   // Group_SetPoint_Command.postUpdate(24.0)   // send a default value
+
+   // if (Group_SetPoint_Command.state == NULL) {
+   //    // if not yet initialized or restored
+   //       Group_SetPoint_Command.postUpdate(24.0)   // send a default value
+   // }
+
+//    if (AT_BR_Heating_Setpoint.state == NULL) {
+//       // if not yet initialized or restored
+//          AT_KN_Heating_Setpoint.postUpdate(1.0)   // send a default value
+//    }
+//    if (AT_KN_Heating_Setpoint.state == NULL) {
+//       // if not yet initialized or restored
+//          AT_KN_Heating_Setpoint.postUpdate(1.0)   // send a default value
+//    }
+

@@ -1,0 +1,214 @@
+//divide-number-when-displaying-in-sitemap
+// https://community.openhab.org/t/divide-number-when-displaying-in-sitemap/36577
+
+sitemap current_T_Rh label="ТЕМПЕРАТУРА И ВЛАЖНОСТ" {
+
+        // Frame label="ДАТА/ЧАС:" {
+        //     Text item=Date //label="Livingroom"
+        //     // Text item=none label=""
+		// //ФОРМАТ С PM, БЕЗ ДЕН:
+        //     //Text item=DateDiffFormat //label="Livingroo"
+        //     Text item=none
+        //     // Text item=Sunrise_Time
+        //     // Text item=Sunset_Time
+        // }
+
+        Frame label="ТУНЕЛИ: Температура и Влажост" {
+
+
+
+
+            Text item=out_1_Temperature  labelcolor=["navy"] valuecolor=["red"]                 
+            Text item= in_1_Temperature  labelcolor=["navy"] valuecolor=["blue"]   icon="" 
+            Text item=out_1_Humidity     labelcolor=["navy"] valuecolor=["red"]            
+            Text item= in_1_Humidity     labelcolor=["navy"] valuecolor=["blue"]   icon="" 
+
+            Text item=out_2_Temperature     labelcolor=["orange"] valuecolor=["red"]           
+            Text item= in_2_Temperature     labelcolor=["orange"] valuecolor=["blue"]  icon=""   
+            Text item=out_2_Humidity        labelcolor=["orange"] valuecolor=["red"]             
+            Text item= in_2_Humidity        labelcolor=["orange"] valuecolor=["blue"]  icon=""           
+
+            Text item=out_3_Temperature     labelcolor=["navy"] valuecolor=["red"]                               
+            Text item= in_3_Temperature     labelcolor=["navy"] valuecolor=["blue"]   icon=""              
+            Text item=out_3_Humidity        labelcolor=["navy"] valuecolor=["red"]                   
+            Text item= in_3_Humidity        labelcolor=["navy"] valuecolor=["blue"]   icon=""         
+
+            Text item=out_4_Temperature     labelcolor=["orange"] valuecolor=["red"]                        
+            Text item= in_4_Temperature     labelcolor=["orange"] valuecolor=["blue"]  icon=""              
+            Text item=out_4_Humidity        labelcolor=["orange"] valuecolor=["red"]                   
+            Text item= in_4_Humidity        labelcolor=["orange"] valuecolor=["blue"]  icon=""         
+
+            Text item=out_5_Temperature     labelcolor=["navy"] valuecolor=["red"]                             
+            Text item= in_5_Temperature     labelcolor=["navy"] valuecolor=["blue"]   icon=""                 
+            Text item=out_5_Humidity        labelcolor=["navy"] valuecolor=["red"]                        
+            Text item= in_5_Humidity        labelcolor=["navy"] valuecolor=["blue"]   icon=""            
+
+            Text item=out_6_Temperature     labelcolor=["orange"] valuecolor=["red"]                         
+            Text item= in_6_Temperature     labelcolor=["orange"] valuecolor=["blue"]  icon=""              
+            Text item=out_6_Humidity        labelcolor=["orange"] valuecolor=["red"]                                  
+            Text item= in_6_Humidity        labelcolor=["orange"] valuecolor=["blue"]  icon=""                       
+
+            Text item=out_7_Temperature     labelcolor=["navy"] valuecolor=["red"]                                             
+            Text item= in_7_Temperature     labelcolor=["navy"] valuecolor=["blue"]   icon=""                                 
+            Text item=out_7_Humidity        labelcolor=["navy"] valuecolor=["red"]                          
+            Text item= in_7_Humidity        labelcolor=["navy"] valuecolor=["blue"]   icon=""              
+
+            Text item=out_8_Temperature     labelcolor=["orange"] valuecolor=["red"]                                                    
+            Text item= in_8_Temperature     labelcolor=["orange"] valuecolor=["blue"]  icon=""                                          
+            Text item=out_8_Humidity        labelcolor=["orange"] valuecolor=["red"]                                               
+            Text item= in_8_Humidity        labelcolor=["orange"] valuecolor=["blue"]  icon=""                                     
+
+            Text item=out_9_Temperature     labelcolor=["navy"] valuecolor=["red"]                                                      
+            Text item= in_9_Temperature     labelcolor=["navy"] valuecolor=["blue"]   icon=""                                           
+            Text item=out_9_Humidity        labelcolor=["navy"] valuecolor=["red"]                                                 
+            Text item= in_9_Humidity        labelcolor=["navy"] valuecolor=["blue"]   icon=""                                      
+                          
+            Text item=out_10_Temperature    labelcolor=["orange"] valuecolor=["red"]                                     
+            Text item= in_10_Temperature    labelcolor=["orange"] valuecolor=["blue"]  icon=""                           
+            Text item=out_10_Humidity       labelcolor=["orange"] valuecolor=["red"]                  
+            Text item= in_10_Humidity       labelcolor=["orange"] valuecolor=["blue"]  icon=""        
+
+            Text item=out_11_Temperature    labelcolor=["navy"] valuecolor=["red"]                        
+            Text item= in_11_Temperature    labelcolor=["navy"] valuecolor=["blue"]   icon=""             
+            Text item=out_11_Humidity       labelcolor=["navy"] valuecolor=["red"]                   
+            Text item= in_11_Humidity       labelcolor=["navy"] valuecolor=["blue"]   icon=""        
+
+            Text item=out_12_Temperature    labelcolor=["orange"] valuecolor=["red"]                       
+            Text item= in_12_Temperature    labelcolor=["orange"] valuecolor=["blue"]  icon=""                           
+            Text item=out_12_Humidity       labelcolor=["orange"] valuecolor=["red"]                  
+            Text item= in_12_Humidity       labelcolor=["orange"] valuecolor=["blue"]  icon=""        
+
+            Text item=out_13_Temperature    labelcolor=["navy"] valuecolor=["red"]                        
+            Text item= in_13_Temperature    labelcolor=["navy"] valuecolor=["blue"]   icon=""             
+            Text item=out_13_Humidity       labelcolor=["navy"] valuecolor=["red"]                   
+            Text item= in_13_Humidity       labelcolor=["navy"] valuecolor=["blue"]   icon=""        
+
+            Text item=out_14_Temperature    labelcolor=["orange"] valuecolor=["red"]               
+            Text item= in_14_Temperature    labelcolor=["orange"] valuecolor=["blue"] icon=""                      
+            Text item=out_14_Humidity       labelcolor=["orange"] valuecolor=["red"]          
+            Text item= in_14_Humidity       labelcolor=["orange"] valuecolor=["blue"] icon=""                
+
+            Text item=out_15_Temperature    labelcolor=["navy"] valuecolor=["red"]                        
+            Text item= in_15_Temperature    labelcolor=["navy"] valuecolor=["blue"]   icon=""             
+            Text item=out_15_Humidity       labelcolor=["navy"] valuecolor=["red"]                   
+            Text item= in_15_Humidity       labelcolor=["navy"] valuecolor=["blue"]   icon=""        
+
+            Text item=out_16_Temperature    labelcolor=["orange"] valuecolor=["red"]                
+            Text item= in_16_Temperature    labelcolor=["orange"] valuecolor=["blue"]  icon=""                      
+            Text item=out_16_Humidity       labelcolor=["orange"] valuecolor=["red"]           
+            Text item= in_16_Humidity       labelcolor=["orange"] valuecolor=["blue"]   icon=""                
+
+            Text item=out_17_Temperature    labelcolor=["navy"] valuecolor=["red"]                         
+            Text item= in_17_Temperature    labelcolor=["navy"] valuecolor=["blue"]   icon=""              
+            Text item=out_17_Humidity       labelcolor=["navy"] valuecolor=["red"]                    
+            Text item= in_17_Humidity       labelcolor=["navy"] valuecolor=["blue"]   icon=""                    
+
+            Text item=out_18_Temperature    labelcolor=["orange"] valuecolor=["red"]                       
+            Text item= in_18_Temperature    labelcolor=["orange"] valuecolor=["blue"]  icon=""             
+            Text item=out_18_Humidity       labelcolor=["orange"] valuecolor=["red"]                  
+            Text item= in_18_Humidity       labelcolor=["orange"] valuecolor=["blue"]  icon=""        
+
+
+
+
+
+
+            // Text item=out_1_Temperature     labelcolor=["red"] valuecolor=["red"]    
+            // Text item= in_1_Temperature     labelcolor=["blue"] valuecolor=["blue"] 
+            // Text item=out_1_Humidity        labelcolor=["red"] valuecolor=["red"]   
+            // Text item= in_1_Humidity        labelcolor=["blue"] valuecolor=["blue"]  
+
+            // Text item=out_2_Temperature  labelcolor=["red"] valuecolor=["red"]       
+            // Text item= in_2_Temperature  labelcolor=["blue"] valuecolor=["blue"]  
+            // Text item=out_2_Humidity     labelcolor=["red"] valuecolor=["red"]    
+            // Text item= in_2_Humidity     labelcolor=["blue"] valuecolor=["blue"]     
+
+            // Text item=out_3_Temperature  labelcolor=["red"] valuecolor=["red"]                
+            // Text item= in_3_Temperature  labelcolor=["blue"] valuecolor=["blue"]              
+            // Text item=out_3_Humidity     labelcolor=["red"] valuecolor=["red"]           
+            // Text item= in_3_Humidity     labelcolor=["blue"] valuecolor=["blue"]         
+
+            // Text item=out_4_Temperature  labelcolor=["red"] valuecolor=["red"]                
+            // Text item= in_4_Temperature  labelcolor=["blue"] valuecolor=["blue"]              
+            // Text item=out_4_Humidity     labelcolor=["red"] valuecolor=["red"]           
+            // Text item= in_4_Humidity     labelcolor=["blue"] valuecolor=["blue"]         
+
+            // Text item=out_5_Temperature  labelcolor=["red"] valuecolor=["red"]                
+            // Text item= in_5_Temperature  labelcolor=["blue"] valuecolor=["blue"]              
+            // Text item=out_5_Humidity     labelcolor=["red"] valuecolor=["red"]           
+            // Text item= in_5_Humidity     labelcolor=["blue"] valuecolor=["blue"]         
+
+            // Text item=out_6_Temperature  labelcolor=["red"] valuecolor=["red"]                
+            // Text item= in_6_Temperature  labelcolor=["blue"] valuecolor=["blue"]              
+            // Text item=out_6_Humidity     labelcolor=["red"] valuecolor=["red"]                         
+            // Text item= in_6_Humidity     labelcolor=["blue"] valuecolor=["blue"]                       
+
+            // Text item=out_7_Temperature  labelcolor=["red"] valuecolor=["red"]                              
+            // Text item= in_7_Temperature  labelcolor=["blue"] valuecolor=["blue"]                            
+            // Text item=out_7_Humidity     labelcolor=["red"] valuecolor=["red"]           
+            // Text item= in_7_Humidity     labelcolor=["blue"] valuecolor=["blue"]         
+
+            // Text item=out_8_Temperature  labelcolor=["red"] valuecolor=["red"]                                            
+            // Text item= in_8_Temperature  labelcolor=["blue"] valuecolor=["blue"]                                          
+            // Text item=out_8_Humidity     labelcolor=["red"] valuecolor=["red"]                                       
+            // Text item= in_8_Humidity     labelcolor=["blue"] valuecolor=["blue"]                                     
+
+            // Text item=out_9_Temperature labelcolor=["red"] valuecolor=["red"]                                             
+            // Text item= in_9_Temperature labelcolor=["blue"] valuecolor=["blue"]                                           
+            // Text item=out_9_Humidity    labelcolor=["red"] valuecolor=["red"]                                        
+            // Text item= in_9_Humidity    labelcolor=["blue"] valuecolor=["blue"]                                      
+                          
+            // Text item=out_10_Temperature   labelcolor=["red"] valuecolor=["red"]                             
+            // Text item= in_10_Temperature   labelcolor=["blue"] valuecolor=["blue"]                           
+            // Text item=out_10_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item= in_10_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+            // Text item=out_11_Temperature   labelcolor=["red"] valuecolor=["red"]               
+            // Text item= in_11_Temperature   labelcolor=["blue"] valuecolor=["blue"]             
+            // Text item=out_11_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item= in_11_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+            // Text item=out_12_Temperature   labelcolor=["red"] valuecolor=["red"]               
+            // Text item= in_12_Temperature   labelcolor=["blue"] valuecolor=["blue"]                           
+            // Text item=out_12_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item= in_12_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+            // Text item=out_13_Temperature   labelcolor=["red"] valuecolor=["red"]               
+            // Text item= in_13_Temperature   labelcolor=["blue"] valuecolor=["blue"]             
+            // Text item=out_13_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item= in_13_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+            // Text item= in_14_Temperature   labelcolor=["red"] valuecolor=["red"]               
+            // Text item=out_14_Temperature   labelcolor=["blue"] valuecolor=["blue"]             
+            // Text item= in_14_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item=out_14_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+            // Text item=out_15_Temperature   labelcolor=["red"] valuecolor=["red"]               
+            // Text item= in_15_Temperature   labelcolor=["blue"] valuecolor=["blue"]             
+            // Text item=out_15_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item= in_15_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+            // Text item= in_16_Temperature  labelcolor=["red"] valuecolor=["red"]                
+            // Text item=out_16_Temperature  labelcolor=["blue"] valuecolor=["blue"]              
+            // Text item= in_16_Humidity     labelcolor=["red"] valuecolor=["red"]           
+            // Text item=out_16_Humidity     labelcolor=["blue"] valuecolor=["blue"]         
+
+            // Text item=out_17_Temperature  labelcolor=["red"] valuecolor=["red"]                
+            // Text item= in_17_Temperature  labelcolor=["blue"] valuecolor=["blue"]              
+            // Text item=out_17_Humidity     labelcolor=["red"] valuecolor=["red"]           
+            // Text item= in_17_Humidity     labelcolor=["blue"] valuecolor=["blue"]                    
+
+            // Text item=out_18_Temperature   labelcolor=["red"] valuecolor=["red"]               
+            // Text item= in_18_Temperature   labelcolor=["blue"] valuecolor=["blue"]             
+            // Text item=out_18_Humidity      labelcolor=["red"] valuecolor=["red"]          
+            // Text item= in_18_Humidity      labelcolor=["blue"] valuecolor=["blue"]        
+
+
+
+
+        }
+        
+
+
+}
+      

@@ -1,0 +1,10 @@
+Strategies {
+    // every30seconds : "0/30 * * * * ?"
+    everyMinute : "0 * * * * ?"
+    default = everyChange
+}
+
+Items {
+    gPersist_On_Change_1minute* : strategy = everyChange, everyMinute
+    gPersist_On_Every_Change* : strategy = everyChange, restoreOnStartup
+}

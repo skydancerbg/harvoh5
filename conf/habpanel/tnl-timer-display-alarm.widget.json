@@ -1,0 +1,33 @@
+{
+    "template": "<div class=\"row\">\n  <div class=\"col-xs-4\"><span style=\"color: cyan; font-size: 50pt\">{{config.tnl_number}}</span></div>\n</div>\n\n<div class=\"row\">\n<div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_enable_item)=='OFF')?'grey':(itemValue(config.tnl_timer_item) > itemValue(config.tnl_timer_warn_item)*1.0 ?'lime':itemValue(config.tnl_timer_item) > 0 ?'yellow':'red') }\">\n\t\t<span style=\"font-size: 130pt\">{{'%.0f' | sprintf:itemValue(config.tnl_timer_item).split('.')[0]}}</span> \n\n  </div>\n</div>",
+    "name": "Tunnel timer display with alarms",
+    "author": "St",
+    "id": "tnl-timer-display-alarm",
+    "description": "Box for the large display with displaying alarm situations",
+    "settings": [
+        {
+            "id": "tnl_timer_warn_item",
+            "label": "Color value in yellow setpoint",
+            "default": "default_tnl_warn_timer_value",
+            "type": "item"
+        },
+        {
+            "id": "tnl_number",
+            "label": "Tunnel number",
+            "default": "1",
+            "type": "string"
+        },
+        {
+            "id": "tnl_enable_item",
+            "label": "Tunnel btnctrl enable",
+            "default": "tnl_1_btnctrl_enable",
+            "type": "item"
+        },
+        {
+            "id": "tnl_timer_item",
+            "label": "Tunnel current timer",
+            "default": "tnl_1_current_timer_value",
+            "type": "item"
+        }
+    ]
+}

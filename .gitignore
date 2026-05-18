@@ -1,0 +1,8 @@
+# Ignore heavy volatile userdata cache
+userdata/cache/
+userdata/tmp/
+userdata/log/
+userdata/backup/
+userdata/jsondb/backup/
+*.log
+*.lck

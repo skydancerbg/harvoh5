@@ -1,0 +1,190 @@
+sitemap dev label="Development test page" {
+
+
+        
+        Frame label="DEV webpage" {
+
+            Switch item=globalInit       label="Global initial INIT all tunnel values!"
+            Switch item=sw_init_default_tnl_warn_timer_setpoint label="Init yellow collor display below x minutes"
+            Switch item=sw_init_default_tnl_temperature_alarm_setpoint label="Init temperature alarm setpoint value"
+
+            Text item=none                  
+            Text item=none                  
+            Switch item=enableAllTunnels label="Global ENABLE all tunnels!"
+            Switch item=disableAllTunnels label="Global DISABLE all tunnels!"
+
+            Text item=none                  
+            Text item=none  
+            Text item=none
+            Setpoint item=default_tnl_timer_value                       label="Глобално: Таймер времеза сушене  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+            Setpoint item=default_tnl_timer_missed_actinon_value        label="Глобално: Таймер аларма при бездействие [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+            Setpoint item=default_tnl_timer_extendedDryingTime_value    label="Глобално: Допълнително време за сушене  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1    
+            Text item=none
+            Text item=none
+            Setpoint item=default_tnl_warn_timer_value    label="Глобално: Оцвети дисплей в жълто при оставащи  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+            Setpoint item=default_tnl_temperature_alarm_value    label="Глобално: Настройка аларма при висока температура  [%.1f °C]" icon="time" minValue=1 maxValue=120 step=1
+            Text item=none
+            Text item=none
+            Text item=none
+            Text item=none
+        Switch item=tnl_1_btnctrl_enable
+        Switch item=tnl_2_btnctrl_enable
+        Switch item=tnl_3_btnctrl_enable
+        Switch item=tnl_4_btnctrl_enable
+        Switch item=tnl_5_btnctrl_enable
+        Switch item=tnl_6_btnctrl_enable
+        Switch item=tnl_7_btnctrl_enable
+        Switch item=tnl_8_btnctrl_enable
+        Switch item=tnl_9_btnctrl_enable
+        Switch item=tnl_10_btnctrl_enable
+        Switch item=tnl_11_btnctrl_enable
+        Switch item=tnl_12_btnctrl_enable
+        Switch item=tnl_13_btnctrl_enable
+        Switch item=tnl_14_btnctrl_enable
+        Switch item=tnl_15_btnctrl_enable
+        Switch item=tnl_16_btnctrl_enable
+        Switch item=tnl_17_btnctrl_enable
+        Switch item=tnl_18_btnctrl_enable
+
+            Text item=none
+            Text item=none
+            Text item=tnl_1_current_timer_value     label="[%.1f минути]"
+            Text item=tnl_2_current_timer_value     label="[%.1f минути]"
+            Text item=tnl_3_current_timer_value     label="[%d минути]"
+            Text item=tnl_4_current_timer_value     label="[%d минути]"
+            Text item=tnl_5_current_timer_value     label="[%d минути]"
+            Text item=tnl_6_current_timer_value     label="[%d минути]"
+            Text item=tnl_7_current_timer_value     label="[%d минути]"
+            Text item=tnl_8_current_timer_value     label="[%d минути]"
+            Text item=tnl_9_current_timer_value     label="[%d минути]"
+            Text item=tnl_10_current_timer_value    label="[%d минути]"
+            Text item=tnl_11_current_timer_value    label="[%d минути]"
+            Text item=tnl_12_current_timer_value    label="[%d минути]"
+            Text item=tnl_13_current_timer_value    label="[%d минути]"
+            Text item=tnl_14_current_timer_value    label="[%d минути]"
+            Text item=tnl_15_current_timer_value    label="[%d минути]"
+            Text item=tnl_16_current_timer_value    label="[%d минути]"
+            Text item=tnl_17_current_timer_value    label="[%d минути]"
+            Text item=tnl_18_current_timer_value    label="[%d минути]"
+
+            
+            // REMOVE tnis setting for individual tunnels
+            // Setpoint item=tnl_51_timer_missed_actinon_value     label="Тунел 51 - Таймер пропуснато действие[%d минути]" icon="time" minValue=1 maxValue=1440 step=1                                    
+            // Text item=none                  
+            // Text item=none        
+            // Switch item=tnl_51_set_all_to_defaults_sw  label="Tunnel 51 - Set values to default"
+            // Text item=none                  
+            // Text item=none  
+            // Text item=none
+            // Switch item=tnl_51_btnctrl_enable  label="Tunnel 51 - POWER"                         
+            // Text item=none                  
+             
+}
+
+        // Frame label="ТАЙМЕРИ" {
+
+
+        //     Text item=none   labelcolor=["blue"]     label="TUNNEL 8"             
+        //     Text item=none
+        //     Setpoint item=tnl_8_current_timer_value   labelcolor=["blue"]  valuecolor=[Last_Update=="Uninitialized"="gray",>0="green",<=0="red"] label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     Text item=none                  
+        //     Setpoint item=tnl_8_timer_default_value   labelcolor=["blue"]            label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     Setpoint item=tnl_8_timer_extendedDryingTime_value   labelcolor=["blue"] label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //     Text item=none                  
+
+        //     Text item=none        label="TUNNEL 8"             
+        //     Text item=none
+        //     Setpoint item=tnl_8_current_timer_value     valuecolor=[Last_Update=="Uninitialized"="gray",>0="green",<=0="red"] label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     Text item=none                  
+        //     Setpoint item=tnl_8_timer_default_value               label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     Setpoint item=tnl_8_timer_extendedDryingTime_value    label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //     Text item=none                  
+
+
+        //     // valuecolor=[Last_Update=="Uninitialized"="gray",>=25="orange",>=15="green",0="white",<15="blue"]
+        //     Text item=none   labelcolor=["green"]      label="TUNNEL 1"             
+        //     Setpoint item=tnl_1_current_timer_value   labelcolor=["green"]  valuecolor=[Last_Update=="Uninitialized"="gray",>0="green",<=0="red"] label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     Text item=none                  
+        //     Setpoint item=tnl_1_timer_default_value   labelcolor=["green"]             label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     Setpoint item=tnl_1_timer_extendedDryingTime_value   labelcolor=["green"]  label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //      Text item=none         
+        //      Text item=none         
+        //      Text item=none         
+        //      Text item=none         
+
+        //     // Text item=none     label="TUNNEL 51"             
+        //     // Setpoint item=tnl_51_current_timer_value label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     // // Text item=none                  
+        //     // Text item=none                  
+        //     // // Text item=none                  
+        //     // Setpoint item=tnl_51_timer_default_value            label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     // Setpoint item=tnl_51_timer_extendedDryingTime_value label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //     //  Text item=none                  
+        //     // Switch item=tnl_51_resetTimer_sw   label="RESET"
+        //     // Text item=none                  
+
+        //     Text item=none     label="TUNNEL 1"             
+        //     Setpoint item=tnl_1_current_timer_value label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     Text item=none                  
+        //     Setpoint item=tnl_1_timer_default_value            label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     Setpoint item=tnl_1_timer_extendedDryingTime_value label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //      Text item=none                  
+        //     Switch item=tnl_1_resetTimer_sw   label="RESET"
+        //     Text item=none
+
+        //     Text item=none     label="TUNNEL 2"             
+        //     Setpoint item=tnl_2_current_timer_value label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     Text item=none                  
+        //     Setpoint item=tnl_2_timer_default_value            label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     Setpoint item=tnl_2_timer_extendedDryingTime_value label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //     Text item=none                  
+        //     Switch item=tnl_2_resetTimer_sw   label="RESET"
+        //     Text item=none                  
+
+        //     Text item=none     label="TUNNEL 3"             
+        //     Text item=none
+        //     Setpoint item=tnl_3_current_timer_value label="Timer [%d минути]" icon="time" minValue=-1440 maxValue=1440 step=1                                                    
+        //     Text item=none                  
+        //     Setpoint item=tnl_3_timer_default_value            label="Normal time [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                                                  
+        //     Setpoint item=tnl_3_timer_extendedDryingTime_value label="Overtime [%d min]" icon="time" minValue=1 maxValue=1440 step=1                                 
+        //     Text item=none                  
+        //     Switch item=tnl_3_resetTimer_sw   label="RESET"
+        //     Text item=none    
+
+
+
+
+
+
+
+
+
+
+
+
+        //     // Text item=none
+        //     // Switch item=out_51_tnl_light label="Туnel 51 OUT Tunnel Light"
+        //     // Switch item=out_51_btn_light  label="Туnel 51 OUT BUTTON Light"
+        //     // Switch item=in_51_tnl_light  label="Туnel 51 IN Tunnel Light"
+        //     // Switch item=in_51_btn_light  label="Туnel 51 IN BUTTON Light"
+        //     // Switch item=out_51_button label="Туnel 51 IN BUTTON "
+        //     // Switch item=in_51_button label="Туnel 51 IN BUTTON "
+        //     // Text item=none
+        //     // Switch item=tnl_51_btnaction_enable                      
+
+
+        //     // Setpoint    item=tnl_Timers_Default_Value label="Таймер - Стойност по подразбиране [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+        //     // Switch  item=tnl_Timers_Set_Default_Setpoint_sw
+        //     // Setpoint    item=tnl_51_Timer_Setpoint  label="Тунел 51 -Таймер [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+        //     // Setpoint    item=tnl_51_Timer_Current_Value label="Тунел 51 - Таймер текуща стойност [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+        //     // Switch  item=tnl_51_Timer_Enable
+        //     // Switch      item=tnl_51_Timer_Enable label="Тунел 51 ВКЛ./ИЗКЛ. УПРАВЛЕНИЕ С БУТОНИ"  
+        //     // Setpoint    item=tnl_51_Timer_Setpoint label="Тунел 51 -Таймер [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+        //     // Text        item=Gr_HVAC_Room_Temperature_2 label="Измерена температура [%.1f °C]" icon="temperature"
+        //     // Switch      item=HVAC_Heating_OnOff_Visualizer_2  label="Отоплителни уреди" icon="radiator"  mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+
+        // }
+
+
+
+}

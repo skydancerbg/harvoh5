@@ -1,0 +1,152 @@
+//divide-number-when-displaying-in-sitemap
+// https://community.openhab.org/t/divide-number-when-displaying-in-sitemap/36577
+
+
+// http://10.50.20.100:8080/basicui/app?sitemap=dev
+
+sitemap masterinit label="МАСТЕР ДЕФОЛТ" {
+
+
+        
+    Frame label="Управление сигнализация и бутони" {
+        // Setpoint item=default_tnl_timer_value                       label="Глобално: Таймер времеза сушене  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+        // Setpoint item=default_tnl_timer_missed_actinon_value        label="Глобално: Таймер аларма при бездействие [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+        // Setpoint item=default_tnl_timer_extendedDryingTime_value    label="Глобално: Допълнително време за сушене  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1    
+        // Text item=none
+        // REMOVE tnis setting for individual tunnels
+        // Setpoint item=tnl_51_timer_missed_actinon_value     label="Тунел 51 - Таймер пропуснато действие[%d минути]" icon="time" minValue=1 maxValue=1440 step=1                                    
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_51_set_all_to_defaults_sw  label="Tunnel tnl_51 - Set values to default"
+        // Text item=none                  
+        // Text item=none  
+        // Text item=none
+        // Switch item=tnl_51_btnctrl_enable  label="Tunnel tnl_51 - POWER"                         
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_1_set_all_to_defaults_sw  label="Tunnel tnl_1 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_1_btnctrl_enable  label="Tunnel tnl_1 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_2_set_all_to_defaults_sw  label="Tunnel tnl_2 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_2_btnctrl_enable  label="Tunnel tnl_2 - POWER"                  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_3_set_all_to_defaults_sw  label="Tunnel tnl_3 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_3_btnctrl_enable  label="Tunnel tnl_3 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_4_set_all_to_defaults_sw  label="Tunnel tnl_4 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_4_btnctrl_enable  label="Tunnel tnl_4 - POWER" 
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_5_set_all_to_defaults_sw  label="Tunnel tnl_5 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_5_btnctrl_enable  label="Tunnel tnl_5 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_6_set_all_to_defaults_sw  label="Tunnel tnl_6 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_6_btnctrl_enable  label="Tunnel tnl_6 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_7_set_all_to_defaults_sw  label="Tunnel tnl_7 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_7_btnctrl_enable  label="Tunnel tnl_7 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_8_set_all_to_defaults_sw  label="Tunnel tnl_8 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_8_btnctrl_enable  label="Tunnel tnl_8 - POWER"
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_9_set_all_to_defaults_sw  label="Tunnel tnl_9 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_9_btnctrl_enable  label="Tunnel tnl_9 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_10_set_all_to_defaults_sw  label="Tunnel tnl_10 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_10_btnctrl_enable  label="Tunnel tnl_10 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_11_set_all_to_defaults_sw  label="Tunnel tnl_11 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_11_btnctrl_enable  label="Tunnel tnl_11 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_12_set_all_to_defaults_sw  label="Tunnel tnl_12 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_12_btnctrl_enable  label="Tunnel tnl_12 - POWER" 
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_13_set_all_to_defaults_sw  label="Tunnel tnl_13 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_13_btnctrl_enable  label="Tunnel tnl_13 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_14_set_all_to_defaults_sw  label="Tunnel tnl_14 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_14_btnctrl_enable  label="Tunnel tnl_14 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_15_set_all_to_defaults_sw  label="Tunnel tnl_15 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_15_btnctrl_enable  label="Tunnel tnl_15 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_16_set_all_to_defaults_sw  label="Tunnel tnl_16 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_16_btnctrl_enable  label="Tunnel tnl_16 - POWER"  
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_17_set_all_to_defaults_sw  label="Tunnel tnl_17 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_17_btnctrl_enable  label="Tunnel tnl_17 - POWER" 
+        // Text item=none                  
+        // Text item=none        
+        // Switch item=tnl_18_set_all_to_defaults_sw  label="Tunnel tnl_18 - Set values to default"
+        // Text item=none                  
+        Text item=none  
+        Text item=none
+        Switch item=tnl_18_btnctrl_enable  label="Tunnel tnl_18 - POWER"  
+    }
+} 

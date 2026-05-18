@@ -1,0 +1,22 @@
+/// PERSISTENCE
+// !!! All ITEMS IN THIS GROUP WILL BE PERSISTED ON EVERY CHANGE AND ON STARTUP
+Group gPersist_On_Change_1minute
+Group gPersist_On_Every_Change
+// Group Gr_Persist_On_Statup
+// Group Gr_Persist_On_Change
+// Group Gr_Persist_On_Change_Startup
+// Group Gr_Persist_On_Change_1minute_Startup
+// Group gPersist_Every_1_Minute
+// Group Gr_Persist_Every_30_Seconds
+// Group Gr_Persist_On_Change_Restore_On_Startup
+
+//! This Switch is used for delayed rule execution on startup!
+Switch SystemStarting
+
+
+
+
+
+
+
+String none "" <none>

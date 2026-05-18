@@ -1,0 +1,428 @@
+rule "Every minute trigger"
+when
+  Time cron "0 * * ? * *"
+then
+  if (oneMinuteTriggerSwitch.state == ON) {
+    oneMinuteTriggerSwitch.sendCommand(OFF)
+  }
+  else
+  {
+    oneMinuteTriggerSwitch.sendCommand(ON)
+  }
+end
+
+
+rule "Decrement active tunnel timers every minute"
+when
+    Item oneMinuteTriggerSwitch changed 
+then
+// logInfo("Rule: Decrement timers", "gCurrentTnlTimers DECREMENT!!!")
+logInfo("btn_controll.rules", "TIMER TICK DECREMENT")
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_51   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+    tnl_51_current_timer_value.postUpdate((tnl_51_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+    if(tnl_51_btnctrl_enable.state == ON) {
+        if(tnl_51_current_timer_value.state <= 0 ){   // If tunnel timer expired in this moment it will be set to 0
+            tnl_51_btnaction_enable.sendCommand(ON) // Enable button press
+            tnl_51_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+            g51_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+            g51_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+// logInfo("Rule: Decrement timers", "tnl_51 Timer expired !!!")
+        }
+
+        if(tnl_51_missed_action_countdown_enable_sw.state == ON){
+        tnl_51_timer_missed_actinon_value.postUpdate((tnl_51_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        }
+    }
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_1   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+    if(tnl_1_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_1_ TIMER: {}", tnl_1_current_timer_value.state)
+            tnl_1_current_timer_value.postUpdate((tnl_1_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_1_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_1_current_timer_value.state <= 0  ){ 
+                    tnl_1_displayCurrentTimerValue.postUpdate(0)
+                    tnl_1_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_1_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_1_current_timer_value.state >= 120  ){
+                    tnl_1_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_1_displayCurrentTimerValue.postUpdate(tnl_1_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_2   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+    if(tnl_2_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_2_ TIMER: {}", tnl_2_current_timer_value.state)
+            tnl_2_current_timer_value.postUpdate((tnl_2_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_2_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_2_current_timer_value.state <= 0  ){ 
+                    tnl_2_displayCurrentTimerValue.postUpdate(0)
+                    tnl_2_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_2_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_2_current_timer_value.state >= 120  ){
+                    tnl_2_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_2_displayCurrentTimerValue.postUpdate(tnl_2_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_3   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+    if(tnl_3_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_3_ TIMER: {}", tnl_3_current_timer_value.state)
+            tnl_3_current_timer_value.postUpdate((tnl_3_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_3_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_3_current_timer_value.state <= 0  ){ 
+                    tnl_3_displayCurrentTimerValue.postUpdate(0)
+                    tnl_3_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_3_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_3_current_timer_value.state >= 120  ){
+                    tnl_3_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_3_displayCurrentTimerValue.postUpdate(tnl_3_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_4   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_4_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_4_ TIMER: {}", tnl_4_current_timer_value.state)
+            tnl_4_current_timer_value.postUpdate((tnl_4_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_4_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_4_current_timer_value.state <= 0  ){ 
+                    tnl_4_displayCurrentTimerValue.postUpdate(0)
+                    tnl_4_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_4_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_4_current_timer_value.state >= 120  ){
+                    tnl_4_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_4_displayCurrentTimerValue.postUpdate(tnl_4_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_5   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_5_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_5_ TIMER: {}", tnl_5_current_timer_value.state)
+            tnl_5_current_timer_value.postUpdate((tnl_5_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_5_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_5_current_timer_value.state <= 0  ){ 
+                    tnl_5_displayCurrentTimerValue.postUpdate(0)
+                    tnl_5_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_5_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_5_current_timer_value.state >= 120  ){
+                    tnl_5_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_5_displayCurrentTimerValue.postUpdate(tnl_5_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_6   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_6_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_6_ TIMER: {}", tnl_6_current_timer_value.state)
+            tnl_6_current_timer_value.postUpdate((tnl_6_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_6_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_6_current_timer_value.state <= 0  ){ 
+                    tnl_6_displayCurrentTimerValue.postUpdate(0)
+                    tnl_6_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_6_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_6_current_timer_value.state >= 120  ){
+                    tnl_6_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_6_displayCurrentTimerValue.postUpdate(tnl_6_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_7   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_7_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_7_ TIMER: {}", tnl_7_current_timer_value.state)
+            tnl_7_current_timer_value.postUpdate((tnl_7_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_7_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_7_current_timer_value.state <= 0  ){ 
+                    tnl_7_displayCurrentTimerValue.postUpdate(0)
+                    tnl_7_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_7_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_7_current_timer_value.state >= 120  ){
+                    tnl_7_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_7_displayCurrentTimerValue.postUpdate(tnl_7_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_8   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_8_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_8_ TIMER: {}", tnl_8_current_timer_value.state)
+            tnl_8_current_timer_value.postUpdate((tnl_8_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_8_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_8_current_timer_value.state <= 0  ){ 
+                    tnl_8_displayCurrentTimerValue.postUpdate(0)
+                    tnl_8_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_8_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_8_current_timer_value.state >= 120  ){
+                    tnl_8_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_8_displayCurrentTimerValue.postUpdate(tnl_8_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_9   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_9_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_9_ TIMER: {}", tnl_9_current_timer_value.state)
+            tnl_9_current_timer_value.postUpdate((tnl_9_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_9_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_9_current_timer_value.state <= 0  ){ 
+                    tnl_9_displayCurrentTimerValue.postUpdate(0)
+                    tnl_9_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_9_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_9_current_timer_value.state >= 120  ){
+                    tnl_9_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_9_displayCurrentTimerValue.postUpdate(tnl_9_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_10   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_10_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_10_ TIMER: {}", tnl_10_current_timer_value.state)
+            tnl_10_current_timer_value.postUpdate((tnl_10_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_10_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_10_current_timer_value.state <= 0  ){ 
+                    tnl_10_displayCurrentTimerValue.postUpdate(0)
+                    tnl_10_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_10_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_10_current_timer_value.state >= 120  ){
+                    tnl_10_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_10_displayCurrentTimerValue.postUpdate(tnl_10_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_11   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_11_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_11_ TIMER: {}", tnl_11_current_timer_value.state)
+            tnl_11_current_timer_value.postUpdate((tnl_11_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_11_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_11_current_timer_value.state <= 0  ){ 
+                    tnl_11_displayCurrentTimerValue.postUpdate(0)
+                    tnl_11_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_11_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_11_current_timer_value.state >= 120  ){
+                    tnl_11_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_11_displayCurrentTimerValue.postUpdate(tnl_11_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_12   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_12_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_12_ TIMER: {}", tnl_12_current_timer_value.state)
+            tnl_12_current_timer_value.postUpdate((tnl_12_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_12_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_12_current_timer_value.state <= 0  ){ 
+                    tnl_12_displayCurrentTimerValue.postUpdate(0)
+                    tnl_12_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_12_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_12_current_timer_value.state >= 120  ){
+                    tnl_12_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_12_displayCurrentTimerValue.postUpdate(tnl_12_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_13   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_13_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_13_ TIMER: {}", tnl_13_current_timer_value.state)
+            tnl_13_current_timer_value.postUpdate((tnl_13_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_13_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_13_current_timer_value.state <= 0  ){ 
+                    tnl_13_displayCurrentTimerValue.postUpdate(0)
+                    tnl_13_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_13_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_13_current_timer_value.state >= 120  ){
+                    tnl_13_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_13_displayCurrentTimerValue.postUpdate(tnl_13_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_14   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_14_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_14_ TIMER: {}", tnl_14_current_timer_value.state)
+            tnl_14_current_timer_value.postUpdate((tnl_14_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_14_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_14_current_timer_value.state <= 0  ){ 
+                    tnl_14_displayCurrentTimerValue.postUpdate(0)
+                    tnl_14_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_14_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_14_current_timer_value.state >= 120  ){
+                    tnl_14_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_14_displayCurrentTimerValue.postUpdate(tnl_14_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_15   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_15_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_15_ TIMER: {}", tnl_15_current_timer_value.state)
+            tnl_15_current_timer_value.postUpdate((tnl_15_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_15_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_15_current_timer_value.state <= 0  ){ 
+                    tnl_15_displayCurrentTimerValue.postUpdate(0)
+                    tnl_15_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_15_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_15_current_timer_value.state >= 120  ){
+                    tnl_15_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_15_displayCurrentTimerValue.postUpdate(tnl_15_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_16   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_16_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_16_ TIMER: {}", tnl_16_current_timer_value.state)
+            tnl_16_current_timer_value.postUpdate((tnl_16_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_16_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_16_current_timer_value.state <= 0  ){ 
+                    tnl_16_displayCurrentTimerValue.postUpdate(0)
+                    tnl_16_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_16_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_16_current_timer_value.state >= 120  ){
+                    tnl_16_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_16_displayCurrentTimerValue.postUpdate(tnl_16_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_17   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_17_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_17_ TIMER: {}", tnl_17_current_timer_value.state)
+            tnl_17_current_timer_value.postUpdate((tnl_17_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_17_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_17_current_timer_value.state <= 0  ){ 
+                    tnl_17_displayCurrentTimerValue.postUpdate(0)
+                    tnl_17_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_17_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_17_current_timer_value.state >= 120  ){
+                    tnl_17_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_17_displayCurrentTimerValue.postUpdate(tnl_17_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+//  //  //  //  //  TUNNEL tnl_18   //  //  //  //  //  //  //  //
+//  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
+
+    if(tnl_18_btnctrl_enable.state == ON) {
+// logInfo("btn_controll.rules", "Before decrement tnl_18_ TIMER: {}", tnl_18_current_timer_value.state)
+            tnl_18_current_timer_value.postUpdate((tnl_18_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+            if(tnl_18_missed_action_countdown_enable_sw.state == ON){
+                if(tnl_18_current_timer_value.state <= 0  ){ 
+                    tnl_18_displayCurrentTimerValue.postUpdate(0)
+                    tnl_18_btnaction_enable.sendCommand(ON) // Enable button press
+                    tnl_18_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncoountdown timer
+                    g1_btn_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Button LED's on both sides
+                    g1_tnl_lights.allMembers.forEach [ item | item.sendCommand(ON) ]  // Light the Tunnel Lights on both sides
+                }else if (tnl_18_current_timer_value.state >= 120  ){
+                    tnl_18_displayCurrentTimerValue.postUpdate(120)
+                }else{
+                    tnl_18_displayCurrentTimerValue.postUpdate(tnl_18_current_timer_value.state as DecimalType)
+                }
+            }
+    }
+
+end
+

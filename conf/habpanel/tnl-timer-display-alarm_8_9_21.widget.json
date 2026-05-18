@@ -1,0 +1,45 @@
+{
+    "template": "<div class=\"row\">\n    <div ng-if=\"itemValue(config.tnl_current_temperature) >= itemValue(config.temperature_alarm_setpoint)\">\n        <div class=\"col-xs-4\"> \n            <table>\n                <tr>\n                  <td><widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'error'\" size=\"45\" inline=\"true\"></widget-icon></td>\n                  <td><span style=\"color: cyan; font-size: 50pt\">{{config.tnl_number}}</span></td>\n                  <td><widget-icon iconset=\"'eclipse-smarthome-classic'\" icon=\"'temperature_hot'\" size=\"45\" inline=\"true\"></widget-icon></td>\n                  <td><span style=\"color: red; font-size: 45pt\"><strong>&nbsp;&nbsp;{{'%.1f°' | sprintf:itemValue(config.tnl_current_temperature)}}</strong></span></td>\n                </tr>\n            </table>\n        </div>\n    </div>\n    <div ng-if=\"itemValue(config.temperature_alarm_setpoint) > itemValue(config.tnl_current_temperature)\">\n        <div class=\"col-xs-4\"><span style=\"color: cyan; font-size: 50pt\">{{config.tnl_number}}</span></div>\n    </div>\n</div>  \n\n<div class=\"row\">\n    <div class=\"text-center\" ng-style=\"{ color: (itemState(config.tnl_enable_item)=='OFF')?'grey':(itemValue(config.tnl_timer_item) > itemValue(config.tnl_timer_warn_item)*1.0 ?'lime':itemValue(config.tnl_timer_item) > 0 ?'yellow':'red') }\">\n          <span style=\"font-size: 130pt\">{{'%.0f' | sprintf:itemValue(config.tnl_timer_item).split('.')[0]}}</span> \n    </div>\n</div>",
+    "name": "Tunnel timer display with alarms",
+    "author": "St",
+    "id": "tnl-timer-display-alarm",
+    "description": "Box for the large display with displaying alarm situations",
+    "settings": [
+        {
+            "id": "tnl_timer_warn_item",
+            "label": "Color value in yellow setpoint",
+            "default": "default_tnl_warn_timer_value",
+            "type": "item"
+        },
+        {
+            "id": "tnl_number",
+            "label": "Tunnel number",
+            "default": "1",
+            "type": "string"
+        },
+        {
+            "id": "tnl_enable_item",
+            "label": "Tunnel btnctrl enable",
+            "default": "tnl_1_btnctrl_enable",
+            "type": "item"
+        },
+        {
+            "id": "tnl_timer_item",
+            "label": "Tunnel current timer",
+            "default": "tnl_1_current_timer_value",
+            "type": "item"
+        },
+        {
+            "label": "Temperature alarm setpoint",
+            "default": "default_tnl_temperature_alarm_value",
+            "id": "temperature_alarm_setpoint",
+            "type": "item"
+        },
+        {
+            "label": "Current tnl out temperature",
+            "id": "tnl_current_temperature",
+            "default": "out_1_Temperature",
+            "type": "item"
+        }
+    ]
+}

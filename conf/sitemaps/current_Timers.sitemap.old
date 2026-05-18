@@ -1,0 +1,135 @@
+sitemap current_Timers label="Current tunnel timers" {
+
+
+    Frame label="Времена по тунели" {
+
+        // Text item=none     label="ТУНЕЛ tnl_1"
+        // Text item=none
+        Text    item=tnl_1_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 1  [%d мин.]" icon="time"
+        // Switch  item=in_1_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_2"
+        // Text item=none
+        Text    item=tnl_2_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 2  [%d мин.]" icon="time"
+        // Switch  item=out_2_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_3"
+        // Text item=none
+        Text    item=tnl_3_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 3  [%d мин.]" icon="time"
+        // Switch  item=out_3_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_4"
+        // Text item=none
+        Text    item=tnl_4_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 4  [%d мин.]" icon="time"
+        // Switch  item=out_4_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_5"
+        // Text item=none
+        Text    item=tnl_5_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 5  [%d мин.]" icon="time"
+        // Switch  item=out_5_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_6"
+        // Text item=none
+        Text    item=tnl_6_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 6  [%d мин.]" icon="time"
+        // Switch  item=out_6_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_7"
+        // Text item=none
+        // Text    item=tnl_7_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 7  [%d мин.]" icon="time"
+        // Switch  item=out_7_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        Text    item=tnl_7_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 7  [%d мин.]" icon="time"
+
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_8"
+        // Text item=none
+        Text    item=tnl_8_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 8  [%d мин.]" icon="time"
+        // Switch  item=out_8_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_9"
+        // Text item=none
+        Text    item=tnl_9_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 9  [%d мин.]" icon="time"
+        // Switch  item=out_9_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_10"
+        // Text item=none
+        Text    item=tnl_10_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 10  [%d мин.]" icon="time"
+        // Switch  item=out_10_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_11"
+        // Text item=none
+        Text    item=tnl_11_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 11  [%d мин.]" icon="time"
+        // Switch  item=out_11_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none 
+
+        // Text item=none     label="ТУНЕЛ tnl_12"
+        // Text item=none
+        Text    item=tnl_12_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 12  [%d мин.]" icon="time"
+        // Switch  item=out_12_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_13"
+        // Text item=none
+        Text    item=tnl_13_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 13  [%d мин.]" icon="time"
+        // Switch  item=out_13_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_14"
+        // Text item=none
+        Text    item=tnl_14_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 14  [%d мин.]" icon="time"
+        // Switch  item=out_14_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_15"
+        // Text item=none
+        Text    item=tnl_15_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 15  [%d мин.]" icon="time"
+        // Switch  item=out_15_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_16"
+        // Text item=none
+        Text    item=tnl_16_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 16  [%d мин.]" icon="time"
+        // Switch  item=out_16_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+        // Text item=none     label="ТУНЕЛ tnl_17"
+        // Text item=none
+        Text    item=tnl_17_current_timer_value labelcolor=["blue"] valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 17  [%d мин.]" icon="time"
+        // Switch  item=out_17_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none 
+        // Text item=none 
+
+        // Text item=none     label="ТУНЕЛ tnl_18"
+        // Text item=none
+        Text    item=tnl_18_current_timer_value  valuecolor=[>0="green",<=0="red"] label="Таймер ТУНЕЛ 18  [%d мин.]" icon="time"
+        // Switch  item=out_18_tnl_light   icon="light"    label="LED ТОПЪЛ"
+        // Text item=none                  
+        // Text item=none  
+
+    }
+}

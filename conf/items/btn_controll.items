@@ -1,0 +1,645 @@
+Group gTunnelItems
+Group gCurrentTnlTimers
+Group gEnableTunnelsw (gPersist_On_Change_1minute)
+
+Switch oneMinuteTriggerSwitch   //Using this as a rule trigger for the other rules, in order not to do heavy operations in a chron job.
+                                // By default, there are only 2 threads allocated to Quartz, the scheduler. 
+                                // All cron rules, Timers, and Astro triggered rules all use this…
+Number default_tnl_timer_value (gPersist_On_Every_Change)
+Number default_tnl_timer_missed_actinon_value (gPersist_On_Every_Change)
+Number default_tnl_timer_extendedDryingTime_value (gPersist_On_Every_Change)
+
+Switch globalInit // init all tunnel values to defaults. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using
+Switch enableAllTunnels
+Switch disableAllTunnels
+
+
+Number  tnl_1_displayCurrentTimerValue
+Number  tnl_2_displayCurrentTimerValue
+Number  tnl_3_displayCurrentTimerValue
+Number  tnl_4_displayCurrentTimerValue
+Number  tnl_5_displayCurrentTimerValue
+Number  tnl_6_displayCurrentTimerValue
+Number  tnl_7_displayCurrentTimerValue
+Number  tnl_8_displayCurrentTimerValue
+Number  tnl_9_displayCurrentTimerValue
+Number tnl_10_displayCurrentTimerValue
+Number tnl_11_displayCurrentTimerValue
+Number tnl_12_displayCurrentTimerValue
+Number tnl_13_displayCurrentTimerValue
+Number tnl_14_displayCurrentTimerValue
+Number tnl_15_displayCurrentTimerValue
+Number tnl_16_displayCurrentTimerValue
+Number tnl_17_displayCurrentTimerValue
+Number tnl_18_displayCurrentTimerValue
+
+
+
+
+// // Tunnel tnl_51  // // 
+// // // // // // // // //
+Group gtnl_51_btn_ctrl (gTunnelItems)
+
+Switch tnl_51_btnctrl_enable        (gtnl_51_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_51_btnaction_enable      (gtnl_51_btn_ctrl)                
+Switch tnl_51_missed_action_countdown_enable_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
+Switch tnl_51_resetTimer_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
+Switch tnl_51_set_all_to_defaults_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
+
+Number tnl_51_timer_default_value               (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_51_timer_missed_actinon_value        (gtnl_51_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_51_timer_extendedDryingTime_value    (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_51_current_timer_value               (gtnl_51_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
+
+// // Tunnel tnl_1  // // 
+// // // // // // // // //
+Group gtnl_1_btn_ctrl (gTunnelItems)
+
+Switch tnl_1_btnctrl_enable        (gtnl_1_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_1_btnaction_enable      (gtnl_1_btn_ctrl)                
+Switch tnl_1_missed_action_countdown_enable_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
+Switch tnl_1_resetTimer_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
+Switch tnl_1_set_all_to_defaults_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
+
+Number tnl_1_timer_default_value               (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_1_timer_missed_actinon_value        (gtnl_1_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_1_timer_extendedDryingTime_value    (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_1_current_timer_value               (gtnl_1_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_2  // // 
+// // // // // // // // //
+Group gtnl_2_btn_ctrl (gTunnelItems)
+
+Switch tnl_2_btnctrl_enable        (gtnl_2_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_2_btnaction_enable      (gtnl_2_btn_ctrl)                
+Switch tnl_2_missed_action_countdown_enable_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
+Switch tnl_2_resetTimer_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
+Switch tnl_2_set_all_to_defaults_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
+
+Number tnl_2_timer_default_value               (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_2_timer_missed_actinon_value        (gtnl_2_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_2_timer_extendedDryingTime_value    (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_2_current_timer_value               (gtnl_2_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_3  // // 
+// // // // // // // // //
+Group gtnl_3_btn_ctrl (gTunnelItems)
+
+Switch tnl_3_btnctrl_enable        (gtnl_3_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_3_btnaction_enable      (gtnl_3_btn_ctrl)                
+Switch tnl_3_missed_action_countdown_enable_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
+Switch tnl_3_resetTimer_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
+Switch tnl_3_set_all_to_defaults_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
+
+Number tnl_3_timer_default_value               (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_3_timer_missed_actinon_value        (gtnl_3_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_3_timer_extendedDryingTime_value    (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_3_current_timer_value               (gtnl_3_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_4  // // 
+// // // // // // // // //
+Group gtnl_4_btn_ctrl (gTunnelItems)
+
+Switch tnl_4_btnctrl_enable        (gtnl_4_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_4_btnaction_enable      (gtnl_4_btn_ctrl)                
+Switch tnl_4_missed_action_countdown_enable_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
+Switch tnl_4_resetTimer_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
+Switch tnl_4_set_all_to_defaults_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
+
+Number tnl_4_timer_default_value               (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_4_timer_missed_actinon_value        (gtnl_4_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_4_timer_extendedDryingTime_value    (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_4_current_timer_value               (gtnl_4_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
+
+// // Tunnel tnl_5  // // 
+// // // // // // // // //
+Group gtnl_5_btn_ctrl (gTunnelItems)
+
+Switch tnl_5_btnctrl_enable        (gtnl_5_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_5_btnaction_enable      (gtnl_5_btn_ctrl)                
+Switch tnl_5_missed_action_countdown_enable_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
+Switch tnl_5_resetTimer_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
+Switch tnl_5_set_all_to_defaults_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
+
+Number tnl_5_timer_default_value               (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_5_timer_missed_actinon_value        (gtnl_5_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_5_timer_extendedDryingTime_value    (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_5_current_timer_value               (gtnl_5_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_6  // // 
+// // // // // // // // //
+Group gtnl_6_btn_ctrl (gTunnelItems)
+
+Switch tnl_6_btnctrl_enable        (gtnl_6_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_6_btnaction_enable      (gtnl_6_btn_ctrl)                
+Switch tnl_6_missed_action_countdown_enable_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
+Switch tnl_6_resetTimer_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
+Switch tnl_6_set_all_to_defaults_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
+
+Number tnl_6_timer_default_value               (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_6_timer_missed_actinon_value        (gtnl_6_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_6_timer_extendedDryingTime_value    (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_6_current_timer_value               (gtnl_6_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_7  // // 
+// // // // // // // // //
+Group gtnl_7_btn_ctrl (gTunnelItems)
+
+Switch tnl_7_btnctrl_enable        (gtnl_7_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_7_btnaction_enable      (gtnl_7_btn_ctrl)                
+Switch tnl_7_missed_action_countdown_enable_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
+Switch tnl_7_resetTimer_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
+Switch tnl_7_set_all_to_defaults_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
+
+Number tnl_7_timer_default_value               (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_7_timer_missed_actinon_value        (gtnl_7_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_7_timer_extendedDryingTime_value    (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_7_current_timer_value               (gtnl_7_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_8  // // 
+// // // // // // // // //
+Group gtnl_8_btn_ctrl (gTunnelItems)
+
+Switch tnl_8_btnctrl_enable        (gtnl_8_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_8_btnaction_enable      (gtnl_8_btn_ctrl)                
+Switch tnl_8_missed_action_countdown_enable_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
+Switch tnl_8_resetTimer_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
+Switch tnl_8_set_all_to_defaults_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
+
+Number tnl_8_timer_default_value               (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_8_timer_missed_actinon_value        (gtnl_8_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_8_timer_extendedDryingTime_value    (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_8_current_timer_value               (gtnl_8_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_9  // // 
+// // // // // // // // //
+Group gtnl_9_btn_ctrl (gTunnelItems)
+
+Switch tnl_9_btnctrl_enable        (gtnl_9_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_9_btnaction_enable      (gtnl_9_btn_ctrl)                
+Switch tnl_9_missed_action_countdown_enable_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
+Switch tnl_9_resetTimer_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
+Switch tnl_9_set_all_to_defaults_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
+
+Number tnl_9_timer_default_value               (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_9_timer_missed_actinon_value        (gtnl_9_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_9_timer_extendedDryingTime_value    (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_9_current_timer_value               (gtnl_9_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_10  // // 
+// // // // // // // // //
+Group gtnl_10_btn_ctrl (gTunnelItems)
+
+Switch tnl_10_btnctrl_enable        (gtnl_10_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_10_btnaction_enable      (gtnl_10_btn_ctrl)                
+Switch tnl_10_missed_action_countdown_enable_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
+Switch tnl_10_resetTimer_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
+Switch tnl_10_set_all_to_defaults_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
+
+Number tnl_10_timer_default_value               (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_10_timer_missed_actinon_value        (gtnl_10_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_10_timer_extendedDryingTime_value    (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_10_current_timer_value               (gtnl_10_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_11  // // 
+// // // // // // // // //
+Group gtnl_11_btn_ctrl (gTunnelItems)
+
+Switch tnl_11_btnctrl_enable        (gtnl_11_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_11_btnaction_enable      (gtnl_11_btn_ctrl)                
+Switch tnl_11_missed_action_countdown_enable_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
+Switch tnl_11_resetTimer_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
+Switch tnl_11_set_all_to_defaults_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
+
+Number tnl_11_timer_default_value               (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_11_timer_missed_actinon_value        (gtnl_11_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_11_timer_extendedDryingTime_value    (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_11_current_timer_value               (gtnl_11_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_12  // // 
+// // // // // // // // //
+Group gtnl_12_btn_ctrl (gTunnelItems)
+
+Switch tnl_12_btnctrl_enable        (gtnl_12_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_12_btnaction_enable      (gtnl_12_btn_ctrl)                
+Switch tnl_12_missed_action_countdown_enable_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
+Switch tnl_12_resetTimer_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
+Switch tnl_12_set_all_to_defaults_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
+
+Number tnl_12_timer_default_value               (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_12_timer_missed_actinon_value        (gtnl_12_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_12_timer_extendedDryingTime_value    (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_12_current_timer_value               (gtnl_12_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_13  // // 
+// // // // // // // // //
+Group gtnl_13_btn_ctrl (gTunnelItems)
+
+Switch tnl_13_btnctrl_enable        (gtnl_13_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_13_btnaction_enable      (gtnl_13_btn_ctrl)                
+Switch tnl_13_missed_action_countdown_enable_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
+Switch tnl_13_resetTimer_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
+Switch tnl_13_set_all_to_defaults_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
+
+Number tnl_13_timer_default_value               (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_13_timer_missed_actinon_value        (gtnl_13_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_13_timer_extendedDryingTime_value    (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_13_current_timer_value               (gtnl_13_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_14  // // 
+// // // // // // // // //
+Group gtnl_14_btn_ctrl (gTunnelItems)
+
+Switch tnl_14_btnctrl_enable        (gtnl_14_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_14_btnaction_enable      (gtnl_14_btn_ctrl)                
+Switch tnl_14_missed_action_countdown_enable_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
+Switch tnl_14_resetTimer_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
+Switch tnl_14_set_all_to_defaults_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
+
+Number tnl_14_timer_default_value               (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_14_timer_missed_actinon_value        (gtnl_14_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_14_timer_extendedDryingTime_value    (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_14_current_timer_value               (gtnl_14_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_15  // // 
+// // // // // // // // //
+Group gtnl_15_btn_ctrl (gTunnelItems)
+
+Switch tnl_15_btnctrl_enable        (gtnl_15_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_15_btnaction_enable      (gtnl_15_btn_ctrl)                
+Switch tnl_15_missed_action_countdown_enable_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
+Switch tnl_15_resetTimer_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
+Switch tnl_15_set_all_to_defaults_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
+
+Number tnl_15_timer_default_value               (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_15_timer_missed_actinon_value        (gtnl_15_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_15_timer_extendedDryingTime_value    (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_15_current_timer_value               (gtnl_15_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_16  // // 
+// // // // // // // // //
+Group gtnl_16_btn_ctrl (gTunnelItems)
+
+Switch tnl_16_btnctrl_enable        (gtnl_16_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_16_btnaction_enable      (gtnl_16_btn_ctrl)                
+Switch tnl_16_missed_action_countdown_enable_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
+Switch tnl_16_resetTimer_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
+Switch tnl_16_set_all_to_defaults_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
+
+Number tnl_16_timer_default_value               (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_16_timer_missed_actinon_value        (gtnl_16_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_16_timer_extendedDryingTime_value    (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_16_current_timer_value               (gtnl_16_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+// // Tunnel tnl_17  // // 
+// // // // // // // // //
+Group gtnl_17_btn_ctrl (gTunnelItems)
+
+Switch tnl_17_btnctrl_enable        (gtnl_17_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_17_btnaction_enable      (gtnl_17_btn_ctrl)                
+Switch tnl_17_missed_action_countdown_enable_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
+Switch tnl_17_resetTimer_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
+Switch tnl_17_set_all_to_defaults_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
+
+Number tnl_17_timer_default_value               (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_17_timer_missed_actinon_value        (gtnl_17_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_17_timer_extendedDryingTime_value    (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_17_current_timer_value               (gtnl_17_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // Tunnel tnl_18  // // 
+// // // // // // // // //
+Group gtnl_18_btn_ctrl (gTunnelItems)
+
+Switch tnl_18_btnctrl_enable        (gtnl_18_btn_ctrl, gEnableTunnelsw)                   
+Switch tnl_18_btnaction_enable      (gtnl_18_btn_ctrl)                
+Switch tnl_18_missed_action_countdown_enable_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
+Switch tnl_18_resetTimer_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
+Switch tnl_18_set_all_to_defaults_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
+
+Number tnl_18_timer_default_value               (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                              
+Number tnl_18_timer_missed_actinon_value        (gtnl_18_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_18_timer_extendedDryingTime_value    (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                
+Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+
+// Group gTunnelItems
+// Group gCurrentTnlTimers
+// Group gEnableTunnelsw (gPersist_On_Change_1minute)
+
+// Switch oneMinuteTriggerSwitch   //Using this as a rule trigger for the other rules, in order not to do heavy operations in a chron job.
+//                                 // By default, there are only 2 threads allocated to Quartz, the scheduler. 
+//                                 // All cron rules, Timers, and Astro triggered rules all use this…
+// Number default_tnl_timer_value (gPersist_On_Every_Change)
+// Number default_tnl_timer_missed_actinon_value (gPersist_On_Every_Change)
+// Number default_tnl_timer_extendedDryingTime_value (gPersist_On_Every_Change)
+
+// Switch globalInit // init all tunnel values to defaults. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using
+// Switch enableAllTunnels
+// Switch disableAllTunnels
+
+
+// Number  tnl_1_displayCurrentTimerValue
+// Number  tnl_2_displayCurrentTimerValue
+// Number  tnl_3_displayCurrentTimerValue
+// Number  tnl_4_displayCurrentTimerValue
+// Number  tnl_5_displayCurrentTimerValue
+// Number  tnl_6_displayCurrentTimerValue
+// Number  tnl_7_displayCurrentTimerValue
+// Number  tnl_8_displayCurrentTimerValue
+// Number  tnl_9_displayCurrentTimerValue
+// Number tnl_10_displayCurrentTimerValue
+// Number tnl_11_displayCurrentTimerValue
+// Number tnl_12_displayCurrentTimerValue
+// Number tnl_13_displayCurrentTimerValue
+// Number tnl_14_displayCurrentTimerValue
+// Number tnl_15_displayCurrentTimerValue
+// Number tnl_16_displayCurrentTimerValue
+// Number tnl_17_displayCurrentTimerValue
+// Number tnl_18_displayCurrentTimerValue
+
+
+
+
+// // // Tunnel tnl_51  // // 
+// // // // // // // // // //
+// Group gtnl_51_btn_ctrl (gTunnelItems)
+
+// Switch tnl_51_btnctrl_enable        (gtnl_51_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_51_btnaction_enable      (gtnl_51_btn_ctrl)                
+// Switch tnl_51_missed_action_countdown_enable_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
+// Switch tnl_51_resetTimer_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
+// Switch tnl_51_set_all_to_defaults_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_51_timer_default_value               (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_51_timer_missed_actinon_value        (gtnl_51_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_51_timer_extendedDryingTime_value    (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_51_current_timer_value               (gtnl_51_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
+
+// // // Tunnel tnl_1  // // 
+// // // // // // // // // //
+// Group gtnl_1_btn_ctrl (gTunnelItems)
+
+// Switch tnl_1_btnctrl_enable        (gtnl_1_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_1_btnaction_enable      (gtnl_1_btn_ctrl)                
+// Switch tnl_1_missed_action_countdown_enable_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
+// Switch tnl_1_resetTimer_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
+// Switch tnl_1_set_all_to_defaults_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_1_timer_default_value               (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_1_timer_missed_actinon_value        (gtnl_1_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_1_timer_extendedDryingTime_value    (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_1_current_timer_value               (gtnl_1_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_2  // // 
+// // // // // // // // // //
+// Group gtnl_2_btn_ctrl (gTunnelItems)
+
+// Switch tnl_2_btnctrl_enable        (gtnl_2_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_2_btnaction_enable      (gtnl_2_btn_ctrl)                
+// Switch tnl_2_missed_action_countdown_enable_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
+// Switch tnl_2_resetTimer_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
+// Switch tnl_2_set_all_to_defaults_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_2_timer_default_value               (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_2_timer_missed_actinon_value        (gtnl_2_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_2_timer_extendedDryingTime_value    (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_2_current_timer_value               (gtnl_2_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_3  // // 
+// // // // // // // // // //
+// Group gtnl_3_btn_ctrl (gTunnelItems)
+
+// Switch tnl_3_btnctrl_enable        (gtnl_3_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_3_btnaction_enable      (gtnl_3_btn_ctrl)                
+// Switch tnl_3_missed_action_countdown_enable_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
+// Switch tnl_3_resetTimer_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
+// Switch tnl_3_set_all_to_defaults_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_3_timer_default_value               (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_3_timer_missed_actinon_value        (gtnl_3_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_3_timer_extendedDryingTime_value    (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_3_current_timer_value               (gtnl_3_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_4  // // 
+// // // // // // // // // //
+// Group gtnl_4_btn_ctrl (gTunnelItems)
+
+// Switch tnl_4_btnctrl_enable        (gtnl_4_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_4_btnaction_enable      (gtnl_4_btn_ctrl)                
+// Switch tnl_4_missed_action_countdown_enable_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
+// Switch tnl_4_resetTimer_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
+// Switch tnl_4_set_all_to_defaults_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_4_timer_default_value               (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_4_timer_missed_actinon_value        (gtnl_4_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_4_timer_extendedDryingTime_value    (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_4_current_timer_value               (gtnl_4_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
+
+// // // Tunnel tnl_5  // // 
+// // // // // // // // // //
+// Group gtnl_5_btn_ctrl (gTunnelItems)
+
+// Switch tnl_5_btnctrl_enable        (gtnl_5_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_5_btnaction_enable      (gtnl_5_btn_ctrl)                
+// Switch tnl_5_missed_action_countdown_enable_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
+// Switch tnl_5_resetTimer_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
+// Switch tnl_5_set_all_to_defaults_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_5_timer_default_value               (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_5_timer_missed_actinon_value        (gtnl_5_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_5_timer_extendedDryingTime_value    (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_5_current_timer_value               (gtnl_5_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_6  // // 
+// // // // // // // // // //
+// Group gtnl_6_btn_ctrl (gTunnelItems)
+
+// Switch tnl_6_btnctrl_enable        (gtnl_6_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_6_btnaction_enable      (gtnl_6_btn_ctrl)                
+// Switch tnl_6_missed_action_countdown_enable_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
+// Switch tnl_6_resetTimer_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
+// Switch tnl_6_set_all_to_defaults_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_6_timer_default_value               (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_6_timer_missed_actinon_value        (gtnl_6_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_6_timer_extendedDryingTime_value    (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_6_current_timer_value               (gtnl_6_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_7  // // 
+// // // // // // // // // //
+// Group gtnl_7_btn_ctrl (gTunnelItems)
+
+// Switch tnl_7_btnctrl_enable        (gtnl_7_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_7_btnaction_enable      (gtnl_7_btn_ctrl)                
+// Switch tnl_7_missed_action_countdown_enable_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
+// Switch tnl_7_resetTimer_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
+// Switch tnl_7_set_all_to_defaults_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_7_timer_default_value               (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_7_timer_missed_actinon_value        (gtnl_7_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_7_timer_extendedDryingTime_value    (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_7_current_timer_value               (gtnl_7_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_8  // // 
+// // // // // // // // // //
+// Group gtnl_8_btn_ctrl (gTunnelItems)
+
+// Switch tnl_8_btnctrl_enable        (gtnl_8_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_8_btnaction_enable      (gtnl_8_btn_ctrl)                
+// Switch tnl_8_missed_action_countdown_enable_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
+// Switch tnl_8_resetTimer_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
+// Switch tnl_8_set_all_to_defaults_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_8_timer_default_value               (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_8_timer_missed_actinon_value        (gtnl_8_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_8_timer_extendedDryingTime_value    (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_8_current_timer_value               (gtnl_8_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_9  // // 
+// // // // // // // // // //
+// Group gtnl_9_btn_ctrl (gTunnelItems)
+
+// Switch tnl_9_btnctrl_enable        (gtnl_9_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_9_btnaction_enable      (gtnl_9_btn_ctrl)                
+// Switch tnl_9_missed_action_countdown_enable_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
+// Switch tnl_9_resetTimer_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
+// Switch tnl_9_set_all_to_defaults_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_9_timer_default_value               (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_9_timer_missed_actinon_value        (gtnl_9_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_9_timer_extendedDryingTime_value    (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_9_current_timer_value               (gtnl_9_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_10  // // 
+// // // // // // // // // //
+// Group gtnl_10_btn_ctrl (gTunnelItems)
+
+// Switch tnl_10_btnctrl_enable        (gtnl_10_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_10_btnaction_enable      (gtnl_10_btn_ctrl)                
+// Switch tnl_10_missed_action_countdown_enable_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
+// Switch tnl_10_resetTimer_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
+// Switch tnl_10_set_all_to_defaults_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_10_timer_default_value               (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_10_timer_missed_actinon_value        (gtnl_10_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_10_timer_extendedDryingTime_value    (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_10_current_timer_value               (gtnl_10_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_11  // // 
+// // // // // // // // // //
+// Group gtnl_11_btn_ctrl (gTunnelItems)
+
+// Switch tnl_11_btnctrl_enable        (gtnl_11_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_11_btnaction_enable      (gtnl_11_btn_ctrl)                
+// Switch tnl_11_missed_action_countdown_enable_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
+// Switch tnl_11_resetTimer_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
+// Switch tnl_11_set_all_to_defaults_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_11_timer_default_value               (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_11_timer_missed_actinon_value        (gtnl_11_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_11_timer_extendedDryingTime_value    (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_11_current_timer_value               (gtnl_11_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_12  // // 
+// // // // // // // // // //
+// Group gtnl_12_btn_ctrl (gTunnelItems)
+
+// Switch tnl_12_btnctrl_enable        (gtnl_12_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_12_btnaction_enable      (gtnl_12_btn_ctrl)                
+// Switch tnl_12_missed_action_countdown_enable_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
+// Switch tnl_12_resetTimer_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
+// Switch tnl_12_set_all_to_defaults_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_12_timer_default_value               (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_12_timer_missed_actinon_value        (gtnl_12_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_12_timer_extendedDryingTime_value    (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_12_current_timer_value               (gtnl_12_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_13  // // 
+// // // // // // // // // //
+// Group gtnl_13_btn_ctrl (gTunnelItems)
+
+// Switch tnl_13_btnctrl_enable        (gtnl_13_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_13_btnaction_enable      (gtnl_13_btn_ctrl)                
+// Switch tnl_13_missed_action_countdown_enable_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
+// Switch tnl_13_resetTimer_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
+// Switch tnl_13_set_all_to_defaults_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_13_timer_default_value               (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_13_timer_missed_actinon_value        (gtnl_13_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_13_timer_extendedDryingTime_value    (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_13_current_timer_value               (gtnl_13_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_14  // // 
+// // // // // // // // // //
+// Group gtnl_14_btn_ctrl (gTunnelItems)
+
+// Switch tnl_14_btnctrl_enable        (gtnl_14_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_14_btnaction_enable      (gtnl_14_btn_ctrl)                
+// Switch tnl_14_missed_action_countdown_enable_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
+// Switch tnl_14_resetTimer_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
+// Switch tnl_14_set_all_to_defaults_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_14_timer_default_value               (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_14_timer_missed_actinon_value        (gtnl_14_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_14_timer_extendedDryingTime_value    (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_14_current_timer_value               (gtnl_14_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_15  // // 
+// // // // // // // // // //
+// Group gtnl_15_btn_ctrl (gTunnelItems)
+
+// Switch tnl_15_btnctrl_enable        (gtnl_15_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_15_btnaction_enable      (gtnl_15_btn_ctrl)                
+// Switch tnl_15_missed_action_countdown_enable_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
+// Switch tnl_15_resetTimer_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
+// Switch tnl_15_set_all_to_defaults_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_15_timer_default_value               (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_15_timer_missed_actinon_value        (gtnl_15_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_15_timer_extendedDryingTime_value    (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_15_current_timer_value               (gtnl_15_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_16  // // 
+// // // // // // // // // //
+// Group gtnl_16_btn_ctrl (gTunnelItems)
+
+// Switch tnl_16_btnctrl_enable        (gtnl_16_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_16_btnaction_enable      (gtnl_16_btn_ctrl)                
+// Switch tnl_16_missed_action_countdown_enable_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
+// Switch tnl_16_resetTimer_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
+// Switch tnl_16_set_all_to_defaults_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_16_timer_default_value               (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_16_timer_missed_actinon_value        (gtnl_16_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_16_timer_extendedDryingTime_value    (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_16_current_timer_value               (gtnl_16_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+// // // Tunnel tnl_17  // // 
+// // // // // // // // // //
+// Group gtnl_17_btn_ctrl (gTunnelItems)
+
+// Switch tnl_17_btnctrl_enable        (gtnl_17_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_17_btnaction_enable      (gtnl_17_btn_ctrl)                
+// Switch tnl_17_missed_action_countdown_enable_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
+// Switch tnl_17_resetTimer_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
+// Switch tnl_17_set_all_to_defaults_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_17_timer_default_value               (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_17_timer_missed_actinon_value        (gtnl_17_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_17_timer_extendedDryingTime_value    (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_17_current_timer_value               (gtnl_17_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+
+// // // Tunnel tnl_18  // // 
+// // // // // // // // // //
+// Group gtnl_18_btn_ctrl (gTunnelItems)
+
+// Switch tnl_18_btnctrl_enable        (gtnl_18_btn_ctrl, gEnableTunnelsw)                   
+// Switch tnl_18_btnaction_enable      (gtnl_18_btn_ctrl)                
+// Switch tnl_18_missed_action_countdown_enable_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
+// Switch tnl_18_resetTimer_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
+// Switch tnl_18_set_all_to_defaults_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
+
+// Number tnl_18_timer_default_value               (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                              
+// Number tnl_18_timer_missed_actinon_value        (gtnl_18_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_18_timer_extendedDryingTime_value    (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                
+// Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
+

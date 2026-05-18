@@ -1,0 +1,11 @@
+TASMOTA SHT20 AND SHT30 bin files located at:
+C:\Users\Stefan.STEFAN-HP\Documents\aaa\Harvesta\Tasmota\Tasmotizer and SHT sensor bin files
+
+
+TEMPLATE 3 relays/ 3 buttons:
+{"NAME":"controller_v3","GPIO":[33,226,0,32,640,608,0,0,256,257,34,0,0,0],"FLAG":0,"BASE":18}
+
+BACKLOG:
+Backlog Topic out_51; MqttHost 10.50.20.100; MqttUser openhabian; MqttPassword harv123; SetOption1 1; SetOption13 1; SetOption65 1; SetOption36  0; PowerOnState 0; TelePeriod 60
+Backlog Topic in_51; MqttHost 10.50.20.100; MqttUser openhabian; MqttPassword harv123; SetOption1 1; SetOption13 1; SetOption65 1; SetOption36  0; PowerOnState 0; TelePeriod 60;
+

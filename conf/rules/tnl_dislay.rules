@@ -1,0 +1,23 @@
+rule "Init default_tnl_warn_timer_setpoint"
+when
+    // Item out_51_button received command
+    Item sw_init_default_tnl_warn_timer_setpoint changed 
+then
+    // logInfo("Button pressed", "Button out_51 pressed!")
+    if(sw_init_default_tnl_warn_timer_setpoint.state == ON){
+        default_tnl_warn_timer_value.postUpdate(10)
+        logInfo("rule.init_display_warn_value", "Init default_tnl_warn_timer_setpoint executed!")
+}
+end
+
+rule "Init default_tnl_temperature_alarm_value"
+when
+    // Item out_51_button received command
+    Item sw_init_default_tnl_temperature_alarm_setpoint changed 
+then
+    // logInfo("Button pressed", "Button out_51 pressed!")
+    if(sw_init_default_tnl_temperature_alarm_setpoint.state == ON){
+        default_tnl_temperature_alarm_value.postUpdate(86.0)
+        logInfo("rule.default_tnl_temperature_alarm_value", "Init default_tnl_temperature_alarm_value executed!")
+}
+end

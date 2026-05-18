@@ -1,0 +1,458 @@
+
+
+// //      //      //      //      TUNNEL CONTROLLERS SIDE "IN"    //      //
+// //      //      //      //          //      //          //
+// //      //      //      //          //      //          //
+// //      //      //      //          //      //          //
+
+// //  ATTENTION TUNNEL 2 IS WITH SHT30 SENSOR !!!
+// Group g1_btn_lights
+// Group g1_tnl_lights
+// Group g1AllLights 
+
+// Group gIn_1 
+// Group gIn_1_lights
+// Switch in_1_button       "Тунел 1 LED"                         <switch>       (gIn_1)                                                                                 { channel="mqtt:topic:localMQTTbroker:in_1:button" }       
+// Switch in_1_tnl_light    "Тунел 1 LED"                         <switch>       (gIn_1,gIn_1_lights,g1_tnl_lights,g1AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_1:power1" }       
+// Switch in_1_btn_light    "Бутон 1 LED"                         <switch>       (gIn_1,gIn_1_lights,g1_btn_lights,g1AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_1:power2" }
+// Number in_1_Temperature  "Вход  1 [%.1f °C]"                   <temperature>  (gIn_1,gPersist_On_Change_1minute)                                                      { channel="mqtt:topic:localMQTTbroker:in_1:temperature" }
+// Number in_1_Humidity     "Вход  1 [%.1f %%]"                   <humidity>     (gIn_1,gPersist_On_Change_1minute)                                                      { channel="mqtt:topic:localMQTTbroker:in_1:humidity" }
+// String in_1_Reachable    "SHT20 - Достъпен: [%s]"               <presence>    (gIn_1)                                                                                { channel="mqtt:topic:localMQTTbroker:in_1:reachable" }
+// Number in_1_RSSI         "SHT20 - WiFi Signal Strength [%d %%]" <network>     (gIn_1)                                                                                { channel="mqtt:topic:localMQTTbroker:in_1:rssi" }
+
+
+// Group g2_btn_lights
+// Group g2_tnl_lights
+// Group g2AllLights 
+
+// Group gIn_2 
+// Group gIn_2_lights
+// Switch in_2_button       "Тунел 2 LED"                         <switch>       (gIn_2)                                                                                   { channel="mqtt:topic:localMQTTbroker:in_2:button" }       
+// Switch in_2_tnl_light    "Тунел 2 LED"                         <switch>       (gIn_2,gIn_2_lights,g2_tnl_lights,g2AllLights,gTnlLights)                                 { channel="mqtt:topic:localMQTTbroker:in_2:power1" }       
+// Switch in_2_btn_light    "Бутон 2 LED"                         <switch>       (gIn_2,gIn_2_lights,g2_btn_lights,g2AllLights,gBtnLights,gPersist_On_Change_1minute)      { channel="mqtt:topic:localMQTTbroker:in_2:power2" }
+// Number in_2_Temperature  "Вход  2 [%.1f °C]"                   <temperature>  (gIn_2,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:in_2:temperature" }
+// Number in_2_Humidity     "Вход  2 [%.1f %%]"                   <humidity>     (gIn_2,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:in_2:humidity" }
+// String in_2_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_2)                                                                                  { channel="mqtt:topic:localMQTTbroker:in_2:reachable" }
+// Number in_2_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_2)                                                                                  { channel="mqtt:topic:localMQTTbroker:in_2:rssi" }
+
+// Group g3_btn_lights
+// Group g3_tnl_lights
+// Group g3AllLights 
+
+// Group gIn_3 
+// Group gIn_3_lights
+// Switch in_3_button       "Тунел 3 LED"                         <switch>       (gIn_3)                                                                                 { channel="mqtt:topic:localMQTTbroker:in_3:button" }       
+// Switch in_3_tnl_light    "Тунел 3 LED"                         <switch>       (gIn_3,gIn_3_lights,g3_tnl_lights,g3AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_3:power1" }       
+// Switch in_3_btn_light    "Бутон 3 LED"                         <switch>       (gIn_3,gIn_3_lights,g3_btn_lights,g3AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_3:power2" }
+// Number in_3_Temperature  "Вход  3 [%.1f °C]"                   <temperature>  (gIn_3,gPersist_On_Change_1minute)                                                      { channel="mqtt:topic:localMQTTbroker:in_3:temperature" }
+// Number in_3_Humidity     "Вход  3 [%.1f %%]"                   <humidity>     (gIn_3,gPersist_On_Change_1minute)                                                      { channel="mqtt:topic:localMQTTbroker:in_3:humidity" }
+// String in_3_Reachable    "SHT20 - Достъпен: [%s]"               <presence>     (gIn_3)                                                                                { channel="mqtt:topic:localMQTTbroker:in_3:reachable" }
+// Number in_3_RSSI         "SHT20 - WiFi Signal Strength [%d %%]" <network>      (gIn_3)                                                                                { channel="mqtt:topic:localMQTTbroker:in_3:rssi" }
+
+// Group g4_btn_lights
+// Group g4_tnl_lights
+// Group g4AllLights 
+
+// Group gIn_4 
+// Group gIn_4_lights
+// Switch in_4_button       "Тунел 4 LED"                         <switch>       (gIn_4)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_4:button" }       
+// Switch in_4_tnl_light    "Тунел 4 LED"                         <switch>       (gIn_4,gIn_4_lights,g4_tnl_lights,g4AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_4:power1" }       
+// Switch in_4_btn_light    "Бутон 4 LED"                         <switch>       (gIn_4,gIn_4_lights,g4_btn_lights,g4AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_4:power2" }
+// Number in_4_Temperature  "Вход  4 [%.1f °C]"                   <temperature>  (gIn_4,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_4:temperature" }
+// Number in_4_Humidity     "Вход  4 [%.1f %%]"                   <humidity>     (gIn_4,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_4:humidity" }
+// String in_4_Reachable    "SHT20 - Достъпен: [%s]"               <presence>     (gIn_4)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_4:reachable" }
+// Number in_4_RSSI         "SHT20 - WiFi Signal Strength [%d %%]" <network>      (gIn_4)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_4:rssi" }
+
+// Group g5_btn_lights
+// Group g5_tnl_lights
+// Group g5AllLights
+
+// Group gIn_5 
+// Group gIn_5_lights
+// Switch in_5_button       "Тунел 5 LED"                         <switch>       (gIn_5)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_5:button" }       
+// Switch in_5_tnl_light    "Тунел 5 LED"                         <switch>       (gIn_5,gIn_5_lights,g5_tnl_lights,g5AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_5:power1" }       
+// Switch in_5_btn_light    "Бутон 5 LED"                         <switch>       (gIn_5,gIn_5_lights,g5_btn_lights,g5AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_5:power2" }
+// Number in_5_Temperature  "Вход  5 [%.1f °C]"                   <temperature>  (gIn_5,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_5:temperature" }
+// Number in_5_Humidity     "Вход  5 [%.1f %%]"                   <humidity>     (gIn_5,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_5:humidity" }
+// String in_5_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_5)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_5:reachable" }
+// Number in_5_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_5)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_5:rssi" }
+
+// Group gIn_6 
+// Group gIn_6_lights
+// Group g6_btn_lights
+// Group g6_tnl_lights
+// Group g6AllLights 
+// Switch in_6_button       "Тунел 6 LED"                         <switch>       (gIn_6)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_6:button" }       
+// Switch in_6_tnl_light    "Тунел 6 LED"                         <switch>       (gIn_6,gIn_6_lights,g6_tnl_lights,g6AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_6:power1" }       
+// Switch in_6_btn_light    "Бутон 6 LED"                         <switch>       (gIn_6,gIn_6_lights,g6_btn_lights,g6AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_6:power2" }
+// Number in_6_Temperature  "Вход  6 [%.1f °C]"                   <temperature>  (gIn_6,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_6:temperature" }
+// Number in_6_Humidity     "Вход  6 [%.1f %%]"                   <humidity>     (gIn_6,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_6:humidity" }
+// String in_6_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_6)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_6:reachable" }
+// Number in_6_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_6)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_6:rssi" }
+
+// Group gIn_7 
+// Group gIn_7_lights
+// Group g7_btn_lights
+// Group g7_tnl_lights
+// Group g7AllLights 
+// Switch in_7_button       "Тунел 7 LED"                         <switch>       (gIn_7)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_7:button" }       
+// Switch in_7_tnl_light    "Тунел 7 LED"                         <switch>       (gIn_7,gIn_7_lights,g7_tnl_lights,g7AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_7:power1" }       
+// Switch in_7_btn_light    "Бутон 7 LED"                         <switch>       (gIn_7,gIn_7_lights,g7_btn_lights,g7AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_7:power2" }
+// Number in_7_Temperature  "Вход  7 [%.1f °C]"                   <temperature>  (gIn_7,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_7:temperature" }
+// Number in_7_Humidity     "Вход  7 [%.1f %%]"                   <humidity>     (gIn_7,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_7:humidity" }
+// String in_7_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_7)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_7:reachable" }
+// Number in_7_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_7)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_7:rssi" }
+
+// Group gIn_8 
+// Group gIn_8_lights
+// Group g8_btn_lights
+// Group g8_tnl_lights
+// Group g8AllLights 
+// Switch in_8_button       "Тунел 8 LED"                         <switch>       (gIn_8)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_8:button" }       
+// Switch in_8_tnl_light    "Тунел 8 LED"                         <switch>       (gIn_8,gIn_8_lights,g8_tnl_lights,g8AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_8:power1" }       
+// Switch in_8_btn_light    "Бутон 8 LED"                         <switch>       (gIn_8,gIn_8_lights,g8_btn_lights,g8AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_8:power2" }
+// Number in_8_Temperature  "Вход  8 [%.1f °C]"                   <temperature>  (gIn_8,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_8:temperature" }
+// Number in_8_Humidity     "Вход  8 [%.1f %%]"                   <humidity>     (gIn_8,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_8:humidity" }
+// String in_8_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_8)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_8:reachable" }
+// Number in_8_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_8)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_8:rssi" }
+
+// Group gIn_9 
+// Group gIn_9_lights
+// Group g9_btn_lights
+// Group g9_tnl_lights
+// Group g9AllLights 
+// Switch in_9_button       "Тунел 9 LED"                         <switch>       (gIn_9)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_9:button" }       
+// Switch in_9_tnl_light    "Тунел 9 LED"                         <switch>       (gIn_9,gIn_9_lights,g9_tnl_lights,g9AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_9:power1" }       
+// Switch in_9_btn_light    "Бутон 9 LED"                         <switch>       (gIn_9,gIn_9_lights,g9_btn_lights,g9AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_9:power2" }
+// Number in_9_Temperature  "Вход  9 [%.1f °C]"                   <temperature>  (gIn_9,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_9:temperature" }
+// Number in_9_Humidity     "Вход  9 [%.1f %%]"                   <humidity>     (gIn_9,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_9:humidity" }
+// String in_9_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_9)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_9:reachable" }
+// Number in_9_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_9)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_9:rssi" }
+
+// Group gIn_10 
+// Group gIn_10_lights
+// Group g10_btn_lights
+// Group g10_tnl_lights
+// Group g10AllLights 
+// Switch in_10_button       "Тунел 10 LED"                         <switch>       (gIn_10)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_10:button" }       
+// Switch in_10_tnl_light    "Тунел 10 LED"                         <switch>       (gIn_10,gIn_10_lights,g10_tnl_lights,g10AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_10:power1" }       
+// Switch in_10_btn_light    "Бутон 10 LED"                         <switch>       (gIn_10,gIn_10_lights,g10_btn_lights,g10AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_10:power2" }
+// Number in_10_Temperature  "Вход  10 [%.1f °C]"                   <temperature>  (gIn_10,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_10:temperature" }
+// Number in_10_Humidity     "Вход  10 [%.1f %%]"                   <humidity>     (gIn_10,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_10:humidity" }
+// String in_10_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_10)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_10:reachable" }
+// Number in_10_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_10)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_10:rssi" }
+
+// Group gIn_11 
+// Group gIn_11_lights
+// Group g11_btn_lights
+// Group g11_tnl_lights
+// Group g11AllLights 
+// Switch in_11_button       "Тунел 11 LED"                         <switch>       (gIn_11)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_11:button" }       
+// Switch in_11_tnl_light    "Тунел 11 LED"                         <switch>       (gIn_11,gIn_11_lights,g11_tnl_lights,g11AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_11:power1" }       
+// Switch in_11_btn_light    "Бутон 11 LED"                         <switch>       (gIn_11,gIn_11_lights,g11_btn_lights,g11AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_11:power2" }
+// Number in_11_Temperature  "Вход  11 [%.1f °C]"                   <temperature>  (gIn_11,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_11:temperature" }
+// Number in_11_Humidity     "Вход  11 [%.1f %%]"                   <humidity>     (gIn_11,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_11:humidity" }
+// String in_11_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_11)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_11:reachable" }
+// Number in_11_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_11)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_11:rssi" }
+
+// Group gIn_12 
+// Group gIn_12_lights
+// Group g12_btn_lights
+// Group g12_tnl_lights
+// Group g12AllLights 
+// Switch in_12_button       "Тунел 12 LED"                         <switch>       (gIn_12)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_12:button" }       
+// Switch in_12_tnl_light    "Тунел 12 LED"                         <switch>       (gIn_12,gIn_12_lights,g12_tnl_lights,g12AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_12:power1" }       
+// Switch in_12_btn_light    "Бутон 12 LED"                         <switch>       (gIn_12,gIn_12_lights,g12_btn_lights,g12AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_12:power2" }
+// Number in_12_Temperature  "Вход  12 [%.1f °C]"                   <temperature>  (gIn_12,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_12:temperature" }
+// Number in_12_Humidity     "Вход  12 [%.1f %%]"                   <humidity>     (gIn_12,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_12:humidity" }
+// String in_12_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_12)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_12:reachable" }
+// Number in_12_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_12)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_12:rssi" }
+
+// Group gIn_13 
+// Group gIn_13_lights
+// Group g13_btn_lights
+// Group g13_tnl_lights
+// Group g13AllLights 
+// Switch in_13_button       "Тунел 13 LED"                         <switch>       (gIn_13)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_13:button" }       
+// Switch in_13_tnl_light    "Тунел 13 LED"                         <switch>       (gIn_13,gIn_13_lights,g13_tnl_lights,g13AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_13:power1" }       
+// Switch in_13_btn_light    "Бутон 13 LED"                         <switch>       (gIn_13,gIn_13_lights,g13_btn_lights,g13AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_13:power2" }
+// Number in_13_Temperature  "Вход  13 [%.1f °C]"                   <temperature>  (gIn_13,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_13:temperature" }
+// Number in_13_Humidity     "Вход  13 [%.1f %%]"                   <humidity>     (gIn_13,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_13:humidity" }
+// String in_13_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_13)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_13:reachable" }
+// Number in_13_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_13)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_13:rssi" }
+
+// Group gIn_14 
+// Group gIn_14_lights
+// Group g14_btn_lights
+// Group g14_tnl_lights
+// Group g14AllLights 
+// Switch in_14_button       "Тунел 14 LED"                         <switch>       (gIn_14)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_14:button" }       
+// Switch in_14_tnl_light    "Тунел 14 LED"                         <switch>       (gIn_14,gIn_14_lights,g14_tnl_lights,g14AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_14:power1" }       
+// Switch in_14_btn_light    "Бутон 14 LED"                         <switch>       (gIn_14,gIn_14_lights,g14_btn_lights,g14AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_14:power2" }
+// Number in_14_Temperature  "Вход  14 [%.1f °C]"                   <temperature>  (gIn_14,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_14:temperature" }
+// Number in_14_Humidity     "Вход  14 [%.1f %%]"                   <humidity>     (gIn_14,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_14:humidity" }
+// String in_14_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_14)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_14:reachable" }
+// Number in_14_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_14)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_14:rssi" }
+
+// Group gIn_15 
+// Group gIn_15_lights
+// Group g15_btn_lights
+// Group g15_tnl_lights
+// Group g15AllLights 
+// Switch in_15_button       "Тунел 15 LED"                         <switch>       (gIn_15)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_15:button" }       
+// Switch in_15_tnl_light    "Тунел 15 LED"                         <switch>       (gIn_15,gIn_15_lights,g15_tnl_lights,g15AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_15:power1" }       
+// Switch in_15_btn_light    "Бутон 15 LED"                         <switch>       (gIn_15,gIn_15_lights,g15_btn_lights,g15AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_15:power2" }
+// Number in_15_Temperature  "Вход  15 [%.1f °C]"                   <temperature>  (gIn_15,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_15:temperature" }
+// Number in_15_Humidity     "Вход  15 [%.1f %%]"                   <humidity>     (gIn_15,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_15:humidity" }
+// String in_15_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_15)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_15:reachable" }
+// Number in_15_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_15)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_15:rssi" }
+
+// Group gIn_16 
+// Group gIn_16_lights
+// Group g16_btn_lights
+// Group g16_tnl_lights
+// Group g16AllLights 
+// Switch in_16_button       "Тунел 16 LED"                         <switch>       (gIn_16)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_16:button" }       
+// Switch in_16_tnl_light    "Тунел 16 LED"                         <switch>       (gIn_16,gIn_16_lights,g16_tnl_lights,g16AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_16:power1" }       
+// Switch in_16_btn_light    "Бутон 16 LED"                         <switch>       (gIn_16,gIn_16_lights,g16_btn_lights,g16AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_16:power2" }
+// Number in_16_Temperature  "Вход  16 [%.1f °C]"                   <temperature>  (gIn_16,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_16:temperature" }
+// Number in_16_Humidity     "Вход  16 [%.1f %%]"                   <humidity>     (gIn_16,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_16:humidity" }
+// String in_16_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_16)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_16:reachable" }
+// Number in_16_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_16)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_16:rssi" }
+
+// Group gIn_17 
+// Group gIn_17_lights
+// Group g17_btn_lights
+// Group g17_tnl_lights
+// Group g17AllLights 
+// Switch in_17_button       "Тунел 17 LED"                         <switch>       (gIn_17)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_17:button" }       
+// Switch in_17_tnl_light    "Тунел 17 LED"                         <switch>       (gIn_17,gIn_17_lights,g17_tnl_lights,g17AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_17:power1" }       
+// Switch in_17_btn_light    "Бутон 17 LED"                         <switch>       (gIn_17,gIn_17_lights,g17_btn_lights,g17AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_17:power2" }
+// Number in_17_Temperature  "Вход  17 [%.1f °C]"                   <temperature>  (gIn_17,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_17:temperature" }
+// Number in_17_Humidity     "Вход  17 [%.1f %%]"                   <humidity>     (gIn_17,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_17:humidity" }
+// String in_17_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_17)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_17:reachable" }
+// Number in_17_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_17)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_17:rssi" }
+
+// Group gIn_18 
+// Group gIn_18_lights
+// Group g18_btn_lights
+// Group g18_tnl_lights
+// Group g18AllLights 
+// Switch in_18_button       "Тунел 18 LED"                         <switch>       (gIn_18)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_18:button" }       
+// Switch in_18_tnl_light    "Тунел 18 LED"                         <switch>       (gIn_18,gIn_18_lights,g18_tnl_lights,g18AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_18:power1" }       
+// Switch in_18_btn_light    "Бутон 18 LED"                         <switch>       (gIn_18,gIn_18_lights,g18_btn_lights,g18AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_18:power2" }
+// Number in_18_Temperature  "Вход  18 [%.1f °C]"                   <temperature>  (gIn_18,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_18:temperature" }
+// Number in_18_Humidity     "Вход  18 [%.1f %%]"                   <humidity>     (gIn_18,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_18:humidity" }
+// String in_18_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_18)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_18:reachable" }
+// Number in_18_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_18)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_18:rssi" }
+
+// // //      TEST TUNNEL IN     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// // Group gIn_51 
+// // Group gIn_51_lights
+// // Group g51_btn_lights
+// // Group g51_tnl_lights
+// // Group g51AllLights 
+// // Switch in_51_button       "Тунел 51 LED"                         <switch>       (gIn_51)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_51:button" }       
+// // Switch in_51_tnl_light    "Тунел 51 LED"                         <switch>       (gIn_51,gIn_51_lights,g51_tnl_lights,g51AllLights,gTnlLights)                               { channel="mqtt:topic:localMQTTbroker:in_51:power1" }       
+// // Switch in_51_btn_light    "Бутон 51 LED"                         <switch>       (gIn_51,gIn_51_lights,g51_btn_lights,g51AllLights,gBtnLights,gPersist_On_Change_1minute)    { channel="mqtt:topic:localMQTTbroker:in_51:power2" }
+// // Number in_51_Temperature  "Вход  51 [%.1f °C]"                   <temperature>  (gIn_51,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_51:temperature" }
+// // Number in_51_Humidity     "Вход  51 [%.1f %%]"                   <humidity>     (gIn_51,gPersist_On_Change_1minute)                                                         { channel="mqtt:topic:localMQTTbroker:in_51:humidity" }
+// // String in_51_Reachable    "SHT30 - Достъпен: [%s]"               <presence>     (gIn_51)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_51:reachable" }
+// // Number in_51_RSSI         "SHT30 - WiFi Signal Strength [%d %%]" <network>      (gIn_51)                                                                                    { channel="mqtt:topic:localMQTTbroker:in_51:rssi" }
+// //      TEST TUNNEL IN     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+// Group gOut_1 
+// Group gOut_1_lights
+// Switch out_1_button       "Тунел 1 LED"                          <switch>      (gOut_1)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_1:button", autoupdate="false"}      
+// Switch out_1_tnl_light    "Тунел 1 LED"                          <switch>      (gOut_1,gOut_1_lights,g1_tnl_lights,g1AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_1:power1" }       
+// Switch out_1_btn_light    "Бутон 1 LED"                          <switch>      (gOut_1,gOut_1_lights,g1_btn_lights,g1AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_1:power2" }
+// Number out_1_Temperature  "Изход 1 [%.1f °C]"                    <temperature> (gOut_1,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_1:temperature" }
+// Number out_1_Humidity     "Изход 1 [%.1f %%]"                    <humidity>    (gOut_1,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_1:humidity" }
+// String out_1_Reachable    "Контролер 1  - Достъпен: [%s]"               <presence>    (gOut_1)                                                                            { channel="mqtt:topic:localMQTTbroker:out_1:reachable" }
+// Number out_1_RSSI         "Контролер 1 - WiFi Signal Strength [%d %%]" <network>      (gOut_1)                                                                            { channel="mqtt:topic:localMQTTbroker:out_1:rssi" }
+
+// Group gOut_2 
+// Group gOut_2_lights
+// Switch out_2_button       "Тунел 2 LED"                          <switch>      (gOut_2)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_2:button", autoupdate="false"}      
+// Switch out_2_tnl_light    "Тунел 2 LED"                          <switch>      (gOut_2,gOut_2_lights,g2_tnl_lights,g2AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_2:power1" }       
+// Switch out_2_btn_light    "Бутон 2 LED"                          <switch>      (gOut_2,gOut_2_lights,g2_btn_lights,g2AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_2:power2" }
+// Number out_2_Temperature  "Изход 2 [%.1f °C]"                    <temperature> (gOut_2,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_2:temperature" }
+// Number out_2_Humidity     "Изход 2 [%.1f %%]"                    <humidity>    (gOut_2,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_2:humidity" }
+// String out_2_Reachable    "Контролер 2  - Достъпен: [%s]"               <presence>    (gOut_2)                                                                            { channel="mqtt:topic:localMQTTbroker:out_2:reachable" }
+// Number out_2_RSSI         "Контролер 2 - WiFi Signal Strength [%d %%]" <network>      (gOut_2)                                                                            { channel="mqtt:topic:localMQTTbroker:out_2:rssi" }
+
+// Group gOut_3 
+// Group gOut_3_lights
+// Switch out_3_button       "Тунел 3 LED"                          <switch>      (gOut_3)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_3:button", autoupdate="false"}      
+// Switch out_3_tnl_light    "Тунел 3 LED"                          <switch>      (gOut_3,gOut_3_lights,g3_tnl_lights,g3AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_3:power1" }       
+// Switch out_3_btn_light    "Бутон 3 LED"                          <switch>      (gOut_3,gOut_3_lights,g3_btn_lights,g3AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_3:power2" }
+// Number out_3_Temperature  "Изход 3 [%.1f °C]"                    <temperature> (gOut_3,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_3:temperature" }
+// Number out_3_Humidity     "Изход 3 [%.1f %%]"                    <humidity>    (gOut_3,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_3:humidity" }
+// String out_3_Reachable    "Контролер 3  - Достъпен: [%s]"               <presence>    (gOut_3)                                                                            { channel="mqtt:topic:localMQTTbroker:out_3:reachable" }
+// Number out_3_RSSI         "Контролер 3 - WiFi Signal Strength [%d %%]" <network>      (gOut_3)                                                                            { channel="mqtt:topic:localMQTTbroker:out_3:rssi" }
+
+// Group gOut_4 
+// Group gOut_4_lights
+// Switch out_4_button       "Тунел 4 LED"                          <switch>      (gOut_4)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_4:button", autoupdate="false"}      
+// Switch out_4_tnl_light    "Тунел 4 LED"                          <switch>      (gOut_4,gOut_4_lights,g4_tnl_lights,g4AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_4:power1" }       
+// Switch out_4_btn_light    "Бутон 4 LED"                          <switch>      (gOut_4,gOut_4_lights,g4_btn_lights,g4AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_4:power2" }
+// Number out_4_Temperature  "Изход 4 [%.1f °C]"                    <temperature> (gOut_4,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_4:temperature" }
+// Number out_4_Humidity     "Изход 4 [%.1f %%]"                    <humidity>    (gOut_4,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_4:humidity" }
+// String out_4_Reachable    "Контролер 4  - Достъпен: [%s]"               <presence>    (gOut_4)                                                                            { channel="mqtt:topic:localMQTTbroker:out_4:reachable" }
+// Number out_4_RSSI         "Контролер 4 - WiFi Signal Strength [%d %%]" <network>      (gOut_4)                                                                            { channel="mqtt:topic:localMQTTbroker:out_4:rssi" }
+
+// Group gOut_5 
+// Group gOut_5_lights
+// Switch out_5_button       "Тунел 5 LED"                          <switch>      (gOut_5)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_5:button", autoupdate="false"}      
+// Switch out_5_tnl_light    "Тунел 5 LED"                          <switch>      (gOut_5,gOut_5_lights,g5_tnl_lights,g5AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_5:power1" }       
+// Switch out_5_btn_light    "Бутон 5 LED"                          <switch>      (gOut_5,gOut_5_lights,g5_btn_lights,g5AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_5:power2" }
+// Number out_5_Temperature  "Изход 5 [%.1f °C]"                    <temperature> (gOut_5,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_5:temperature" }
+// Number out_5_Humidity     "Изход 5 [%.1f %%]"                    <humidity>    (gOut_5,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_5:humidity" }
+// String out_5_Reachable    "Контролер 5  - Достъпен: [%s]"               <presence>    (gOut_5)                                                                            { channel="mqtt:topic:localMQTTbroker:out_5:reachable" }
+// Number out_5_RSSI         "Контролер 5 - WiFi Signal Strength [%d %%]" <network>      (gOut_5)                                                                            { channel="mqtt:topic:localMQTTbroker:out_5:rssi" }
+
+// Group gOut_6 
+// Group gOut_6_lights
+// Switch out_6_button       "Тунел 6 LED"                          <switch>      (gOut_6)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_6:button", autoupdate="false"}      
+// Switch out_6_tnl_light    "Тунел 6 LED"                          <switch>      (gOut_6,gOut_6_lights,g6_tnl_lights,g6AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_6:power1" }       
+// Switch out_6_btn_light    "Бутон 6 LED"                          <switch>      (gOut_6,gOut_6_lights,g6_btn_lights,g6AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_6:power2" }
+// Number out_6_Temperature  "Изход 6 [%.1f °C]"                    <temperature> (gOut_6,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_6:temperature" }
+// Number out_6_Humidity     "Изход 6 [%.1f %%]"                    <humidity>    (gOut_6,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_6:humidity" }
+// String out_6_Reachable    "Контролер 6  - Достъпен: [%s]"               <presence>    (gOut_6)                                                                            { channel="mqtt:topic:localMQTTbroker:out_6:reachable" }
+// Number out_6_RSSI         "Контролер 6 - WiFi Signal Strength [%d %%]" <network>      (gOut_6)                                                                            { channel="mqtt:topic:localMQTTbroker:out_6:rssi" }
+
+// Group gOut_7 
+// Group gOut_7_lights
+// Switch out_7_button       "Тунел 7 LED"                          <switch>      (gOut_7)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_7:button", autoupdate="false"}      
+// Switch out_7_tnl_light    "Тунел 7 LED"                          <switch>      (gOut_7,gOut_7_lights,g7_tnl_lights,g7AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_7:power1" }       
+// Switch out_7_btn_light    "Бутон 7 LED"                          <switch>      (gOut_7,gOut_7_lights,g7_btn_lights,g7AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_7:power2" }
+// Number out_7_Temperature  "Изход 7 [%.1f °C]"                    <temperature> (gOut_7,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_7:temperature" }
+// Number out_7_Humidity     "Изход 7 [%.1f %%]"                    <humidity>    (gOut_7,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_7:humidity" }
+// String out_7_Reachable    "Контролер 7  - Достъпен: [%s]"               <presence>    (gOut_7)                                                                            { channel="mqtt:topic:localMQTTbroker:out_7:reachable" }
+// Number out_7_RSSI         "Контролер 7 - WiFi Signal Strength [%d %%]" <network>      (gOut_7)                                                                            { channel="mqtt:topic:localMQTTbroker:out_7:rssi" }
+
+// Group gOut_8 
+// Group gOut_8_lights
+// Switch out_8_button       "Тунел 8 LED"                          <switch>      (gOut_8)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_8:button", autoupdate="false"}      
+// Switch out_8_tnl_light    "Тунел 8 LED"                          <switch>      (gOut_8,gOut_8_lights,g8_tnl_lights,g8AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_8:power1" }       
+// Switch out_8_btn_light    "Бутон 8 LED"                          <switch>      (gOut_8,gOut_8_lights,g8_btn_lights,g8AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_8:power2" }
+// Number out_8_Temperature  "Изход 8 [%.1f °C]"                    <temperature> (gOut_8,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_8:temperature" }
+// Number out_8_Humidity     "Изход 8 [%.1f %%]"                    <humidity>    (gOut_8,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_8:humidity" }
+// String out_8_Reachable    "Контролер 8  - Достъпен: [%s]"               <presence>    (gOut_8)                                                                            { channel="mqtt:topic:localMQTTbroker:out_8:reachable" }
+// Number out_8_RSSI         "Контролер 8 - WiFi Signal Strength [%d %%]" <network>      (gOut_8)                                                                            { channel="mqtt:topic:localMQTTbroker:out_8:rssi" }
+
+// Group gOutn_9 
+// Group gOut_9_lights
+// Switch out_9_button       "Тунел 9 LED"                          <switch>      (gOut_9)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_9:button", autoupdate="false"}      
+// Switch out_9_tnl_light    "Тунел 9 LED"                          <switch>      (gOut_9,gOut_9_lights,g9_tnl_lights,g9AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_9:power1" }       
+// Switch out_9_btn_light    "Бутон 9 LED"                          <switch>      (gOut_9,gOut_9_lights,g9_btn_lights,g9AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_9:power2" }
+// Number out_9_Temperature  "Изход 9 [%.1f °C]"                    <temperature> (gOut_9,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_9:temperature" }
+// Number out_9_Humidity     "Изход 9 [%.1f %%]"                    <humidity>    (gOut_9,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_9:humidity" }
+// String out_9_Reachable    "Контролер 9  - Достъпен: [%s]"               <presence>    (gOut_9)                                                                            { channel="mqtt:topic:localMQTTbroker:out_9:reachable" }
+// Number out_9_RSSI         "Контролер 9 - WiFi Signal Strength [%d %%]" <network>      (gOut_9)                                                                            { channel="mqtt:topic:localMQTTbroker:out_9:rssi" }
+
+// Group gOut_10 
+// Group gOut_10_lights
+// Switch out_10_button       "Тунел 10 LED"                          <switch>      (gOut_10)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_10:button", autoupdate="false"}      
+// Switch out_10_tnl_light    "Тунел 10 LED"                          <switch>      (gOut_10,gOut_10_lights,g10_tnl_lights,g10AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_10:power1" }       
+// Switch out_10_btn_light    "Бутон 10 LED"                          <switch>      (gOut_10,gOut_10_lights,g10_btn_lights,g10AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_10:power2" }
+// Number out_10_Temperature  "Изход 10 [%.1f °C]"                    <temperature> (gOut_10,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_10:temperature" }
+// Number out_10_Humidity     "Изход 10 [%.1f %%]"                    <humidity>    (gOut_10,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_10:humidity" }
+// String out_10_Reachable    "Контролер 10  - Достъпен: [%s]"               <presence>    (gOut_10)                                                                            { channel="mqtt:topic:localMQTTbroker:out_10:reachable" }
+// Number out_10_RSSI         "Контролер 10 - WiFi Signal Strength [%d %%]" <network>      (gOut_10)                                                                            { channel="mqtt:topic:localMQTTbroker:out_10:rssi" }
+
+// Group gOut_11 
+// Group gOut_11_lights
+// Switch out_11_button       "Тунел 11 LED"                          <switch>      (gOut_11)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_11:button", autoupdate="false"}      
+// Switch out_11_tnl_light    "Тунел 11 LED"                          <switch>      (gOut_11,gOut_11_lights,g11_tnl_lights,g11AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_11:power1" }       
+// Switch out_11_btn_light    "Бутон 11 LED"                          <switch>      (gOut_11,gOut_11_lights,g11_btn_lights,g11AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_11:power2" }
+// Number out_11_Temperature  "Изход 11 [%.1f °C]"                    <temperature> (gOut_11,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_11:temperature" }
+// Number out_11_Humidity     "Изход 11 [%.1f %%]"                    <humidity>    (gOut_11,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_11:humidity" }
+// String out_11_Reachable    "Контролер 11  - Достъпен: [%s]"               <presence>    (gOut_11)                                                                            { channel="mqtt:topic:localMQTTbroker:out_11:reachable" }
+// Number out_11_RSSI         "Контролер 11 - WiFi Signal Strength [%d %%]" <network>      (gOut_11)                                                                            { channel="mqtt:topic:localMQTTbroker:out_11:rssi" }
+
+// Group gOut_12 
+// Group gOut_12_lights
+// Switch out_12_button       "Тунел 12 LED"                          <switch>      (gOut_12)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_12:button", autoupdate="false"}      
+// Switch out_12_tnl_light    "Тунел 12 LED"                          <switch>      (gOut_12,gOut_12_lights,g12_tnl_lights,g12AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_12:power1" }       
+// Switch out_12_btn_light    "Бутон 12 LED"                          <switch>      (gOut_12,gOut_12_lights,g12_btn_lights,g12AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_12:power2" }
+// Number out_12_Temperature  "Изход 12 [%.1f °C]"                    <temperature> (gOut_12,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_12:temperature" }
+// Number out_12_Humidity     "Изход 12 [%.1f %%]"                    <humidity>    (gOut_12,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_12:humidity" }
+// String out_12_Reachable    "Контролер 12  - Достъпен: [%s]"               <presence>    (gOut_12)                                                                            { channel="mqtt:topic:localMQTTbroker:out_12:reachable" }
+// Number out_12_RSSI         "Контролер 12 - WiFi Signal Strength [%d %%]" <network>      (gOut_12)                                                                            { channel="mqtt:topic:localMQTTbroker:out_12:rssi" }
+
+// Group gOut_13 
+// Group gOut_13_lights
+// Switch out_13_button       "Тунел 13 LED"                          <switch>      (gOut_13)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_13:button", autoupdate="false"}      
+// Switch out_13_tnl_light    "Тунел 13 LED"                          <switch>      (gOut_13,gOut_13_lights,g13_tnl_lights,g13AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_13:power1" }       
+// Switch out_13_btn_light    "Бутон 13 LED"                          <switch>      (gOut_13,gOut_13_lights,g13_btn_lights,g13AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_13:power2" }
+// Number out_13_Temperature  "Изход 13 [%.1f °C]"                    <temperature> (gOut_13,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_13:temperature" }
+// Number out_13_Humidity     "Изход 13 [%.1f %%]"                    <humidity>    (gOut_13,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_13:humidity" }
+// String out_13_Reachable    "Контролер 13  - Достъпен: [%s]"               <presence>    (gOut_13)                                                                            { channel="mqtt:topic:localMQTTbroker:out_13:reachable" }
+// Number out_13_RSSI         "Контролер 13 - WiFi Signal Strength [%d %%]" <network>      (gOut_13)                                                                            { channel="mqtt:topic:localMQTTbroker:out_13:rssi" }
+
+// Group gOut_14 
+// Group gOut_14_lights
+// Switch out_14_button       "Тунел 14 LED"                          <switch>      (gOut_14)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_14:button", autoupdate="false"}      
+// Switch out_14_tnl_light    "Тунел 14 LED"                          <switch>      (gOut_14,gOut_14_lights,g14_tnl_lights,g14AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_14:power1" }       
+// Switch out_14_btn_light    "Бутон 14 LED"                          <switch>      (gOut_14,gOut_14_lights,g14_btn_lights,g14AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_14:power2" }
+// Number out_14_Temperature  "Изход 14 [%.1f °C]"                    <temperature> (gOut_14,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_14:temperature" }
+// Number out_14_Humidity     "Изход 14 [%.1f %%]"                    <humidity>    (gOut_14,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_14:humidity" }
+// String out_14_Reachable    "Контролер 14  - Достъпен: [%s]"               <presence>    (gOut_14)                                                                            { channel="mqtt:topic:localMQTTbroker:out_14:reachable" }
+// Number out_14_RSSI         "Контролер 14 - WiFi Signal Strength [%d %%]" <network>      (gOut_14)                                                                            { channel="mqtt:topic:localMQTTbroker:out_14:rssi" }
+
+// Group gOut_15 
+// Group gOut_15_lights
+// Switch out_15_button       "Тунел 15 LED"                          <switch>      (gOut_15)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_15:button", autoupdate="false"}      
+// Switch out_15_tnl_light    "Тунел 15 LED"                          <switch>      (gOut_15,gOut_15_lights,g15_tnl_lights,g15AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_15:power1" }       
+// Switch out_15_btn_light    "Бутон 15 LED"                          <switch>      (gOut_15,gOut_15_lights,g15_btn_lights,g15AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_15:power2" }
+// Number out_15_Temperature  "Изход 15 [%.1f °C]"                    <temperature> (gOut_15,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_15:temperature" }
+// Number out_15_Humidity     "Изход 15 [%.1f %%]"                    <humidity>    (gOut_15,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_15:humidity" }
+// String out_15_Reachable    "Контролер 15  - Достъпен: [%s]"               <presence>    (gOut_15)                                                                            { channel="mqtt:topic:localMQTTbroker:out_15:reachable" }
+// Number out_15_RSSI         "Контролер 15 - WiFi Signal Strength [%d %%]" <network>      (gOut_15)                                                                            { channel="mqtt:topic:localMQTTbroker:out_15:rssi" }
+
+// Group gOut_16 
+// Group gOut_16_lights
+// Switch out_16_button       "Тунел 16 LED"                          <switch>      (gOut_16)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_16:button", autoupdate="false"}      
+// Switch out_16_tnl_light    "Тунел 16 LED"                          <switch>      (gOut_16,gOut_16_lights,g16_tnl_lights,g16AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_16:power1" }       
+// Switch out_16_btn_light    "Бутон 16 LED"                          <switch>      (gOut_16,gOut_16_lights,g16_btn_lights,g16AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_16:power2" }
+// Number out_16_Temperature  "Изход 16 [%.1f °C]"                    <temperature> (gOut_16,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_16:temperature" }
+// Number out_16_Humidity     "Изход 16 [%.1f %%]"                    <humidity>    (gOut_16,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_16:humidity" }
+// String out_16_Reachable    "Контролер 16  - Достъпен: [%s]"               <presence>    (gOut_16)                                                                            { channel="mqtt:topic:localMQTTbroker:out_16:reachable" }
+// Number out_16_RSSI         "Контролер 16 - WiFi Signal Strength [%d %%]" <network>      (gOut_16)                                                                            { channel="mqtt:topic:localMQTTbroker:out_16:rssi" }
+
+
+// Group gOut_17 
+// Group gOut_17_lights
+// Switch out_17_button       "Тунел 17 LED"                          <switch>      (gOut_17)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_17:button", autoupdate="false"}      
+// Switch out_17_tnl_light    "Тунел 17 LED"                          <switch>      (gOut_17,gOut_17_lights,g17_tnl_lights,g17AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_17:power1" }       
+// Switch out_17_btn_light    "Бутон 17 LED"                          <switch>      (gOut_17,gOut_17_lights,g17_btn_lights,g17AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_17:power2" }
+// Number out_17_Temperature  "Изход 17 [%.1f °C]"                    <temperature> (gOut_17,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_17:temperature" }
+// Number out_17_Humidity     "Изход 17 [%.1f %%]"                    <humidity>    (gOut_17,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_17:humidity" }
+// String out_17_Reachable    "Контролер 17  - Достъпен: [%s]"               <presence>    (gOut_17)                                                                            { channel="mqtt:topic:localMQTTbroker:out_17:reachable" }
+// Number out_17_RSSI         "Контролер 17 - WiFi Signal Strength [%d %%]" <network>      (gOut_17)                                                                            { channel="mqtt:topic:localMQTTbroker:out_17:rssi" }
+
+// Group gOut_18 
+// Group gOut_18_lights
+// Switch out_18_button       "Тунел 18 LED"                          <switch>      (gOut_18)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_18:button", autoupdate="false"}      
+// Switch out_18_tnl_light    "Тунел 18 LED"                          <switch>      (gOut_18,gOut_18_lights,g18_tnl_lights,g18AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_18:power1" }       
+// Switch out_18_btn_light    "Бутон 18 LED"                          <switch>      (gOut_18,gOut_18_lights,g18_btn_lights,g18AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_18:power2" }
+// Number out_18_Temperature  "Изход 18 [%.1f °C]"                    <temperature> (gOut_18,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_18:temperature" }
+// Number out_18_Humidity     "Изход 18 [%.1f %%]"                    <humidity>    (gOut_18,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_18:humidity" }
+// String out_18_Reachable    "Контролер 18  - Достъпен: [%s]"               <presence>    (gOut_18)                                                                            { channel="mqtt:topic:localMQTTbroker:out_18:reachable" }
+// Number out_18_RSSI         "Контролер 18 - WiFi Signal Strength [%d %%]" <network>      (gOut_18)                                                                            { channel="mqtt:topic:localMQTTbroker:out_18:rssi" }
+
+
+// // //      TEST TUNNEL OUT     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// // Group gIn_51 
+// // Group gIn_51_lights
+// // Switch out_51_button       "Тунел 51 LED"                          <switch>      (gOut_51)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_51:button", autoupdate="false"}      
+// // Switch out_51_tnl_light    "Тунел 51 LED"                          <switch>      (gOut_51,gOut_51_lights,g51_tnl_lights,g51AllLights,gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_51:power1" }       
+// // Switch out_51_btn_light    "Бутон 51 LED"                          <switch>      (gOut_51,gOut_51_lights,g51_btn_lights,g51AllLights,gBtnLights,gPersist_On_Change_1minute)  { channel="mqtt:topic:localMQTTbroker:out_51:power2" }
+// // Number out_51_Temperature  "Изход 51 [%.1f °C]"                    <temperature> (gOut_51,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_51:temperature" }
+// // Number out_51_Humidity     "Изход 51 [%.1f %%]"                    <humidity>    (gOut_51,gPersist_On_Change_1minute)                                                        { channel="mqtt:topic:localMQTTbroker:out_51:humidity" }
+// // String out_51_Reachable    "Контролер 51  - Достъпен: [%s]"               <presence>    (gOut_51)                                                                            { channel="mqtt:topic:localMQTTbroker:out_51:reachable" }
+// // Number out_51_RSSI         "Контролер 51 - WiFi Signal Strength [%d %%]" <network>      (gOut_51)                                                                            { channel="mqtt:topic:localMQTTbroker:out_51:rssi" }
+// // //      TEST TUNNEL OUT     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

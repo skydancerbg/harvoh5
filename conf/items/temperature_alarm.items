@@ -1,0 +1,19 @@
+Switch  tnl1_temperature_alarm
+Switch  tnl2_temperature_alarm
+Switch  tnl3_temperature_alarm
+Switch  tnl4_temperature_alarm
+// Switch  tnl3_temperature_alarm
+Switch  tnl5_temperature_alarm
+Switch  tnl6_temperature_alarm
+Switch  tnl7_temperature_alarm
+Switch  tnl8_temperature_alarm
+Switch  tnl9_temperature_alarm
+Switch  tnl10_temperature_alarm
+Switch  tnl11_temperature_alarm
+Switch  tnl12_temperature_alarm
+Switch  tnl13_temperature_alarm
+Switch  tnl14_temperature_alarm
+Switch  tnl115_temperature_alarm
+Switch  tnl116_temperature_alarm
+Switch  tnl17_temperature_alarm
+Switch  tnl18_temperature_alarm
