@@ -348,7 +348,7 @@ then
 // logInfo("Set values to tunnel defaults", "tnl_2_resetTimer_sw  ON pressed!")
 logInfo("btn_controll.rules", "Iside tnl_2_resetTimer_sw: {}", tnl_2_timer_default_value.state)
 
-        tnl_2_timer_missed_actinon_value.postUpdate(tnl_2_timer_default_value.state as DecimalType)           // Updates te Global default value
+        tnl_2_timer_missed_actinon_value.postUpdate(default_tnl_timer_missed_actinon_value.state as DecimalType)           // Updates te Global default value
         tnl_2_current_timer_value.postUpdate(tnl_2_timer_default_value.state as DecimalType)                              // Updates te Tunnel default value
         // tnl_2_timer_extendedDryingTime_value.postUpdate(default_tnl_timer_extendedDryingTime_value.state as DecimalType)   // Updates te Global default value 
         tnl_2_btnaction_enable.sendCommand(OFF) // disable Button press
