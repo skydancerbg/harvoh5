@@ -3,7 +3,7 @@
 //  //  //  //  //  INITIAL SET ALL TO DEFAULTS   //  //  //  //  //  //  //  //
 //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
 
-rule "Button initialSetDefaultsToAllTunnesls is prerssed"
+rule "Button initialSetDefaultsToAllTunnesls is pressed"
 when
     // Item globalInit received command
     // or
@@ -137,7 +137,7 @@ then
 }
 end
 
-rule "Button enableAllTunnels is prerssed"
+rule "Button enableAllTunnels is pressed"
 when
     // Item globalInit received command
     // or
@@ -151,7 +151,7 @@ then
     }
 end
 
-rule "Button disableAllTunnels is prerssed"
+rule "Button disableAllTunnels is pressed"
 when
     // Item globalInit received command
     // or
