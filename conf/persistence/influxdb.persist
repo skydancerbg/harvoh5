@@ -1,7 +1,6 @@
 Strategies {
     // every30seconds : "0/30 * * * * ?"
     everyMinute : "0 * * * * ?"
-    default = everyChange
 }
 
 Items {
