@@ -13,7 +13,7 @@ Switch  tnl11_temperature_alarm
 Switch  tnl12_temperature_alarm
 Switch  tnl13_temperature_alarm
 Switch  tnl14_temperature_alarm
-Switch  tnl115_temperature_alarm
-Switch  tnl116_temperature_alarm
+Switch  tnl15_temperature_alarm
+Switch  tnl16_temperature_alarm
 Switch  tnl17_temperature_alarm
 Switch  tnl18_temperature_alarm
