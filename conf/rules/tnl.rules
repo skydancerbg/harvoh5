@@ -706,7 +706,7 @@ when
 then
     if(tnl_6_btnctrl_enable.state == ON){
         // tnl_6_current_timer_value.postUpdate(default_tnl_timer_value.state as DecimalType) // Set the tunnel timer to default value
-        tnl_6_current_timer_value.postUpdate(dtnl_6_timer_default_value.state as DecimalType) // Set the tunnel timer to default value
+        tnl_6_current_timer_value.postUpdate(tnl_6_timer_default_value.state as DecimalType) // Set the tunnel timer to default value
         tnl_6_timer_missed_actinon_value.postUpdate(default_tnl_timer_missed_actinon_value.state as DecimalType)
         tnl_6_timer_extendedDryingTime_value.postUpdate(default_tnl_timer_extendedDryingTime_value.state as DecimalType)
         tnl_6_btnaction_enable.sendCommand(OFF) // disable Button press
