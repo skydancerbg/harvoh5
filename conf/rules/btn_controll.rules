@@ -32,7 +32,7 @@ logInfo("btn_controll.rules", "TIMER TICK DECREMENT")
         }
 
         if(tnl_51_missed_action_countdown_enable_sw.state == ON){
-        tnl_51_timer_missed_actinon_value.postUpdate((tnl_51_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_51_timer_missed_action_value.postUpdate((tnl_51_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
     }
 */
@@ -45,7 +45,7 @@ logInfo("btn_controll.rules", "TIMER TICK DECREMENT")
 // logInfo("default.rules", "1st Item: {}, 2nd Item: {}, 3rd Item: {}", Item1.state, Item2.state, Item3.state)
 // logInfo("btn_controll.rules", "After decrementtnl tnl_1_ TIMER: {}", tnl_1_current_timer_value.state)
         if(tnl_1_missed_action_countdown_enable_sw.state == ON){
-        tnl_1_timer_missed_actinon_value.postUpdate((tnl_1_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_1_timer_missed_action_value.postUpdate((tnl_1_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         // if(tnl_1_current_timer_value.state as DecimalType == 0 || tnl_1_current_timer_value.state as DecimalType == 1.0 || tnl_1_current_timer_value.state as DecimalType < 0 ){ 
@@ -68,7 +68,7 @@ logInfo("btn_controll timer clock", "tnl_1 Lights ON")
 // logInfo("btn_controll.rules", "Iside decrement tnl_2_ TIMER: {}", tnl_1_current_timer_value.state)
 
         if(tnl_2_missed_action_countdown_enable_sw.state == ON){
-        tnl_2_timer_missed_actinon_value.postUpdate((tnl_2_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_2_timer_missed_action_value.postUpdate((tnl_2_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         // if(tnl_2_current_timer_value.state as DecimalType == 0 || tnl_2_current_timer_value.state as DecimalType == 1 ){   // If tunnel timer expired
@@ -89,7 +89,7 @@ logInfo("btn_controll timer clock", "tnl_2 Lights ON")
         tnl_3_current_timer_value.postUpdate((tnl_3_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_3_missed_action_countdown_enable_sw.state == ON){
-        tnl_3_timer_missed_actinon_value.postUpdate((tnl_3_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_3_timer_missed_action_value.postUpdate((tnl_3_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         // if(tnl_3_current_timer_value.state as DecimalType == 1 ){   // If tunnel timer expired
@@ -109,7 +109,7 @@ logInfo("btn_controll timer clock", "tnl_3 Lights ON")
         tnl_4_current_timer_value.postUpdate((tnl_4_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_4_missed_action_countdown_enable_sw.state == ON){
-        tnl_4_timer_missed_actinon_value.postUpdate((tnl_4_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_4_timer_missed_action_value.postUpdate((tnl_4_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         // if(tnl_4_current_timer_value.state as DecimalType == 1 ){   // If tunnel timer expired
@@ -129,7 +129,7 @@ logInfo("btn_controll timer clock", "tnl_4 Lights ON")
         tnl_5_current_timer_value.postUpdate((tnl_5_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_5_missed_action_countdown_enable_sw.state == ON){
-        tnl_5_timer_missed_actinon_value.postUpdate((tnl_5_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_5_timer_missed_action_value.postUpdate((tnl_5_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_5_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -148,7 +148,7 @@ logInfo("btn_controll timer clock", "tnl_5 Lights ON")
         tnl_6_current_timer_value.postUpdate((tnl_6_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_6_missed_action_countdown_enable_sw.state == ON){
-        tnl_6_timer_missed_actinon_value.postUpdate((tnl_6_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_6_timer_missed_action_value.postUpdate((tnl_6_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_6_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -167,7 +167,7 @@ logInfo("btn_controll timer clock", "tnl_6 Lights ON")
         tnl_7_current_timer_value.postUpdate((tnl_7_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_7_missed_action_countdown_enable_sw.state == ON){
-        tnl_7_timer_missed_actinon_value.postUpdate((tnl_7_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_7_timer_missed_action_value.postUpdate((tnl_7_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_7_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -186,7 +186,7 @@ logInfo("btn_controll timer clock", "tnl_7 Lights ON")
         tnl_8_current_timer_value.postUpdate((tnl_8_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_8_missed_action_countdown_enable_sw.state == ON){
-        tnl_8_timer_missed_actinon_value.postUpdate((tnl_8_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_8_timer_missed_action_value.postUpdate((tnl_8_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_8_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -205,7 +205,7 @@ logInfo("btn_controll timer clock", "tnl_8 Lights ON")
         tnl_9_current_timer_value.postUpdate((tnl_9_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_9_missed_action_countdown_enable_sw.state == ON){
-        tnl_9_timer_missed_actinon_value.postUpdate((tnl_9_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_9_timer_missed_action_value.postUpdate((tnl_9_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_9_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -224,7 +224,7 @@ logInfo("btn_controll timer clock", "tnl_9 Lights ON")
         tnl_10_current_timer_value.postUpdate((tnl_10_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_10_missed_action_countdown_enable_sw.state == ON){
-        tnl_10_timer_missed_actinon_value.postUpdate((tnl_10_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_10_timer_missed_action_value.postUpdate((tnl_10_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_10_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -243,7 +243,7 @@ logInfo("btn_controll timer clock", "tnl_10 Lights ON")
         tnl_11_current_timer_value.postUpdate((tnl_11_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_11_missed_action_countdown_enable_sw.state == ON){
-        tnl_11_timer_missed_actinon_value.postUpdate((tnl_11_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_11_timer_missed_action_value.postUpdate((tnl_11_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_11_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -262,7 +262,7 @@ logInfo("btn_controll timer clock", "tnl_11 Lights ON")
         tnl_12_current_timer_value.postUpdate((tnl_12_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_12_missed_action_countdown_enable_sw.state == ON){
-        tnl_12_timer_missed_actinon_value.postUpdate((tnl_12_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_12_timer_missed_action_value.postUpdate((tnl_12_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_12_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -281,7 +281,7 @@ logInfo("btn_controll timer clock", "tnl_12 Lights ON")
         tnl_13_current_timer_value.postUpdate((tnl_13_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_13_missed_action_countdown_enable_sw.state == ON){
-        tnl_13_timer_missed_actinon_value.postUpdate((tnl_13_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_13_timer_missed_action_value.postUpdate((tnl_13_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_13_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -300,7 +300,7 @@ logInfo("btn_controll timer clock", "tnl_12 Lights ON")
         tnl_14_current_timer_value.postUpdate((tnl_14_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_14_missed_action_countdown_enable_sw.state == ON){
-        tnl_14_timer_missed_actinon_value.postUpdate((tnl_14_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_14_timer_missed_action_value.postUpdate((tnl_14_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_14_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -319,7 +319,7 @@ logInfo("btn_controll timer clock", "tnl_12 Lights ON")
         tnl_15_current_timer_value.postUpdate((tnl_15_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_15_missed_action_countdown_enable_sw.state == ON){
-        tnl_15_timer_missed_actinon_value.postUpdate((tnl_15_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_15_timer_missed_action_value.postUpdate((tnl_15_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_15_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -338,7 +338,7 @@ logInfo("btn_controll timer clock", "tnl_12 Lights ON")
         tnl_16_current_timer_value.postUpdate((tnl_16_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_16_missed_action_countdown_enable_sw.state == ON){
-        tnl_16_timer_missed_actinon_value.postUpdate((tnl_16_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_16_timer_missed_action_value.postUpdate((tnl_16_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_16_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -357,7 +357,7 @@ logInfo("btn_controll timer clock", "tnl_12 Lights ON")
         tnl_17_current_timer_value.postUpdate((tnl_17_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_17_missed_action_countdown_enable_sw.state == ON){
-        tnl_17_timer_missed_actinon_value.postUpdate((tnl_17_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_17_timer_missed_action_value.postUpdate((tnl_17_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_17_current_timer_value.state <= 0 ){   // If tunnel timer expired
@@ -376,7 +376,7 @@ logInfo("btn_controll timer clock", "tnl_12 Lights ON")
         tnl_18_current_timer_value.postUpdate((tnl_18_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
 
         if(tnl_18_missed_action_countdown_enable_sw.state == ON){
-        tnl_18_timer_missed_actinon_value.postUpdate((tnl_18_timer_missed_actinon_value.state as DecimalType) - 1) // Increment missed action timer
+        tnl_18_timer_missed_action_value.postUpdate((tnl_18_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
 
         if(tnl_18_current_timer_value.state <= 0 ){   // If tunnel timer expired

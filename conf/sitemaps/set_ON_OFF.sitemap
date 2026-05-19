@@ -94,11 +94,11 @@ Text item=none
         
 //     Frame label="Управление сигнализация и бутони" {
 //         // Setpoint item=default_tnl_light-onr_value                       label="Глобално: Таймер времеза сушене  [%d минути]" icon="light-on" minValue=1 maxValue=1440 step=1
-//         // Setpoint item=default_tnl_light-onr_missed_actinon_value        label="Глобално: Таймер аларма при бездействие [%d минути]" icon="light-on" minValue=1 maxValue=1440 step=1
+//         // Setpoint item=default_tnl_light-onr_missed_action_value        label="Глобално: Таймер аларма при бездействие [%d минути]" icon="light-on" minValue=1 maxValue=1440 step=1
 //         // Setpoint item=default_tnl_light-onr_extendedDryinglight-on_value    label="Глобално: Допълнително време за сушене  [%d минути]" icon="light-on" minValue=1 maxValue=1440 step=1    
 //         // Text item=none
 //         // REMOVE tnis setting for individual tunnels
-//         // Setpoint item=tnl_51_light-onr_missed_actinon_value     label="Тунел 51 - Таймер пропуснато действие[%d минути]" icon="light-on" minValue=1 maxValue=1440 step=1                                    
+//         // Setpoint item=tnl_51_light-onr_missed_action_value     label="Тунел 51 - Таймер пропуснато действие[%d минути]" icon="light-on" minValue=1 maxValue=1440 step=1                                    
 //         // Text item=none                  
 //         // Text item=none        
 //         // Switch item=tnl_51_set_all_to_defaults_sw  label="Тунел 51 - Set values to default"

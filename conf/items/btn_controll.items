@@ -6,7 +6,7 @@ Switch oneMinuteTriggerSwitch   //Using this as a rule trigger for the other rul
                                 // By default, there are only 2 threads allocated to Quartz, the scheduler. 
                                 // All cron rules, Timers, and Astro triggered rules all use this…
 Number default_tnl_timer_value (gPersist_On_Every_Change)
-Number default_tnl_timer_missed_actinon_value (gPersist_On_Every_Change)
+Number default_tnl_timer_missed_action_value (gPersist_On_Every_Change)
 Number default_tnl_timer_extendedDryingTime_value (gPersist_On_Every_Change)
 
 Switch globalInit // init all tunnel values to defaults. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using
@@ -47,7 +47,7 @@ Switch tnl_51_resetTimer_sw    (gtnl_51_btn_ctrl) // In case restarting after po
 Switch tnl_51_set_all_to_defaults_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
 
 Number tnl_51_timer_default_value               (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_51_timer_missed_actinon_value        (gtnl_51_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_51_timer_missed_action_value        (gtnl_51_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_51_timer_extendedDryingTime_value    (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_51_current_timer_value               (gtnl_51_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
 
@@ -62,7 +62,7 @@ Switch tnl_1_resetTimer_sw    (gtnl_1_btn_ctrl) // In case restarting after powe
 Switch tnl_1_set_all_to_defaults_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
 
 Number tnl_1_timer_default_value               (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_1_timer_missed_actinon_value        (gtnl_1_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_1_timer_missed_action_value        (gtnl_1_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_1_timer_extendedDryingTime_value    (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_1_current_timer_value               (gtnl_1_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -77,7 +77,7 @@ Switch tnl_2_resetTimer_sw    (gtnl_2_btn_ctrl) // In case restarting after powe
 Switch tnl_2_set_all_to_defaults_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
 
 Number tnl_2_timer_default_value               (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_2_timer_missed_actinon_value        (gtnl_2_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_2_timer_missed_action_value        (gtnl_2_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_2_timer_extendedDryingTime_value    (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_2_current_timer_value               (gtnl_2_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -92,7 +92,7 @@ Switch tnl_3_resetTimer_sw    (gtnl_3_btn_ctrl) // In case restarting after powe
 Switch tnl_3_set_all_to_defaults_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
 
 Number tnl_3_timer_default_value               (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_3_timer_missed_actinon_value        (gtnl_3_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_3_timer_missed_action_value        (gtnl_3_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_3_timer_extendedDryingTime_value    (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_3_current_timer_value               (gtnl_3_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -107,7 +107,7 @@ Switch tnl_4_resetTimer_sw    (gtnl_4_btn_ctrl) // In case restarting after powe
 Switch tnl_4_set_all_to_defaults_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
 
 Number tnl_4_timer_default_value               (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_4_timer_missed_actinon_value        (gtnl_4_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_4_timer_missed_action_value        (gtnl_4_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_4_timer_extendedDryingTime_value    (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_4_current_timer_value               (gtnl_4_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
 
@@ -122,7 +122,7 @@ Switch tnl_5_resetTimer_sw    (gtnl_5_btn_ctrl) // In case restarting after powe
 Switch tnl_5_set_all_to_defaults_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
 
 Number tnl_5_timer_default_value               (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_5_timer_missed_actinon_value        (gtnl_5_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_5_timer_missed_action_value        (gtnl_5_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_5_timer_extendedDryingTime_value    (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_5_current_timer_value               (gtnl_5_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -137,7 +137,7 @@ Switch tnl_6_resetTimer_sw    (gtnl_6_btn_ctrl) // In case restarting after powe
 Switch tnl_6_set_all_to_defaults_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
 
 Number tnl_6_timer_default_value               (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_6_timer_missed_actinon_value        (gtnl_6_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_6_timer_missed_action_value        (gtnl_6_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_6_timer_extendedDryingTime_value    (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_6_current_timer_value               (gtnl_6_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -152,7 +152,7 @@ Switch tnl_7_resetTimer_sw    (gtnl_7_btn_ctrl) // In case restarting after powe
 Switch tnl_7_set_all_to_defaults_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
 
 Number tnl_7_timer_default_value               (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_7_timer_missed_actinon_value        (gtnl_7_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_7_timer_missed_action_value        (gtnl_7_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_7_timer_extendedDryingTime_value    (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_7_current_timer_value               (gtnl_7_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -167,7 +167,7 @@ Switch tnl_8_resetTimer_sw    (gtnl_8_btn_ctrl) // In case restarting after powe
 Switch tnl_8_set_all_to_defaults_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
 
 Number tnl_8_timer_default_value               (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_8_timer_missed_actinon_value        (gtnl_8_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_8_timer_missed_action_value        (gtnl_8_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_8_timer_extendedDryingTime_value    (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_8_current_timer_value               (gtnl_8_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -182,7 +182,7 @@ Switch tnl_9_resetTimer_sw    (gtnl_9_btn_ctrl) // In case restarting after powe
 Switch tnl_9_set_all_to_defaults_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
 
 Number tnl_9_timer_default_value               (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_9_timer_missed_actinon_value        (gtnl_9_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_9_timer_missed_action_value        (gtnl_9_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_9_timer_extendedDryingTime_value    (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_9_current_timer_value               (gtnl_9_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -197,7 +197,7 @@ Switch tnl_10_resetTimer_sw    (gtnl_10_btn_ctrl) // In case restarting after po
 Switch tnl_10_set_all_to_defaults_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
 
 Number tnl_10_timer_default_value               (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_10_timer_missed_actinon_value        (gtnl_10_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_10_timer_missed_action_value        (gtnl_10_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_10_timer_extendedDryingTime_value    (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_10_current_timer_value               (gtnl_10_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -212,7 +212,7 @@ Switch tnl_11_resetTimer_sw    (gtnl_11_btn_ctrl) // In case restarting after po
 Switch tnl_11_set_all_to_defaults_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
 
 Number tnl_11_timer_default_value               (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_11_timer_missed_actinon_value        (gtnl_11_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_11_timer_missed_action_value        (gtnl_11_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_11_timer_extendedDryingTime_value    (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_11_current_timer_value               (gtnl_11_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -227,7 +227,7 @@ Switch tnl_12_resetTimer_sw    (gtnl_12_btn_ctrl) // In case restarting after po
 Switch tnl_12_set_all_to_defaults_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
 
 Number tnl_12_timer_default_value               (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_12_timer_missed_actinon_value        (gtnl_12_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_12_timer_missed_action_value        (gtnl_12_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_12_timer_extendedDryingTime_value    (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_12_current_timer_value               (gtnl_12_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -242,7 +242,7 @@ Switch tnl_13_resetTimer_sw    (gtnl_13_btn_ctrl) // In case restarting after po
 Switch tnl_13_set_all_to_defaults_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
 
 Number tnl_13_timer_default_value               (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_13_timer_missed_actinon_value        (gtnl_13_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_13_timer_missed_action_value        (gtnl_13_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_13_timer_extendedDryingTime_value    (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_13_current_timer_value               (gtnl_13_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -257,7 +257,7 @@ Switch tnl_14_resetTimer_sw    (gtnl_14_btn_ctrl) // In case restarting after po
 Switch tnl_14_set_all_to_defaults_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
 
 Number tnl_14_timer_default_value               (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_14_timer_missed_actinon_value        (gtnl_14_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_14_timer_missed_action_value        (gtnl_14_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_14_timer_extendedDryingTime_value    (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_14_current_timer_value               (gtnl_14_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -272,7 +272,7 @@ Switch tnl_15_resetTimer_sw    (gtnl_15_btn_ctrl) // In case restarting after po
 Switch tnl_15_set_all_to_defaults_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
 
 Number tnl_15_timer_default_value               (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_15_timer_missed_actinon_value        (gtnl_15_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_15_timer_missed_action_value        (gtnl_15_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_15_timer_extendedDryingTime_value    (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_15_current_timer_value               (gtnl_15_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -287,7 +287,7 @@ Switch tnl_16_resetTimer_sw    (gtnl_16_btn_ctrl) // In case restarting after po
 Switch tnl_16_set_all_to_defaults_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
 
 Number tnl_16_timer_default_value               (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_16_timer_missed_actinon_value        (gtnl_16_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_16_timer_missed_action_value        (gtnl_16_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_16_timer_extendedDryingTime_value    (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_16_current_timer_value               (gtnl_16_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 // // Tunnel tnl_17  // // 
@@ -301,7 +301,7 @@ Switch tnl_17_resetTimer_sw    (gtnl_17_btn_ctrl) // In case restarting after po
 Switch tnl_17_set_all_to_defaults_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
 
 Number tnl_17_timer_default_value               (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_17_timer_missed_actinon_value        (gtnl_17_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_17_timer_missed_action_value        (gtnl_17_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_17_timer_extendedDryingTime_value    (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_17_current_timer_value               (gtnl_17_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -316,7 +316,7 @@ Switch tnl_18_resetTimer_sw    (gtnl_18_btn_ctrl) // In case restarting after po
 Switch tnl_18_set_all_to_defaults_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
 
 Number tnl_18_timer_default_value               (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                              
-Number tnl_18_timer_missed_actinon_value        (gtnl_18_btn_ctrl, gPersist_On_Every_Change)               
+Number tnl_18_timer_missed_action_value        (gtnl_18_btn_ctrl, gPersist_On_Every_Change)               
 Number tnl_18_timer_extendedDryingTime_value    (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                
 Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -329,7 +329,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 //                                 // By default, there are only 2 threads allocated to Quartz, the scheduler. 
 //                                 // All cron rules, Timers, and Astro triggered rules all use this…
 // Number default_tnl_timer_value (gPersist_On_Every_Change)
-// Number default_tnl_timer_missed_actinon_value (gPersist_On_Every_Change)
+// Number default_tnl_timer_missed_action_value (gPersist_On_Every_Change)
 // Number default_tnl_timer_extendedDryingTime_value (gPersist_On_Every_Change)
 
 // Switch globalInit // init all tunnel values to defaults. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using
@@ -370,7 +370,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_51_set_all_to_defaults_sw    (gtnl_51_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_51_timer_default_value               (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_51_timer_missed_actinon_value        (gtnl_51_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_51_timer_missed_action_value        (gtnl_51_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_51_timer_extendedDryingTime_value    (gtnl_51_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_51_current_timer_value               (gtnl_51_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
 
@@ -385,7 +385,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_1_set_all_to_defaults_sw    (gtnl_1_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_1_timer_default_value               (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_1_timer_missed_actinon_value        (gtnl_1_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_1_timer_missed_action_value        (gtnl_1_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_1_timer_extendedDryingTime_value    (gtnl_1_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_1_current_timer_value               (gtnl_1_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -400,7 +400,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_2_set_all_to_defaults_sw    (gtnl_2_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_2_timer_default_value               (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_2_timer_missed_actinon_value        (gtnl_2_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_2_timer_missed_action_value        (gtnl_2_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_2_timer_extendedDryingTime_value    (gtnl_2_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_2_current_timer_value               (gtnl_2_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -415,7 +415,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_3_set_all_to_defaults_sw    (gtnl_3_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_3_timer_default_value               (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_3_timer_missed_actinon_value        (gtnl_3_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_3_timer_missed_action_value        (gtnl_3_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_3_timer_extendedDryingTime_value    (gtnl_3_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_3_current_timer_value               (gtnl_3_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -430,7 +430,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_4_set_all_to_defaults_sw    (gtnl_4_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_4_timer_default_value               (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_4_timer_missed_actinon_value        (gtnl_4_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_4_timer_missed_action_value        (gtnl_4_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_4_timer_extendedDryingTime_value    (gtnl_4_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_4_current_timer_value               (gtnl_4_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)
 
@@ -445,7 +445,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_5_set_all_to_defaults_sw    (gtnl_5_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_5_timer_default_value               (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_5_timer_missed_actinon_value        (gtnl_5_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_5_timer_missed_action_value        (gtnl_5_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_5_timer_extendedDryingTime_value    (gtnl_5_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_5_current_timer_value               (gtnl_5_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -460,7 +460,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_6_set_all_to_defaults_sw    (gtnl_6_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_6_timer_default_value               (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_6_timer_missed_actinon_value        (gtnl_6_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_6_timer_missed_action_value        (gtnl_6_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_6_timer_extendedDryingTime_value    (gtnl_6_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_6_current_timer_value               (gtnl_6_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -475,7 +475,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_7_set_all_to_defaults_sw    (gtnl_7_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_7_timer_default_value               (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_7_timer_missed_actinon_value        (gtnl_7_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_7_timer_missed_action_value        (gtnl_7_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_7_timer_extendedDryingTime_value    (gtnl_7_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_7_current_timer_value               (gtnl_7_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -490,7 +490,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_8_set_all_to_defaults_sw    (gtnl_8_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_8_timer_default_value               (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_8_timer_missed_actinon_value        (gtnl_8_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_8_timer_missed_action_value        (gtnl_8_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_8_timer_extendedDryingTime_value    (gtnl_8_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_8_current_timer_value               (gtnl_8_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -505,7 +505,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_9_set_all_to_defaults_sw    (gtnl_9_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_9_timer_default_value               (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_9_timer_missed_actinon_value        (gtnl_9_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_9_timer_missed_action_value        (gtnl_9_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_9_timer_extendedDryingTime_value    (gtnl_9_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_9_current_timer_value               (gtnl_9_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -520,7 +520,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_10_set_all_to_defaults_sw    (gtnl_10_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_10_timer_default_value               (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_10_timer_missed_actinon_value        (gtnl_10_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_10_timer_missed_action_value        (gtnl_10_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_10_timer_extendedDryingTime_value    (gtnl_10_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_10_current_timer_value               (gtnl_10_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -535,7 +535,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_11_set_all_to_defaults_sw    (gtnl_11_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_11_timer_default_value               (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_11_timer_missed_actinon_value        (gtnl_11_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_11_timer_missed_action_value        (gtnl_11_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_11_timer_extendedDryingTime_value    (gtnl_11_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_11_current_timer_value               (gtnl_11_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -550,7 +550,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_12_set_all_to_defaults_sw    (gtnl_12_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_12_timer_default_value               (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_12_timer_missed_actinon_value        (gtnl_12_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_12_timer_missed_action_value        (gtnl_12_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_12_timer_extendedDryingTime_value    (gtnl_12_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_12_current_timer_value               (gtnl_12_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -565,7 +565,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_13_set_all_to_defaults_sw    (gtnl_13_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_13_timer_default_value               (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_13_timer_missed_actinon_value        (gtnl_13_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_13_timer_missed_action_value        (gtnl_13_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_13_timer_extendedDryingTime_value    (gtnl_13_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_13_current_timer_value               (gtnl_13_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -580,7 +580,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_14_set_all_to_defaults_sw    (gtnl_14_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_14_timer_default_value               (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_14_timer_missed_actinon_value        (gtnl_14_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_14_timer_missed_action_value        (gtnl_14_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_14_timer_extendedDryingTime_value    (gtnl_14_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_14_current_timer_value               (gtnl_14_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -595,7 +595,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_15_set_all_to_defaults_sw    (gtnl_15_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_15_timer_default_value               (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_15_timer_missed_actinon_value        (gtnl_15_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_15_timer_missed_action_value        (gtnl_15_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_15_timer_extendedDryingTime_value    (gtnl_15_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_15_current_timer_value               (gtnl_15_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -610,7 +610,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_16_set_all_to_defaults_sw    (gtnl_16_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_16_timer_default_value               (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_16_timer_missed_actinon_value        (gtnl_16_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_16_timer_missed_action_value        (gtnl_16_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_16_timer_extendedDryingTime_value    (gtnl_16_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_16_current_timer_value               (gtnl_16_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 // // // Tunnel tnl_17  // // 
@@ -624,7 +624,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_17_set_all_to_defaults_sw    (gtnl_17_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_17_timer_default_value               (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_17_timer_missed_actinon_value        (gtnl_17_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_17_timer_missed_action_value        (gtnl_17_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_17_timer_extendedDryingTime_value    (gtnl_17_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_17_current_timer_value               (gtnl_17_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 
@@ -639,7 +639,7 @@ Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTi
 // Switch tnl_18_set_all_to_defaults_sw    (gtnl_18_btn_ctrl) // In case restarting after power out   
 
 // Number tnl_18_timer_default_value               (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                              
-// Number tnl_18_timer_missed_actinon_value        (gtnl_18_btn_ctrl, gPersist_On_Every_Change)               
+// Number tnl_18_timer_missed_action_value        (gtnl_18_btn_ctrl, gPersist_On_Every_Change)               
 // Number tnl_18_timer_extendedDryingTime_value    (gtnl_18_btn_ctrl, gPersist_On_Every_Change)                
 // Number tnl_18_current_timer_value               (gtnl_18_btn_ctrl, gCurrentTnlTimers, gPersist_On_Every_Change)                        
 

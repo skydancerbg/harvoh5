@@ -17,7 +17,7 @@ sitemap dev label="Development test page" {
             Text item=none  
             Text item=none
             Setpoint item=default_tnl_timer_value                       label="Глобално: Таймер времеза сушене  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
-            Setpoint item=default_tnl_timer_missed_actinon_value        label="Глобално: Таймер аларма при бездействие [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
+            Setpoint item=default_tnl_timer_missed_action_value        label="Глобално: Таймер аларма при бездействие [%d минути]" icon="time" minValue=1 maxValue=1440 step=1
             Setpoint item=default_tnl_timer_extendedDryingTime_value    label="Глобално: Допълнително време за сушене  [%d минути]" icon="time" minValue=1 maxValue=1440 step=1    
             Text item=none
             Text item=none
@@ -69,7 +69,7 @@ sitemap dev label="Development test page" {
 
             
             // REMOVE tnis setting for individual tunnels
-            // Setpoint item=tnl_51_timer_missed_actinon_value     label="Тунел 51 - Таймер пропуснато действие[%d минути]" icon="time" minValue=1 maxValue=1440 step=1                                    
+            // Setpoint item=tnl_51_timer_missed_action_value     label="Тунел 51 - Таймер пропуснато действие[%d минути]" icon="time" minValue=1 maxValue=1440 step=1                                    
             // Text item=none                  
             // Text item=none        
             // Switch item=tnl_51_set_all_to_defaults_sw  label="Tunnel 51 - Set values to default"
