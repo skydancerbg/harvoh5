@@ -370,7 +370,7 @@ Number out_8_Humidity     "Топъл 8 [%.1f %%]"                    <humidity>
 String out_8_Reachable    "Контролер 8  - Достъпен: [%s]"               <presence>    (gOut_8)                                                                            { channel="mqtt:topic:localMQTTbroker:out_8:reachable" }
 Number out_8_RSSI         "Контролер 8 - WiFi Signal Strength [%d %%]" <network>      (gOut_8)                                                                            { channel="mqtt:topic:localMQTTbroker:out_8:rssi" }
 
-Group gOutn_9 
+Group gOut_9
 Group gOut_9_lights
 Switch out_9_button       "Тунел 9 LED"                          <switch>      (gOut_9, gPersist_On_Change_1minute)                                                                                   { channel="mqtt:topic:localMQTTbroker:out_9:button", autoupdate="false"}      
 Switch out_9_tnl_light    "Тунел 9 LED"                          <switch>      (gOut_9, gOut_9_lights, g9_tnl_lights, g9AllLights, gTnlLights)                             { channel="mqtt:topic:localMQTTbroker:out_9:power1" }       
