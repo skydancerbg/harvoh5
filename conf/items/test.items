@@ -1,4 +1,4 @@
-Switch test_mode "Test Mode" (gPersist_On_Change_1minute)
+Switch test_mode "Test Mode" (gPersist_On_Change_1minute, gPersist_On_Every_Change)
 Number test_speed "Replay Speed" (gPersist_On_Every_Change)
 Switch test_auto_mode "Auto Button Replay" (gPersist_On_Every_Change)
 Switch test_button_in "Simulate IN Button Press"

@@ -3,19 +3,13 @@ sitemap test_system_using_tnl1_old_data label="Тест със стари дан
     Frame label="РЕЖИМ НА ТЕСТВАНЕ" {
         // Simulation mode selection (before activation)
         Switch item=test_auto_mode
-            label="Ръчен режим (бутони от страницата)"
+            label="Симулация на бутони"
             icon="person"
-            mappings=[OFF="РЪЧЕН"]
-            visibility=[test_mode==OFF, test_auto_mode==ON]
-
-        Switch item=test_auto_mode
-            label="Автоматичен режим (бутони от данните)"
-            icon="cloud_download"
-            mappings=[ON="АВТО"]
-            visibility=[test_mode==OFF, test_auto_mode==OFF]
+            mappings=[OFF="Ръчно", ON="Автоматично"]
+            visibility=[test_mode==OFF]
 
         Text item=none
-            label="Ръчен: бутоните се натискат от страницата."
+            label="Ръчно: бутоните се натискат от страницата"
             icon="person"
             visibility=[test_mode==OFF, test_auto_mode==OFF]
 
@@ -31,11 +25,28 @@ sitemap test_system_using_tnl1_old_data label="Тест със стари дан
             minValue=1 maxValue=18 step=1
             visibility=[test_mode==OFF]
 
-        Setpoint item=test_speed
-            label="Скорост на реплей [%d]x"
+        Switch item=test_speed
+            label="1x (реално време)"
             icon="time"
-            minValue=1 maxValue=20 step=1
-            visibility=[test_mode==OFF]
+            mappings=["1"="1x"]
+            visibility=[test_speed!=1]
+
+        Switch item=test_speed
+            label="10x (120 мин → 12 мин)"
+            icon="time"
+            mappings=["10"="10x"]
+            visibility=[test_speed!=10]
+
+        Switch item=test_speed
+            label="20x (120 мин → 6 мин)"
+            icon="time"
+            mappings=["20"="20x"]
+            visibility=[test_speed!=20]
+
+        // Read-only display of current speed
+        Text item=test_speed
+            label="Зададена скорост: [%d]x (времето тече %d пъти по-бързо)"
+            icon="time"
 
         // Confirmation: activate test mode with selected settings
         Text item=test_replay_tunnel
@@ -51,7 +62,7 @@ sitemap test_system_using_tnl1_old_data label="Тест със стари дан
 
         // While test is running: show current settings and stop button
         Text item=test_speed
-            label="Текуща скорост: [%d]x"
+            label="Скорост: [%d]x (времето тече %d пъти по-бързо)"
             icon="time"
             visibility=[test_mode==ON]
 
@@ -120,26 +131,33 @@ sitemap test_system_using_tnl1_old_data label="Тест със стари дан
     }
 
     Frame label="СИМУЛАЦИЯ НА БУТОНИ" {
+        // Manual mode: show press buttons (visible only when test is ON)
         Switch item=test_button_in
             label="Бутон IN (студена/мокра страна)"
             icon="light-on"
             mappings=[ON="НАТИСНИ"]
-            visibility=[test_mode==ON, test_auto_mode==OFF]
+            visibility=[test_mode==ON]
 
         Switch item=test_button_out
             label="Бутон OUT (топла/суха страна)"
             icon="light-on"
             mappings=[ON="НАТИСНИ"]
-            visibility=[test_mode==ON, test_auto_mode==OFF]
+            visibility=[test_mode==ON]
+
+        // Mode indicator during test
+        Text item=none
+            label="Ръчен режим — натисни бутон за симулация"
+            icon="person"
+            visibility=[test_mode==ON]
 
         Text item=none
-            label="Автоматичен режим — бутоните се"
+            label="Автоматичен режим — бутоните се репликират"
             icon="cloud_download"
-            visibility=[test_mode==ON, test_auto_mode==ON]
+            visibility=[test_mode==ON]
         Text item=none
-            label="репликират от историческите данни."
+            label="от историческите данни (2023г.)"
             icon="cloud_download"
-            visibility=[test_mode==ON, test_auto_mode==ON]
+            visibility=[test_mode==ON]
     }
 
     Frame label="СЪСТОЯНИЕ НА СВЕТЛИНИ" {
