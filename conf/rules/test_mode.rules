@@ -1,0 +1,68 @@
+var Timer testTickTimer = null
+
+rule "Test mode: activate"
+when
+    Item test_mode changed to ON
+then
+    // Disable all tunnels except the test tunnel (tunnel 1 is always the target)
+    logInfo("test_mode", "Test mode ON — disabling non-test tunnels")
+    gEnableTunnelsw.allMembers.forEach [ item |
+        if(item.name != "tnl_1_btnctrl_enable") {
+            item.sendCommand(OFF)
+        }
+    ]
+
+    // Read pre-configured speed (set by operator before activating test_mode)
+    var speed = 10
+    if(test_speed.state !== NULL) {
+        speed = (test_speed.state as DecimalType).intValue
+    }
+    if(speed < 1) speed = 10  // safety fallback
+    val interval = (60.0 / speed).intValue
+    logInfo("test_mode", "Accelerated tick: every {} seconds ({}x)", interval, speed)
+
+    // Start looping timer
+    testTickTimer = createTimer(now.plusSeconds(interval), [ |
+        oneMinuteTriggerSwitch.sendCommand(
+            if(oneMinuteTriggerSwitch.state == ON) OFF else ON
+        )
+        testTickTimer.reschedule(now.plusSeconds(interval))
+    ])
+end
+
+rule "Test mode: deactivate"
+when
+    Item test_mode changed to OFF
+then
+    if(testTickTimer !== null) {
+        testTickTimer.cancel()
+        testTickTimer = null
+    }
+    logInfo("test_mode", "Test mode OFF — normal 60s cron restored")
+end
+
+rule "Test: simulate IN button press"
+when
+    Item test_button_in changed to ON
+then
+    val testTunnel = (test_replay_tunnel.state as DecimalType).intValue
+    val itemName = "in_" + testTunnel + "_button"
+    sendCommand(itemName, ON)
+    logInfo("test_mode", "Manual IN button press on {}", itemName)
+    createTimer(now.plusSeconds(1), [ |
+        sendCommand(itemName, OFF)
+    ])
+end
+
+rule "Test: simulate OUT button press"
+when
+    Item test_button_out changed to ON
+then
+    val testTunnel = (test_replay_tunnel.state as DecimalType).intValue
+    val itemName = "out_" + testTunnel + "_button"
+    sendCommand(itemName, ON)
+    logInfo("test_mode", "Manual OUT button press on {}", itemName)
+    createTimer(now.plusSeconds(1), [ |
+        sendCommand(itemName, OFF)
+    ])
+end

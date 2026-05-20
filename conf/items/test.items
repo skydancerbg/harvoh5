@@ -1,0 +1,6 @@
+Switch test_mode "Test Mode" (gPersist_On_Change_1minute)
+Number test_speed "Replay Speed" (gPersist_On_Every_Change)
+Switch test_auto_mode "Auto Button Replay" (gPersist_On_Every_Change)
+Switch test_button_in "Simulate IN Button Press"
+Switch test_button_out "Simulate OUT Button Press"
+Number test_replay_tunnel "Source Tunnel for Data Replay" (gPersist_On_Every_Change)

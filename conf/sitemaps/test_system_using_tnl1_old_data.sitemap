@@ -1,0 +1,156 @@
+sitemap test_system_using_tnl1_old_data label="Тест със стари данни" {
+
+    Frame label="РЕЖИМ НА ТЕСТВАНЕ" {
+        // Simulation mode selection (before activation)
+        Switch item=test_auto_mode
+            label="Ръчен режим (бутони от страницата)"
+            icon="person"
+            mappings=[OFF="РЪЧЕН"]
+            visibility=[test_mode==OFF, test_auto_mode==ON]
+
+        Switch item=test_auto_mode
+            label="Автоматичен режим (бутони от данните)"
+            icon="cloud_download"
+            mappings=[ON="АВТО"]
+            visibility=[test_mode==OFF, test_auto_mode==OFF]
+
+        Text item=none
+            label="Ръчен: бутоните се натискат от страницата."
+            icon="person"
+            visibility=[test_mode==OFF, test_auto_mode==OFF]
+
+        Text item=none
+            label="Авто: бутоните се репликират от данни 2023г."
+            icon="cloud_download"
+            visibility=[test_mode==OFF, test_auto_mode==ON]
+
+        // Speed and tunnel selection
+        Setpoint item=test_replay_tunnel
+            label="Тунел-източник на данни (1-18)"
+            icon="filter_1"
+            minValue=1 maxValue=18 step=1
+            visibility=[test_mode==OFF]
+
+        Setpoint item=test_speed
+            label="Скорост на реплей [%d]x"
+            icon="time"
+            minValue=1 maxValue=20 step=1
+            visibility=[test_mode==OFF]
+
+        // Confirmation: activate test mode with selected settings
+        Text item=test_replay_tunnel
+            label="Реплей на данни от тунел [%d] върху Тунел 1"
+            icon="play"
+            visibility=[test_mode==OFF]
+
+        Switch item=test_mode
+            label="Активирай тест режим"
+            icon="settings"
+            mappings=[ON="СТАРТ"]
+            visibility=[test_mode==OFF]
+
+        // While test is running: show current settings and stop button
+        Text item=test_speed
+            label="Текуща скорост: [%d]x"
+            icon="time"
+            visibility=[test_mode==ON]
+
+        Text item=test_replay_tunnel
+            label="Данни от тунел [%d] → реплей на Тунел 1"
+            icon="filter_1"
+            visibility=[test_mode==ON]
+
+        Switch item=test_mode
+            label="Спри тест режима"
+            icon="stop"
+            mappings=[OFF="СТОП"]
+            visibility=[test_mode==ON]
+    }
+
+    Frame label="ДАННИ ОТ СЕНЗОРИ" {
+        Text item=in_1_Temperature label="Температура IN [%.1f °C]" icon="temperature"
+        Text item=in_1_Humidity    label="Влажност IN [%.1f %%]"    icon="humidity"
+        Text item=out_1_Temperature label="Температура OUT [%.1f °C]" icon="temperature"
+        Text item=out_1_Humidity    label="Влажност OUT [%.1f %%]"    icon="humidity"
+    }
+
+    Frame label="УПРАВЛЕНИЕ ТУНЕЛ 1" {
+        Switch item=tnl_1_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_1_btnctrl_enable==OFF]
+
+        Switch item=tnl_1_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Switch item=tnl_1_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_timer_missed_action_value
+            label="Аларма бездействие [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_1_btnctrl_enable==ON]
+    }
+
+    Frame label="СИМУЛАЦИЯ НА БУТОНИ" {
+        Switch item=test_button_in
+            label="Бутон IN (студена/мокра страна)"
+            icon="light-on"
+            mappings=[ON="НАТИСНИ"]
+            visibility=[test_mode==ON, test_auto_mode==OFF]
+
+        Switch item=test_button_out
+            label="Бутон OUT (топла/суха страна)"
+            icon="light-on"
+            mappings=[ON="НАТИСНИ"]
+            visibility=[test_mode==ON, test_auto_mode==OFF]
+
+        Text item=none
+            label="Автоматичен режим — бутоните се"
+            icon="cloud_download"
+            visibility=[test_mode==ON, test_auto_mode==ON]
+        Text item=none
+            label="репликират от историческите данни."
+            icon="cloud_download"
+            visibility=[test_mode==ON, test_auto_mode==ON]
+    }
+
+    Frame label="СЪСТОЯНИЕ НА СВЕТЛИНИ" {
+        Text item=in_1_tnl_light  label="Тунелна лампа IN"  icon="light"
+        Text item=out_1_tnl_light label="Тунелна лампа OUT" icon="light"
+        Text item=in_1_btn_light  label="Бутонна лампа IN"  icon="light"
+        Text item=out_1_btn_light label="Бутонна лампа OUT" icon="light"
+    }
+
+    Frame label="СТАТУС КОНТРОЛЕРИ" {
+        Text item=in_1_Reachable  label="Контролер IN"  icon="network"
+        Text item=out_1_Reachable label="Контролер OUT" icon="network"
+    }
+}
