@@ -1,0 +1,46 @@
+sitemap mockup_system_operations label="Системни операции" {
+
+    Frame label="УПРАВЛЕНИЕ НА СИСТЕМАТА" {
+        Text item=none
+
+        // Activate: visible when system is not yet activated
+        Switch item=globalInit
+            label="Активирай системата"
+            icon="play"
+            mappings=[ON="Зареди стойности"]
+            visibility=[globalInit==OFF]
+
+        // Deactivate: visible when system is activated
+        Switch item=globalInit
+            label="Деактивирай системата"
+            icon="stop"
+            mappings=[OFF="Изключи"]
+            visibility=[globalInit==ON]
+    }
+
+    Frame label="ЗАПАЗВАНЕ И ВЪЗСТАНОВЯВАНЕ (PAUSE/RESUME)" {
+        Text item=none
+        Text label="При кратко прекъсване на захранването на обекта,"
+
+        // TODO: FreezeState item needs to be created in items file
+        // Switch item=FreezeState
+        //     label="Запази състояние (Freeze)"
+        //     icon="freeze"
+        //     mappings=[ON="ЗАПАЗИ"]
+
+        // TODO: ResumeState item needs to be created in items file
+        //     visibility=[FreezeState==ON]
+        // Switch item=ResumeState
+        //     label="Продължи работа (Resume)"
+        //     icon="resume"
+        //     mappings=[ON="ПРОДЪЛЖИ"]
+    }
+
+    Frame label="АВАРИЙНО ИЗКЛЮЧВАНЕ" {
+        Text item=none
+        Switch item=disableAllTunnels
+            label="Изключи всички тунели"
+            icon="light-off"
+            mappings=[ON="ИЗКЛЮЧИ ВСИЧКИ"]
+    }
+}

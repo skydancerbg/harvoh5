@@ -1,0 +1,760 @@
+sitemap mockup_system_control label="Управление по тунели" {
+
+    Frame {
+        // ═══════════════════════════════════════════
+        // Tunnel 1
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 1" icon="filter_1" labelcolor=["navy"]
+
+        Switch item=tnl_1_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_1_btnctrl_enable==OFF]
+
+        Switch item=tnl_1_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Switch item=tnl_1_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        Setpoint item=tnl_1_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_1_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 2
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 2" icon="filter_2" labelcolor=["navy"]
+
+        Switch item=tnl_2_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_2_btnctrl_enable==OFF]
+
+        Switch item=tnl_2_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_2_btnctrl_enable==ON]
+
+        Switch item=tnl_2_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_2_btnctrl_enable==ON]
+
+        Setpoint item=tnl_2_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_2_btnctrl_enable==ON]
+
+        Setpoint item=tnl_2_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_2_btnctrl_enable==ON]
+
+        Setpoint item=tnl_2_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_2_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 3
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 3" icon="filter_3" labelcolor=["navy"]
+
+        Switch item=tnl_3_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_3_btnctrl_enable==OFF]
+
+        Switch item=tnl_3_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_3_btnctrl_enable==ON]
+
+        Switch item=tnl_3_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_3_btnctrl_enable==ON]
+
+        Setpoint item=tnl_3_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_3_btnctrl_enable==ON]
+
+        Setpoint item=tnl_3_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_3_btnctrl_enable==ON]
+
+        Setpoint item=tnl_3_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_3_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 4
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 4" icon="filter_4" labelcolor=["navy"]
+
+        Switch item=tnl_4_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_4_btnctrl_enable==OFF]
+
+        Switch item=tnl_4_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_4_btnctrl_enable==ON]
+
+        Switch item=tnl_4_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_4_btnctrl_enable==ON]
+
+        Setpoint item=tnl_4_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_4_btnctrl_enable==ON]
+
+        Setpoint item=tnl_4_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_4_btnctrl_enable==ON]
+
+        Setpoint item=tnl_4_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_4_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 5
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 5" icon="filter_5" labelcolor=["navy"]
+
+        Switch item=tnl_5_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_5_btnctrl_enable==OFF]
+
+        Switch item=tnl_5_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_5_btnctrl_enable==ON]
+
+        Switch item=tnl_5_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_5_btnctrl_enable==ON]
+
+        Setpoint item=tnl_5_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_5_btnctrl_enable==ON]
+
+        Setpoint item=tnl_5_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_5_btnctrl_enable==ON]
+
+        Setpoint item=tnl_5_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_5_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 6
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 6" icon="filter_6" labelcolor=["navy"]
+
+        Switch item=tnl_6_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_6_btnctrl_enable==OFF]
+
+        Switch item=tnl_6_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_6_btnctrl_enable==ON]
+
+        Switch item=tnl_6_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_6_btnctrl_enable==ON]
+
+        Setpoint item=tnl_6_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_6_btnctrl_enable==ON]
+
+        Setpoint item=tnl_6_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_6_btnctrl_enable==ON]
+
+        Setpoint item=tnl_6_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_6_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 7
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 7" icon="filter_7" labelcolor=["navy"]
+
+        Switch item=tnl_7_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_7_btnctrl_enable==OFF]
+
+        Switch item=tnl_7_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_7_btnctrl_enable==ON]
+
+        Switch item=tnl_7_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_7_btnctrl_enable==ON]
+
+        Setpoint item=tnl_7_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_7_btnctrl_enable==ON]
+
+        Setpoint item=tnl_7_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_7_btnctrl_enable==ON]
+
+        Setpoint item=tnl_7_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_7_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 8
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 8" icon="filter_8" labelcolor=["navy"]
+
+        Switch item=tnl_8_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_8_btnctrl_enable==OFF]
+
+        Switch item=tnl_8_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_8_btnctrl_enable==ON]
+
+        Switch item=tnl_8_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_8_btnctrl_enable==ON]
+
+        Setpoint item=tnl_8_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_8_btnctrl_enable==ON]
+
+        Setpoint item=tnl_8_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_8_btnctrl_enable==ON]
+
+        Setpoint item=tnl_8_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_8_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 9
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 9" icon="filter_9" labelcolor=["navy"]
+
+        Switch item=tnl_9_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_9_btnctrl_enable==OFF]
+
+        Switch item=tnl_9_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_9_btnctrl_enable==ON]
+
+        Switch item=tnl_9_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_9_btnctrl_enable==ON]
+
+        Setpoint item=tnl_9_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_9_btnctrl_enable==ON]
+
+        Setpoint item=tnl_9_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_9_btnctrl_enable==ON]
+
+        Setpoint item=tnl_9_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_9_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 10
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 10" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_10_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_10_btnctrl_enable==OFF]
+
+        Switch item=tnl_10_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_10_btnctrl_enable==ON]
+
+        Switch item=tnl_10_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_10_btnctrl_enable==ON]
+
+        Setpoint item=tnl_10_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_10_btnctrl_enable==ON]
+
+        Setpoint item=tnl_10_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_10_btnctrl_enable==ON]
+
+        Setpoint item=tnl_10_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_10_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 11
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 11" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_11_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_11_btnctrl_enable==OFF]
+
+        Switch item=tnl_11_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_11_btnctrl_enable==ON]
+
+        Switch item=tnl_11_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_11_btnctrl_enable==ON]
+
+        Setpoint item=tnl_11_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_11_btnctrl_enable==ON]
+
+        Setpoint item=tnl_11_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_11_btnctrl_enable==ON]
+
+        Setpoint item=tnl_11_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_11_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 12
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 12" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_12_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_12_btnctrl_enable==OFF]
+
+        Switch item=tnl_12_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_12_btnctrl_enable==ON]
+
+        Switch item=tnl_12_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_12_btnctrl_enable==ON]
+
+        Setpoint item=tnl_12_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_12_btnctrl_enable==ON]
+
+        Setpoint item=tnl_12_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_12_btnctrl_enable==ON]
+
+        Setpoint item=tnl_12_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_12_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 13
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 13" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_13_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_13_btnctrl_enable==OFF]
+
+        Switch item=tnl_13_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_13_btnctrl_enable==ON]
+
+        Switch item=tnl_13_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_13_btnctrl_enable==ON]
+
+        Setpoint item=tnl_13_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_13_btnctrl_enable==ON]
+
+        Setpoint item=tnl_13_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_13_btnctrl_enable==ON]
+
+        Setpoint item=tnl_13_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_13_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 14
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 14" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_14_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_14_btnctrl_enable==OFF]
+
+        Switch item=tnl_14_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_14_btnctrl_enable==ON]
+
+        Switch item=tnl_14_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_14_btnctrl_enable==ON]
+
+        Setpoint item=tnl_14_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_14_btnctrl_enable==ON]
+
+        Setpoint item=tnl_14_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_14_btnctrl_enable==ON]
+
+        Setpoint item=tnl_14_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_14_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 15
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 15" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_15_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_15_btnctrl_enable==OFF]
+
+        Switch item=tnl_15_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_15_btnctrl_enable==ON]
+
+        Switch item=tnl_15_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_15_btnctrl_enable==ON]
+
+        Setpoint item=tnl_15_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_15_btnctrl_enable==ON]
+
+        Setpoint item=tnl_15_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_15_btnctrl_enable==ON]
+
+        Setpoint item=tnl_15_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_15_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 16
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 16" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_16_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_16_btnctrl_enable==OFF]
+
+        Switch item=tnl_16_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_16_btnctrl_enable==ON]
+
+        Switch item=tnl_16_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_16_btnctrl_enable==ON]
+
+        Setpoint item=tnl_16_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_16_btnctrl_enable==ON]
+
+        Setpoint item=tnl_16_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_16_btnctrl_enable==ON]
+
+        Setpoint item=tnl_16_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_16_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 17
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 17" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_17_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_17_btnctrl_enable==OFF]
+
+        Switch item=tnl_17_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_17_btnctrl_enable==ON]
+
+        Switch item=tnl_17_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_17_btnctrl_enable==ON]
+
+        Setpoint item=tnl_17_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_17_btnctrl_enable==ON]
+
+        Setpoint item=tnl_17_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_17_btnctrl_enable==ON]
+
+        Setpoint item=tnl_17_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_17_btnctrl_enable==ON]
+
+        // ═══════════════════════════════════════════
+        // Tunnel 18
+        // ═══════════════════════════════════════════
+        Text item=none label="Тунел 18" icon="filter_9_plus" labelcolor=["navy"]
+
+        Switch item=tnl_18_btnctrl_enable
+            label="Автоматизация"
+            icon="light-off"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_18_btnctrl_enable==OFF]
+
+        Switch item=tnl_18_btnctrl_enable
+            label="Автоматизация"
+            icon="light-on"
+            mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            visibility=[tnl_18_btnctrl_enable==ON]
+
+        Switch item=tnl_18_resetTimer_sw
+            label="Рестарт"
+            icon="reset"
+            mappings=[ON="РЕСТАРТ"]
+            visibility=[tnl_18_btnctrl_enable==ON]
+
+        Setpoint item=tnl_18_current_timer_value
+            label="Таймер [%d мин]"
+            icon="timeonclassic"
+            valuecolor=[>10="green",>0="orange",<=0="red"]
+            minValue=-1440 maxValue=1440 step=5
+            visibility=[tnl_18_btnctrl_enable==ON]
+
+        Setpoint item=tnl_18_timer_default_value
+            label="Основно време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_18_btnctrl_enable==ON]
+
+        Setpoint item=tnl_18_timer_extendedDryingTime_value
+            label="Доп. време [%d мин]"
+            icon="settings"
+            minValue=1 maxValue=1440 step=1
+            visibility=[tnl_18_btnctrl_enable==ON]
+    }
+}

@@ -1,0 +1,26 @@
+sitemap mockup_global_settings label="Глобални настройки" {
+
+    Frame label="ГЛОБАЛНИ НАСТРОЙКИ ПО ПОДРАЗБИРАНЕ" {
+        Text item=none
+        Setpoint item=default_tnl_timer_value
+            label="Таймер сушене [%d минути]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=default_tnl_timer_missed_action_value
+            label="Аларма пропуснато действие [%d минути]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=default_tnl_timer_extendedDryingTime_value
+            label="Допълнително време сушене [%d минути]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=default_tnl_warn_timer_value
+            label="Жълто предупреждение при оставащи [%d минути]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=default_tnl_temperature_alarm_value
+            label="Аларма висока температура [%.1f °C]"
+            icon="temperature"
+            minValue=1 maxValue=120 step=1
+    }
+}

@@ -1,0 +1,221 @@
+sitemap mockup_tunnel_settings label="Настройки на таймери" {
+
+    Frame label="ДЕТАЙЛНИ НАСТРОЙКИ ПО ТУНЕЛИ" {
+
+        // ═══════════ Tunnel 1 ═══════════
+        Text item=none label="Тунел 1" labelcolor=["navy"] icon="filter_1"
+        Setpoint item=tnl_1_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_1_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 2 ═══════════
+        Text item=none label="Тунел 2" labelcolor=["navy"] icon="filter_2"
+        Setpoint item=tnl_2_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_2_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 3 ═══════════
+        Text item=none label="Тунел 3" labelcolor=["navy"] icon="filter_3"
+        Setpoint item=tnl_3_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_3_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 4 ═══════════
+        Text item=none label="Тунел 4" labelcolor=["navy"] icon="filter_4"
+        Setpoint item=tnl_4_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_4_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 5 ═══════════
+        Text item=none label="Тунел 5" labelcolor=["navy"] icon="filter_5"
+        Setpoint item=tnl_5_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_5_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 6 ═══════════
+        Text item=none label="Тунел 6" labelcolor=["navy"] icon="filter_6"
+        Setpoint item=tnl_6_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_6_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 7 ═══════════
+        Text item=none label="Тунел 7" labelcolor=["navy"] icon="filter_7"
+        Setpoint item=tnl_7_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_7_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 8 ═══════════
+        Text item=none label="Тунел 8" labelcolor=["navy"] icon="filter_8"
+        Setpoint item=tnl_8_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_8_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 9 ═══════════
+        Text item=none label="Тунел 9" labelcolor=["navy"] icon="filter_9"
+        Setpoint item=tnl_9_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_9_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 10 ═══════════
+        Text item=none label="Тунел 10" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_10_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_10_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 11 ═══════════
+        Text item=none label="Тунел 11" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_11_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_11_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 12 ═══════════
+        Text item=none label="Тунел 12" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_12_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_12_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 13 ═══════════
+        Text item=none label="Тунел 13" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_13_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_13_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 14 ═══════════
+        Text item=none label="Тунел 14" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_14_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_14_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 15 ═══════════
+        Text item=none label="Тунел 15" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_15_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_15_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 16 ═══════════
+        Text item=none label="Тунел 16" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_16_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_16_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 17 ═══════════
+        Text item=none label="Тунел 17" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_17_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_17_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+
+        // ═══════════ Tunnel 18 ═══════════
+        Text item=none label="Тунел 18" labelcolor=["navy"] icon="filter_9_plus"
+        Setpoint item=tnl_18_timer_default_value
+            label="Основно време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Setpoint item=tnl_18_timer_extendedDryingTime_value
+            label="Допълнително време [%d мин]"
+            icon="time"
+            minValue=1 maxValue=1440 step=1
+        Text item=none
+    }
+}
