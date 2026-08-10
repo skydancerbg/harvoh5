@@ -117,6 +117,41 @@ Rule-level behaviours worth remembering:
 
 ---
 
+## 3a. What the InfluxDB history actually contains
+
+Surveyed 2026-08-10. Full detail in `data_inventory.md`.
+
+| Season | Drying data |
+|---|---|
+| 2021 | ✅ — contains the burner-sensor incident (below) |
+| 2022 | ✅ late Jul – Sep |
+| 2023 | ✅ late Jul – mid Sep — **best season for analysis**; all handbook charts come from 28 Aug 2023 |
+| 2024 | ✅ Aug – early Sep, coverage ends mid-Sep 2024 |
+| **2025** | ❌ **no season at all** |
+| 2026 | ⚠️ test replay (20 May – 8 Jun) + live data resumed 2026-08-10 |
+
+**2025 is empty because the factory did not run** — climate change left no plum harvest, or a very
+weak one. Confirmed by the operator. This is not data loss; do not go looking for it on the factory's
+own InfluxDB.
+
+**The 2021 burner-sensor incident** is why the high-temperature alarm exists. The gas burner's *own*
+sensor failed; its independent controller therefore did not know the tunnel was overheating and kept
+heating. Our sensors sit outside that control loop, so the rise stayed visible on the operator
+screens — operators caught it and shut the burner down manually, saving tons of plums. It is written
+up in handbook §7.2 as the justification for the 86 °C threshold.
+
+Sustained episodes in the 2021 data (local, UTC+3): 05.09 21:38–22:19 tunnel 10 warm to **101.9 °C**
+with tunnels 10 cold and 11 warm going high in the same window; 15.09 17:36–18:37 tunnel 3 warm to
+94.5 °C; 01.09 tunnels 7 and 4. The 05.09 cluster — three sensors, two adjacent tunnels, same window
+— points at the heating rather than one bad sensor.
+
+> **Querying caveat:** filter `value < 500`. `in_5` and `in_12` report **998** as a sensor error
+> code, and isolated two-minute spikes to 121.6/121.7 °C are glitches, not real temperatures.
+> Which specific date the operator remembers as *the* incident is **not confirmed** — 05.09 and
+> 15.09.2021 are both candidates.
+
+---
+
 ## 4. Environment gotchas discovered
 
 - **openHAB does not hot-reload config written through the mount.** A server-side `touch` doesn't
