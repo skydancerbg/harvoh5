@@ -1,4 +1,26 @@
-Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port=1883, secure=false, username="openhabian", password="harv123", clientID="oh3srv" ]
+// ============================================================================
+//  MQTT SOURCE: live factory broker (Sredetc RPi4 / openhabian, openHAB 3)
+//  84.54.146.177:51883 over WAN.  Config: Harvesta_Sredetc_Mosquitto_WAN_access_.txt
+//
+//  *** THIS INSTANCE IS READ-ONLY.  DO NOT RESTORE commandTopic. ***
+//
+//  The factory's openHAB 3 is still the live controller. To let OH5 observe the
+//  same broker without fighting it, every commandTopic was removed (114 channel
+//  pairs) and the 19 command-only flap_actuator target_position channels were
+//  commented out with a '[read-only mode]' marker. clientID is 'oh5dev', NOT
+//  'oh3srv' -- a duplicate client ID makes the broker evict the other session,
+//  so OH3 and OH5 would kick each other in a loop and the factory would lose
+//  its one-minute control tick.
+//
+//  PLANNED: when THIS server becomes the production controller and the factory
+//  RPi4 openHAB 3 is retired, restore full control by re-adding commandTopic to
+//  every channel and un-commenting the target_position channels. Keep clientID
+//  'oh5dev' unless OH3 is provably off the bus. Do the switchover only after OH3
+//  is stopped -- two controllers on one broker will fight over every relay.
+//  Reference restore point: git history of this file prior to 2026-08-10.
+// ============================================================================
+
+Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="84.54.146.177", port=51883, secure=false, username="openhabian", password="harv123", clientID="oh5dev" ]
 //Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="127.0.0.1", port=1883, secure=false, username="openhabian", password="harv123", clientID="oh3srv" ]
 
 {
@@ -12,9 +34,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_1 "IN 1" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_1/POWER3", commandTopic="cmnd/in_1/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_1/POWER1", commandTopic="cmnd/in_1/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_1/POWER2", commandTopic="cmnd/in_1/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_1/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_1/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_1/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_1/LWT" ]
@@ -24,9 +46,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_2 "IN 2" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_2/POWER3", commandTopic="cmnd/in_2/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_2/POWER1", commandTopic="cmnd/in_2/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_2/POWER2", commandTopic="cmnd/in_2/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_2/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_2/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_2/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_2/LWT" ]
@@ -37,9 +59,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_3 "IN 3" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_3/POWER3", commandTopic="cmnd/in_3/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_3/POWER1", commandTopic="cmnd/in_3/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_3/POWER2", commandTopic="cmnd/in_3/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_3/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_3/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_3/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_3/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_3/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_3/LWT" ]
@@ -49,9 +71,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_4 "IN 4" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_4/POWER3", commandTopic="cmnd/in_4/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_4/POWER1", commandTopic="cmnd/in_4/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_4/POWER2", commandTopic="cmnd/in_4/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_4/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_4/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_4/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_4/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_4/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_4/LWT" ]
@@ -61,9 +83,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_5 "IN 5" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_5/POWER3", commandTopic="cmnd/in_5/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_5/POWER1", commandTopic="cmnd/in_5/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_5/POWER2", commandTopic="cmnd/in_5/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_5/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_5/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_5/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_5/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_5/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_5/LWT" ]
@@ -73,9 +95,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_6 "IN 6" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_6/POWER3", commandTopic="cmnd/in_6/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_6/POWER1", commandTopic="cmnd/in_6/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_6/POWER2", commandTopic="cmnd/in_6/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_6/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_6/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_6/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_6/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_6/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_6/LWT" ]
@@ -85,9 +107,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_7 "IN 7" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_7/POWER3", commandTopic="cmnd/in_7/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_7/POWER1", commandTopic="cmnd/in_7/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_7/POWER2", commandTopic="cmnd/in_7/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_7/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_7/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_7/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_7/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_7/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_7/LWT" ]
@@ -97,9 +119,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_8 "IN 8" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_8/POWER3", commandTopic="cmnd/in_8/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_8/POWER1", commandTopic="cmnd/in_8/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_8/POWER2", commandTopic="cmnd/in_8/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_8/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_8/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_8/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_8/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_8/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_8/LWT" ]
@@ -109,9 +131,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_9 "IN 9" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_9/POWER3", commandTopic="cmnd/in_9/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_9/POWER1", commandTopic="cmnd/in_9/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_9/POWER2", commandTopic="cmnd/in_9/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_9/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_9/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_9/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_9/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_9/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_9/LWT" ]
@@ -121,9 +143,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_10 "IN 10" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_10/POWER3", commandTopic="cmnd/in_10/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_10/POWER1", commandTopic="cmnd/in_10/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_10/POWER2", commandTopic="cmnd/in_10/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_10/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_10/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_10/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_10/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_10/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_10/LWT" ]
@@ -133,9 +155,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_11 "IN 11" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_11/POWER3", commandTopic="cmnd/in_11/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_11/POWER1", commandTopic="cmnd/in_11/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_11/POWER2", commandTopic="cmnd/in_11/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_11/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_11/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_11/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_11/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_11/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_11/LWT" ]
@@ -145,9 +167,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_12 "IN 12" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_12/POWER3", commandTopic="cmnd/in_12/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_12/POWER1", commandTopic="cmnd/in_12/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_12/POWER2", commandTopic="cmnd/in_12/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_12/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_12/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_12/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_12/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_12/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_12/LWT" ]
@@ -157,9 +179,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_13 "IN 13" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_13/POWER3", commandTopic="cmnd/in_13/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_13/POWER1", commandTopic="cmnd/in_13/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_13/POWER2", commandTopic="cmnd/in_13/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_13/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_13/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_13/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_13/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_13/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_13/LWT" ]
@@ -169,9 +191,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_14 "IN 14" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_14/POWER3", commandTopic="cmnd/in_14/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_14/POWER1", commandTopic="cmnd/in_14/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_14/POWER2", commandTopic="cmnd/in_14/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_14/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_14/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_14/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_14/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_14/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_14/LWT" ]
@@ -181,9 +203,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_15 "IN 15" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_15/POWER3", commandTopic="cmnd/in_15/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_15/POWER1", commandTopic="cmnd/in_15/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_15/POWER2", commandTopic="cmnd/in_15/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_15/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_15/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_15/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_15/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_15/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_15/LWT" ]
@@ -193,9 +215,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_16 "IN 16" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_16/POWER3", commandTopic="cmnd/in_16/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_16/POWER1", commandTopic="cmnd/in_16/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_16/POWER2", commandTopic="cmnd/in_16/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_16/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_16/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_16/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_16/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_16/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_16/LWT" ]
@@ -205,9 +227,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_17 "IN 17" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_17/POWER3", commandTopic="cmnd/in_17/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_17/POWER1", commandTopic="cmnd/in_17/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_17/POWER2", commandTopic="cmnd/in_17/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_17/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_17/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_17/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_17/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_17/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_17/LWT" ]
@@ -217,9 +239,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic in_18 "IN 18" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_18/POWER3", commandTopic="cmnd/in_18/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_18/POWER1", commandTopic="cmnd/in_18/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_18/POWER2", commandTopic="cmnd/in_18/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_18/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_18/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_18/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_18/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_18/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_18/LWT" ]
@@ -230,9 +252,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 //      TEST TUNNEL IN     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Thing topic in_51 "IN 51" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/in_51/POWER3", commandTopic="cmnd/in_51/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/in_51/POWER1", commandTopic="cmnd/in_51/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/in_51/POWER2", commandTopic="cmnd/in_51/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/in_51/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/in_51/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/in_51/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/in_51/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/in_51/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/in_51/LWT" ]
@@ -254,9 +276,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_1 "OUT 1" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_1/POWER3", commandTopic="cmnd/out_1/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_1/POWER1", commandTopic="cmnd/out_1/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_1/POWER2", commandTopic="cmnd/out_1/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_1/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_1/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_1/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_1/LWT" ]
@@ -266,9 +288,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_2 "OUT 2" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_2/POWER3", commandTopic="cmnd/out_2/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_2/POWER1", commandTopic="cmnd/out_2/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_2/POWER2", commandTopic="cmnd/out_2/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_2/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_2/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_2/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_2/LWT" ]
@@ -278,9 +300,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_3 "OUT 3" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_3/POWER3", commandTopic="cmnd/out_3/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_3/POWER1", commandTopic="cmnd/out_3/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_3/POWER2", commandTopic="cmnd/out_3/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_3/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_3/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_3/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_3/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_3/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_3/LWT" ]
@@ -290,9 +312,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_4 "OUT 4" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_4/POWER3", commandTopic="cmnd/out_4/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_4/POWER1", commandTopic="cmnd/out_4/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_4/POWER2", commandTopic="cmnd/out_4/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_4/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_4/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_4/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_4/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_4/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_4/LWT" ]
@@ -302,9 +324,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_5 "OUT 5" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_5/POWER3", commandTopic="cmnd/out_5/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_5/POWER1", commandTopic="cmnd/out_5/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_5/POWER2", commandTopic="cmnd/out_5/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_5/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_5/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_5/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_5/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_5/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_5/LWT" ]
@@ -314,9 +336,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_6 "OUT 6" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_6/POWER3", commandTopic="cmnd/out_6/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_6/POWER1", commandTopic="cmnd/out_6/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_6/POWER2", commandTopic="cmnd/out_6/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_6/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_6/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_6/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_6/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_6/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_6/LWT" ]
@@ -326,9 +348,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_7 "OUT 7" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_7/POWER3", commandTopic="cmnd/out_7/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_7/POWER1", commandTopic="cmnd/out_7/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_7/POWER2", commandTopic="cmnd/out_7/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_7/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_7/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_7/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_7/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_7/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_7/LWT" ]
@@ -338,9 +360,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_8 "OUT 8" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_8/POWER3", commandTopic="cmnd/out_8/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_8/POWER1", commandTopic="cmnd/out_8/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_8/POWER2", commandTopic="cmnd/out_8/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_8/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_8/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_8/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_8/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_8/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_8/LWT" ]
@@ -350,9 +372,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_9 "OUT 9" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_9/POWER3", commandTopic="cmnd/out_9/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_9/POWER1", commandTopic="cmnd/out_9/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_9/POWER2", commandTopic="cmnd/out_9/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_9/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_9/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_9/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_9/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_9/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_9/LWT" ]
@@ -362,9 +384,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_10 "OUT 10" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_10/POWER3", commandTopic="cmnd/out_10/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_10/POWER1", commandTopic="cmnd/out_10/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_10/POWER2", commandTopic="cmnd/out_10/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_10/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_10/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_10/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_10/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_10/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_10/LWT" ]
@@ -374,9 +396,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_11 "OUT 11" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_11/POWER3", commandTopic="cmnd/out_11/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_11/POWER1", commandTopic="cmnd/out_11/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_11/POWER2", commandTopic="cmnd/out_11/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_11/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_11/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_11/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_11/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_11/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_11/LWT" ]
@@ -386,9 +408,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_12 "OUT 12" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_12/POWER3", commandTopic="cmnd/out_12/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_12/POWER1", commandTopic="cmnd/out_12/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_12/POWER2", commandTopic="cmnd/out_12/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_12/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_12/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_12/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_12/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_12/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_12/LWT" ]
@@ -398,9 +420,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_13 "OUT 13" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_13/POWER3", commandTopic="cmnd/out_13/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_13/POWER1", commandTopic="cmnd/out_13/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_13/POWER2", commandTopic="cmnd/out_13/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_13/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_13/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_13/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_13/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_13/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_13/LWT" ]
@@ -410,9 +432,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_14 "OUT 14" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_14/POWER3", commandTopic="cmnd/out_14/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_14/POWER1", commandTopic="cmnd/out_14/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_14/POWER2", commandTopic="cmnd/out_14/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_14/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_14/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_14/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_14/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_14/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_14/LWT" ]
@@ -422,9 +444,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_15 "OUT 15" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_15/POWER3", commandTopic="cmnd/out_15/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_15/POWER1", commandTopic="cmnd/out_15/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_15/POWER2", commandTopic="cmnd/out_15/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_15/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_15/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_15/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_15/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_15/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_15/LWT" ]
@@ -434,9 +456,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_16 "OUT 16" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_16/POWER3", commandTopic="cmnd/out_16/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_16/POWER1", commandTopic="cmnd/out_16/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_16/POWER2", commandTopic="cmnd/out_16/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_16/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_16/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_16/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_16/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_16/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_16/LWT" ]
@@ -446,9 +468,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_17 "OUT 17" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_17/POWER3", commandTopic="cmnd/out_17/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_17/POWER1", commandTopic="cmnd/out_17/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_17/POWER2", commandTopic="cmnd/out_17/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_17/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_17/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_17/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_17/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_17/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_17/LWT" ]
@@ -458,9 +480,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 
     Thing topic out_18 "OUT 18" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_18/POWER3", commandTopic="cmnd/out_18/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_18/POWER1", commandTopic="cmnd/out_18/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_18/POWER2", commandTopic="cmnd/out_18/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_18/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_18/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_18/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_18/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_18/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_18/LWT" ]
@@ -470,9 +492,9 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
     //      TEST TUNNEL OUT     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Thing topic out_51 "out 51" @ "tunnel_in" {
     Channels:
-        Type switch : button        "Button"                [ stateTopic="stat/out_51/POWER3", commandTopic="cmnd/out_51/POWER3" ]
-        Type switch : power1        "Power1"                [ stateTopic="stat/out_51/POWER1", commandTopic="cmnd/out_51/POWER1" ]
-        Type switch : power2        "Power2"                [ stateTopic="stat/out_51/POWER2", commandTopic="cmnd/out_51/POWER2" ]        
+        Type switch : button        "Button"                [ stateTopic="stat/out_51/POWER3" ]
+        Type switch : power1        "Power1"                [ stateTopic="stat/out_51/POWER1" ]
+        Type switch : power2        "Power2"                [ stateTopic="stat/out_51/POWER2" ]        
         Type number : temperature   "Temperature"           [ stateTopic="tele/out_51/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
         Type number : humidity      "Humidity"              [ stateTopic="tele/out_51/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
         Type string : reachable     "Reachable"             [ stateTopic="tele/out_51/LWT" ]
@@ -491,115 +513,115 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.50.20.100", port
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Thing topic flap_actuator_1 "flap_actuator_1" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_1/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_1/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_1/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_1/LWT" ]
     }
     Thing topic flap_actuator_2 "flap_actuator_2" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_2/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_2/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_2/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_2/LWT" ]
     }
     Thing topic flap_actuator_3 "flap_actuator_3" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_3/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_3/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_3/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_3/LWT" ]
     }
     Thing topic flap_actuator_4 "flap_actuator_4" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_4/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_4/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_4/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_4/LWT" ]
     }
     Thing topic flap_actuator_5 "flap_actuator_5" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_5/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_5/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_5/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_5/LWT" ]
     }
     Thing topic flap_actuator_6 "flap_actuator_6" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_6/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_6/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_6/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_6/LWT" ]
     }
     Thing topic flap_actuator_7 "flap_actuator_7" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_7/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_7/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_7/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_7/LWT" ]
     }
     Thing topic flap_actuator_8 "flap_actuator_8" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_8/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_8/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_8/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_8/LWT" ]
     }
     Thing topic flap_actuator_9 "flap_actuator_9" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_9/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_9/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_9/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_9/LWT" ]
     }
     Thing topic flap_actuator_10 "flap_actuator_10" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_10/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_10/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_10/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_10/LWT" ]
     }
     Thing topic flap_actuator_11 "flap_actuator_11" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_11/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_11/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_11/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_11/LWT" ]
     }
     Thing topic flap_actuator_12 "flap_actuator_12" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_12/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_12/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_12/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_12/LWT" ]
     }
     Thing topic flap_actuator_13 "flap_actuator_13" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_13/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_13/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_13/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_13/LWT" ]
     }
     Thing topic flap_actuator_14 "flap_actuator_14" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_14/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_14/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_14/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_14/LWT" ]
     }
     Thing topic flap_actuator_15 "flap_actuator_15" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_15/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_15/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_15/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_15/LWT" ]
     }
     Thing topic flap_actuator_16 "flap_actuator_16" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_16/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_16/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_16/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_16/LWT" ]
     }
     Thing topic flap_actuator_17 "flap_actuator_17" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_17/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_17/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_17/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_17/LWT" ]
     }
     Thing topic flap_actuator_18 "flap_actuator_18" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_18/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_18/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_18/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_18/LWT" ]
     }
     Thing topic flap_actuator_19 "flap_actuator_19" @ "Tunnels" {
     Channels:
-        Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_19/TARGET_POSITION" ]
+//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_19/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_19/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_19/LWT" ]
     }
