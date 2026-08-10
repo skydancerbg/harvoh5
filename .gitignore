@@ -6,3 +6,9 @@ userdata/backup/
 userdata/jsondb/backup/
 *.log
 *.lck
+
+# Runtime state and session secrets — live on the server, never versioned.
+# users.json holds user accounts plus live OAuth refresh/authorization tokens.
+# WatchService/*.config is a per-boot UUID file that churns on every restart.
+userdata/jsondb/users.json
+userdata/config/org/openhab/core/service/WatchService/
