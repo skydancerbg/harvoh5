@@ -92,6 +92,66 @@ identical sitemaps, so layouts match.
 
 ---
 
+### 2.4 Handbook §8 — reading the Grafana history (added later the same day)
+
+The handbook gained a new **section 8, „Графики в Grafana — историята на тунелите"** (6 pages,
+7 figures). Old §8/§9 became §9/§10; `make_handbook.py`'s `HEADINGS` list and the in-document TOC
+were updated to match. Now **28 pages**, was 22.
+
+Figures come from `shoot_grafana.py` (new). It is read-only in the same sense as `shoot_prod.py` —
+plain GETs with the time range in the URL, `&theme=light` for print, `&kiosk=tv`, `viewPanel=` for
+single panels. Every figure is taken from a dashboard the operators already have a desktop shortcut
+for, so a reader can open the exact screen the book shows.
+
+What the section teaches, and why each point is in there — all of it verified against InfluxDB
+rather than read off the pictures, and all folded into `system_operation_knowledge.md`:
+
+- Grafana **shows but does not control** — stated up front, because every other page in the book is
+  a control page.
+- Red = warm/`out`, blue = cold/`in`, on every dashboard. On humidity the order **inverts**.
+- **Every edge of the button trace is one press**, rising or falling. The trace latches high for
+  hours and an operator would otherwise read that as "the button is held down".
+- **Notches = doors opened**; a **one-sample vertical needle is a sensor glitch** (the worked case
+  is `in_1` reporting 38.5 °C between 66.6 and 66.8 °C).
+- Two real overheats as the "what a problem looks like" pair: tunnel 6 at **89.3 °C** on the very
+  day used as the normal example, and the 2021 burner-sensor failure at **101.9 °C** with the
+  vertical drop where operators killed the burner by hand.
+
+Three dashboards are recommended and the other seven explicitly told to be ignored — most are
+abandoned drafts, and one (`XptktCZgk`) never got its button series added despite the title.
+
+### 2.5 HABPanel colour coding — two gaps closed
+
+Prompted by the question "does the handbook cover the HABPanel pages and their colour codes".
+It covered ДИСПЛЕЙ but had two holes, both now filled in §5.6 and §6.3:
+
+1. **The alarm tile collapses.** Reading `T-Rh-Timer-T-Alarm`'s `ng-if` conditions showed that a
+   tunnel in temperature alarm stops rendering humidity, the timer and both cold-side values, and
+   draws an amber triangle + red thermometer instead. The book previously described only the
+   recolouring, which would leave an operator hunting for a timer that is deliberately hidden.
+2. **УПРАВЛЕНИЕ КЛАПИ has no colour coding at all** — `-51`, `274`, `490` and `NULL` render in the
+   same light blue as healthy values, on both the desktop and phone layouts. §6.4 asks operators to
+   spot impossible values on a page that gives them no help; that is now said out loud.
+
+The alarm screenshot is real, not mocked. The factory is off-season and the user confirmed a
+temporary value change was fine, so `shoot_habpanel_alarm.py` briefly lowered
+`default_tnl_temperature_alarm_value` **on OH5** below the live ambient readings (29.55 °C), put
+tunnels 12–18 into alarm alongside 11 normal ones, screenshotted, and restored 86.0 in a `finally`.
+Verified restored. Full method and reasoning in `system_operation_knowledge.md`.
+
+> The OH5 `FlapControl-phone` view was captured too and **discarded** — its sliders all read `NaN`
+> because read-only mode has the 19 `target_position` channels commented out. Any future OH5
+> screenshot of a flap *target* will have the same artifact; use production for those.
+
+Released as **v1.1** — `handbook_out/Ръководство за оператора-v1.1.docx` + `.pdf`, **29 pages**.
+`OUTFILE` in `build_handbook.py`, `DOCX` in `make_handbook.py` and the title-page version string
+were all bumped.
+
+**Not committed.** The repo's `Documents/` still holds the 22-page v1.0, which is what operators
+have in hand. Copy v1.1 in and commit once the content has been reviewed.
+
+---
+
 ## 3. Domain corrections learned today
 
 All folded into `system_operation_knowledge.md`. Several overturned earlier assumptions — do not
@@ -200,10 +260,18 @@ pushed history — only rotation fixes them:
 
 Accepted so far because the repo is private.
 
-**Handbook gaps.** Grafana dashboards (six of them, `:3000`) are not covered. The
+**Handbook gaps.** ~~Grafana dashboards are not covered.~~ **Done** — see §7 below. Still open: the
 `Линкове към страниците за управление` link points at `sitemap=masterinit`, which **does not exist**
 on either OH5 or production — a dead link that needs rebuilding. All 18 operator links still point at
 `10.50.20.100` and will need reissuing at switchover.
+
+**Grafana follow-ups** (raised while writing §7, none of them done):
+- The **local Grafana at `10.50.20.4` renders every dashboard empty** — its `openhab_home` datasource
+  points at `http://10.50.20.4:8086`, where nothing listens. Repoint it at `10.50.20.3:8086`.
+- The operator shortcut folder has **seven** Grafana links, **four of them to obsolete dashboards**,
+  and none to `sOvH8URRk`. Worth pruning when the links are reissued at switchover.
+- `in_1_button`'s label in `controller.items` reads `"Тунел 1 LED"`, copy-pasted from
+  `in_1_tnl_light`. Cosmetic, but it misdescribes the channel.
 
 ---
 
