@@ -218,6 +218,20 @@ with tunnels 10 cold and 11 warm going high in the same window; 15.09 17:36–18
 
 ---
 
+### 2.6 Build chain made portable
+
+`make_handbook.py` had two machine-specific landmines, both fixed and the build re-verified
+(29 pages, 27/27 headings located):
+
+- `WORK` pointed at a **dead agent session's** scratchpad path under `/tmp`. Now
+  `tempfile.gettempdir()/harvesta_handbook_tocpass`.
+- The DOCX→PDF converter was `glob(...skills/docx)[0]`, which raises **IndexError at import time**
+  on any machine without the Claude skills plugin. Now resolved lazily into `CONVERT`, falling back
+  to plain `soffice` (on PATH here) — which is what the skill wrapper drives anyway.
+
+This matters because `CLAUDE.md`'s whole premise is that the folder can be copied elsewhere and
+still work.
+
 ## 4. Environment gotchas discovered
 
 - **openHAB does not hot-reload config written through the mount.** A server-side `touch` doesn't
