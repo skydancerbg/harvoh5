@@ -1,7 +1,8 @@
 # Handoff — Harvesta openHAB, session of 2026-08-10
 
-Written for a fresh agent session with no memory of this work. Read `CLAUDE.md` first for the
-standing project rules; this file covers **what changed today and what is still open**.
+Written for a fresh agent session with no memory of this work. Read `CLAUDE.md` and
+`PROJECT_MEMORY.md` first for the standing project rules; this file covers **what changed
+today and what is still open**. Data coverage per season is in `data_inventory.md`.
 
 ---
 
