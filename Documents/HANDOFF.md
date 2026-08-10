@@ -147,10 +147,22 @@ Mosquitto **1.5.7** (2019), with the password in a committed file. Acceptable fo
 observer; less so once OH5 is the thing opening and closing tunnels. Now that Tailscale reaches the
 factory, MQTT could move onto the tailnet and that public port could close.
 
-**Uncommitted runtime churn in the repo.** `userdata/jsondb/users.json` (contains live OAuth
-authorization codes and a pendingToken), `userdata/config/.../addons.config`, and a WatchService UUID
-file. Deliberately **not committed** — pushing `users.json` would publish working session
-credentials. Worth `.gitignore`-ing.
+**Runtime state — untracked, but still on the server** (done 2026-08-10, `ae14745`). These are
+`.gitignore`d now; read them directly via `ssh openhab` when needed:
+- `userdata/jsondb/users.json` — accounts + 18 live OAuth refresh tokens, an authorization code, a
+  pendingToken. Changes on every login.
+- `userdata/config/.../WatchService/*.config` — per-boot UUID file, pure noise.
+
+`userdata/config/org/openhab/addons.config` is deliberately **kept tracked** — it records the
+installed addons and is genuine config; only its felix revision counter churns.
+
+**Secrets still in the repo, unresolved.** Untracking would not help, because they are already in the
+pushed history — only rotation fixes them:
+- `userdata/secrets/rsa_json_web_key.json` — the private RSA key openHAB signs tokens with
+- `userdata/openhabcloud/secret` — the openHAB Cloud pairing secret
+- plaintext credentials in `conf/things/mqtt.things` and `conf/services/influxdb.cfg`
+
+Accepted so far because the repo is private.
 
 **Handbook gaps.** Grafana dashboards (six of them, `:3000`) are not covered. The
 `Линкове към страниците за управление` link points at `sitemap=masterinit`, which **does not exist**
