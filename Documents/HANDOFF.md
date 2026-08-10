@@ -143,12 +143,18 @@ Verified restored. Full method and reasoning in `system_operation_knowledge.md`.
 > because read-only mode has the 19 `target_position` channels commented out. Any future OH5
 > screenshot of a flap *target* will have the same artifact; use production for those.
 
-Released as **v1.1** — `handbook_out/Ръководство за оператора-v1.1.docx` + `.pdf`, **29 pages**.
-`OUTFILE` in `build_handbook.py`, `DOCX` in `make_handbook.py` and the title-page version string
-were all bumped.
+Released as **v1.1**, **29 pages** — committed and pushed as **`54de499`**. `OUTFILE` in
+`build_handbook.py`, `DOCX` in `make_handbook.py` and the title-page version string were all bumped.
 
-**Not committed.** The repo's `Documents/` still holds the 22-page v1.0, which is what operators
-have in hand. Copy v1.1 in and commit once the content has been reviewed.
+`Documents/` now holds **both** v1.0 and v1.1. v1.0 was kept deliberately: it is what operators may
+have printed, and removing it would break any link already handed out.
+
+> **Further handbook changes go into v1.2.** v1.1 is released — do not edit it in place.
+
+Only `Documents/` was committed. The build scripts, memory files and the Obsidian vault live in the
+desktop workspace and are **not** versioned with the openHAB repo (see `CLAUDE.md` → Local vs.
+server files). `userdata/config/org/openhab/addons.config` was left uncommitted — its felix revision
+counter had churned 20 → 42, which is noise unrelated to this change.
 
 ---
 
