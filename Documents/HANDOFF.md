@@ -1,8 +1,12 @@
-# Handoff — Harvesta openHAB, session of 2026-08-10
+# Handoff — Harvesta openHAB, sessions of 2026-08-10
 
 Written for a fresh agent session with no memory of this work. Read `CLAUDE.md` and
-`PROJECT_MEMORY.md` first for the standing project rules; this file covers **what changed
-today and what is still open**. Data coverage per season is in `data_inventory.md`.
+`PROJECT_MEMORY.md` first for the standing project rules; this file covers **what changed and what
+is still open**. Data coverage per season is in `data_inventory.md`.
+
+Two blocks of work happened on 2026-08-10. **§2 is the most recent** (four-season data analysis and
+the two Bulgarian documents); §3 is the earlier one (MQTT switchover, factory access, handbook
+v1.0/v1.1). §1 outranks both and has not changed.
 
 ---
 
@@ -20,9 +24,100 @@ The file carries a 20-line header comment restating this. Read it before editing
 
 ---
 
-## 2. What changed today
+## 2. Latest block — four-season data analysis and two Bulgarian documents
 
-### 2.1 MQTT repointed to the live factory (committed + pushed, `1d25316`)
+Nothing here touches openHAB config. It is all read-only analysis of the InfluxDB history plus new
+files in this workspace. **The two built documents were committed and pushed on 2026-08-11 as
+`de21212`**; the `.md` reports and `analysis/` remain workspace-only — see §6.
+
+### 2.1 What was analysed
+
+**8 660 cart cycles, 23 738 tunnel-hours, 946 tunnel-days, 8 399 pass/reject decisions** across
+2021–2024, joined to hourly outside air for Sredets (Open-Meteo ERA5). Pipeline in `analysis/`,
+twelve modules, cached to `analysis/cache/` (~600 MB, gitignored). Rebuild command is in
+`000 …md` §11.
+
+The method that made it work: **the timer, not the buttons.** `tnl_N_current_timer_value` only ever
+jumps *up* via a rule, and the value it jumps to says which button was pressed (≈120 = IN, ≈30 =
+OUT). Validated to a **1-minute median residual** on `duration == 120 + 30×ext + latency` across all
+8 660 cycles. The raw button items are unusable — a Tasmota relay the button *toggles*, and they
+also fire when the rules ignore them.
+
+### 2.2 The findings that matter
+
+| Finding | Strength |
+|---|---|
+| **Flap N → tunnel N, plus flap 19 → tunnel 8** (flap 8 failed after 2022) — recorded nowhere in the config | high, step-response identification |
+| Flap gain per 100 mm: cold-side RH **−7.3 pp**, warm-side mixing ratio **−12.9 g/kg**, temperature **unchanged** — the burner absorbs it and burns gas. τ ≈ 20 min | high, 1 333 steps |
+| Reject rate swings **19 % at midnight → 60 % at 17:00**, surviving all adjustment. **Hour alone predicts the verdict (AUC 0.617) better than 18 sensor features (0.610)** | high, 8 399 decisions |
+| Pass hazard **flat at ~40 %** from the second check on — after one rejection, +30 min barely helps | high |
+| A cart rotation costs **−5.19 °C / 40 min recovery**; an extension only −0.90 °C / 7 min. Each tunnel spends **23 % of the day** below setpoint from its own doors | high, 17 955 events |
+| Start-up: preheat 25–30 min to 72–73 °C, automation ON **~14 min before** the tunnel is hot, one cart per **123 min**, first check at **20.5 h**, first day +32 % extensions | high, 62 start-ups |
+| **Flap position → throughput** | **not established** — sign flips between seasons |
+| **Whether 120 min is too long** | **unrecoverable from history** — three routes tried and closed |
+
+### 2.3 New deliverables in this workspace
+
+| File | What |
+|---|---|
+| `000 influxdb_data_analysis_for_future_automation.md` | Full report, methods, and the negative results |
+| `001 Operator system control hints.md` | Bulgarian, source of record for the printed guide |
+| `002 Automatic Process Automation Proposition.md` | Phased openHAB implementation design, PI tuning from the identified process model, what **not** to build |
+| `analysis/` (12 modules) | Reproducible pipeline |
+| `docx_kit.py`, `build_tech_guide.py`, `make_tech_guide.py`, `tech_guide_charts.py` | Build chain for the new guide |
+| `handbook_out/Наръчник на технолога-v1.0.docx` + `.pdf` | **New**, 16 pp, Bulgarian, for the technologist |
+| `handbook_out/Ръководство за оператора-v1.2.docx` + `.pdf` | Handbook **v1.2**, 30 pp |
+
+### 2.4 Handbook v1.2 — two targeted changes only
+
+Deliberately not a rewrite; the analysis lives in the separate guide because the handbook's value is
+being definite and stable.
+
+- **§5.1** keeps the existing explanation of the drying ladder and adds the measured baseline
+  beneath it, with a callout stating that across all 62 start-ups the cadence was a flat 123 min —
+  i.e. the "technologist's most important judgement" was never actually exercised.
+- **§6.3** adds the **flap → tunnel mapping**, absent from the entire handbook, plus the flaps that
+  never moved for a season (2022: 12/18/19; 2023: 8/18; 2024: 10/11/18 — **flap 18 never, in any
+  season**).
+
+### 2.6 Naming settled (2026-08-11)
+
+Up to v1.1 the handbook's cover read **„НАРЪЧНИК НА ТЕХНОЛОГА“** while its file was named
+*Ръководство за оператора*. That title moved to the document it actually describes. Each cover now
+matches its filename, and the company line on both is **„МОЗАИК ФРУТ“ ЕООД** — *ХАРВЕСТА* survives
+only as the internal project/repo name, on no operator-facing document.
+
+| Cover | File | Running header |
+|---|---|---|
+| **РЪКОВОДСТВО ЗА ОПЕРАТОРА** | `Ръководство за оператора-v1.2.docx` | Ръководство за оператора · Система за сушене на сливи |
+| **НАРЪЧНИК НА ТЕХНОЛОГА** | `Наръчник на технолога-v1.0.docx` | Наръчник на технолога · Изводи от данните 2021–2024 |
+
+Filenames are sentence case; only covers are capitalised. **Three cross-references had to be
+retargeted** or each document would have pointed at itself — the guide's "Допълнение към…" line and
+its "за това вижте…" callout now name the operator handbook, and the handbook's §5.1 callout now
+names „Наръчник на технолога“.
+
+### 2.5 Three analysis traps — do not rediscover these
+
+- **Never compare humidity between tunnels.** Per-sensor bias reaches ±10 g/kg of mixing ratio
+  against a ~2 g/kg physical signal, stable across all four seasons. Ambient cross-calibration made
+  it **worse** (5.09 → 8.99). Use tunnel-season fixed effects.
+- **Never average conditions over a whole cycle** to predict that cycle's outcome — long cycles
+  average over a longer window and look drier. This produced a confident, completely inverted first
+  result. `analysis/decisions.py` exists to enforce a fixed window ending before the verdict.
+- **A button press is not the crew's arrival time.** OUT is instantaneous, IN follows the rotation of
+  twelve carts (38.9 % of rejects logged within a minute vs 11.2 % of passes). Treating latency as
+  neutral extra drying time gives a large spurious effect; the virtual door sensor does not rescue it
+  either (detected for 81 % of passes vs 45 % of rejects).
+
+Also: **`.env` cannot be shell-sourced** — `INFLUXDB_PASS` contains `&*(`. Parse it, as
+`analysis/influx.py` does.
+
+---
+
+## 3. Earlier the same day — MQTT switchover, factory access, handbook v1.0/v1.1
+
+### 3.1 MQTT repointed to the live factory (committed + pushed, `1d25316`)
 
 | Was | Now |
 |---|---|
@@ -44,7 +139,7 @@ OH5 publishes **nothing** to `cmnd/`. Verification method — subscribe to `cmnd
 correlate against OH5's `events.log` `ItemCommandEvent` lines. Traffic on `cmnd/` is expected; it is
 OH3's. OH5 should log only `oneMinuteTriggerSwitch`, a virtual item with no MQTT channel.
 
-### 2.2 Remote access to the production factory
+### 3.2 Remote access to the production factory
 
 The factory RPi4 (openHAB 3, openhabian, Raspbian **Buster**, 32-bit `armv7l`) now runs Tailscale:
 
@@ -63,7 +158,7 @@ Rules for that host:
   expired. That 404 is also what aborted the Tailscale install script before `apt-get install`;
   the fix was simply `sudo apt-get install -y tailscale` afterwards.
 
-### 2.3 Operator handbook (the main deliverable)
+### 3.3 Operator handbook (the main deliverable)
 
 **`Documents/Ръководство за оператора-v1.0.docx`** and `.pdf` — in the repo, committed.
 22 pages, **Bulgarian only** (an earlier bilingual draft was rejected).
@@ -92,7 +187,7 @@ identical sitemaps, so layouts match.
 
 ---
 
-### 2.4 Handbook §8 — reading the Grafana history (added later the same day)
+### 3.4 Handbook §8 — reading the Grafana history (added later the same day)
 
 The handbook gained a new **section 8, „Графики в Grafana — историята на тунелите"** (6 pages,
 7 figures). Old §8/§9 became §9/§10; `make_handbook.py`'s `HEADINGS` list and the in-document TOC
@@ -120,7 +215,7 @@ rather than read off the pictures, and all folded into `system_operation_knowled
 Three dashboards are recommended and the other seven explicitly told to be ignored — most are
 abandoned drafts, and one (`XptktCZgk`) never got its button series added despite the title.
 
-### 2.5 HABPanel colour coding — two gaps closed
+### 3.5 HABPanel colour coding — two gaps closed
 
 Prompted by the question "does the handbook cover the HABPanel pages and their colour codes".
 It covered ДИСПЛЕЙ but had two holes, both now filled in §5.6 and §6.3:
@@ -156,9 +251,26 @@ desktop workspace and are **not** versioned with the openHAB repo (see `CLAUDE.m
 server files). `userdata/config/org/openhab/addons.config` was left uncommitted — its felix revision
 counter had churned 20 → 42, which is noise unrelated to this change.
 
+### 3.6 Build chain made portable
+
+`make_handbook.py` had two machine-specific landmines, both fixed and the build re-verified
+(29 pages, 27/27 headings located):
+
+- `WORK` pointed at a **dead agent session's** scratchpad path under `/tmp`. Now
+  `tempfile.gettempdir()/harvesta_handbook_tocpass`.
+- The DOCX→PDF converter was `glob(...skills/docx)[0]`, which raises **IndexError at import time**
+  on any machine without the Claude skills plugin. Now resolved lazily into `CONVERT`, falling back
+  to plain `soffice` (on PATH here) — which is what the skill wrapper drives anyway.
+
+This matters because `CLAUDE.md`'s whole premise is that the folder can be copied elsewhere and
+still work.
+
 ---
 
-## 3. Domain corrections learned today
+
+---
+
+## 4. Domain corrections confirmed with the operator
 
 All folded into `system_operation_knowledge.md`. Several overturned earlier assumptions — do not
 regress them.
@@ -183,7 +295,7 @@ Rule-level behaviours worth remembering:
 
 ---
 
-## 3a. What the InfluxDB history actually contains
+## 4a. What the InfluxDB history actually contains
 
 Surveyed 2026-08-10. Full detail in `data_inventory.md`.
 
@@ -218,21 +330,7 @@ with tunnels 10 cold and 11 warm going high in the same window; 15.09 17:36–18
 
 ---
 
-### 2.6 Build chain made portable
-
-`make_handbook.py` had two machine-specific landmines, both fixed and the build re-verified
-(29 pages, 27/27 headings located):
-
-- `WORK` pointed at a **dead agent session's** scratchpad path under `/tmp`. Now
-  `tempfile.gettempdir()/harvesta_handbook_tocpass`.
-- The DOCX→PDF converter was `glob(...skills/docx)[0]`, which raises **IndexError at import time**
-  on any machine without the Claude skills plugin. Now resolved lazily into `CONVERT`, falling back
-  to plain `soffice` (on PATH here) — which is what the skill wrapper drives anyway.
-
-This matters because `CLAUDE.md`'s whole premise is that the folder can be copied elsewhere and
-still work.
-
-## 4. Environment gotchas discovered
+## 5. Environment gotchas discovered
 
 - **openHAB does not hot-reload config written through the mount.** A server-side `touch` doesn't
   help either. Use `ssh openhab 'systemctl restart openhab'`.
@@ -249,11 +347,47 @@ still work.
 
 ---
 
-## 5. Open items
+## 6. Open items
+
+**✅ Both documents published 2026-08-11, commit `de21212`.** `Documents/` now holds handbook
+**v1.0, v1.1 and v1.2** plus **Наръчник на технолога v1.0**. The `.md` reports and `analysis/` live
+in this workspace only and are **not** versioned with the openHAB repo.
+
+> **v1.1 is still in `Documents/` and its cover is wrong** — it reads „НАРЪЧНИК НА ТЕХНОЛОГА“ over
+> the company name *ХАРВЕСТА*, because it predates the 2026-08-11 naming fix (§2.6). It was kept
+> deliberately, on the same reasoning as v1.0: operators may have printed it and handed-out links
+> should not break. **v1.2 is the current operator document.** If v1.1 is ever withdrawn, withdraw
+> v1.0 with it and leave a note in `Documents/`, or the numbering will look like data loss.
+
+Publishing method, for next time — the CIFS mount **cannot create files** under `Documents/`, so
+copy server-side and commit there:
+
+```bash
+tar -C handbook_out -cf - "<file1>" "<file2>" | ssh openhab 'tar -C /repo/openhab/Documents -xf -'
+```
+
+then `ssh openhab`, `git add Documents/` (never `git add -A` — `userdata/config/org/openhab/addons.config`
+churns its felix counter and is noise), commit and push from `/repo/openhab/`. `tar` over `ssh` is
+used rather than `scp` because every filename is Cyrillic with spaces.
 
 **Flap hardware (real, in progress).** 7 of 19 flaps report impossible positions — flap 4 = −51,
 18 = −5, 7 = 274, 10 = 490, and 8/16/19 NULL. Operator confirmed: **broken potentiometers, under
-repair**. Used as the worked example in handbook §6.4.
+repair**. Used as the worked example in handbook §6.4. The analysis adds context: **flap 18 has
+never moved in any season on record**, and flap 8 was replaced by flap 19 on tunnel 8 back in 2023.
+
+**Analysis follow-ups, none started** (full detail in `002 …md`):
+
+- **Phases 1–2 are safe to build today** — they read Items and write only to new virtual Items with
+  no MQTT channel, so they need no switchover: timer-based event detection, escalation after three
+  consecutive extensions, the reject-rate-by-hour panel, the door heat-loss KPI, and the start-up
+  assistant. The reject-rate-by-hour panel is the highest-value display the plant does not have.
+- **Two randomised trials for next season**, each worthless without randomisation: default time
+  100 vs 120 min, and fill cadence 90/123/150 min. Do not run them in the same season as flap-control
+  commissioning.
+- **A gas meter on the burner house** is the single highest-value hardware addition — without it,
+  every "is this worth the fuel?" question stays unanswerable.
+- **`docx_kit.py` duplication.** `build_handbook.py` still carries its own copy of the helpers;
+  folding it onto the kit is a safe cleanup for whenever the handbook is next revised.
 
 **Deferred from the code review** (unchanged): legacy Xtend DSL, extreme rule duplication (108
 copy-pasted blocks), stub `temperature_alarm.rules`, plaintext credentials.
@@ -280,7 +414,7 @@ pushed history — only rotation fixes them:
 
 Accepted so far because the repo is private.
 
-**Handbook gaps.** ~~Grafana dashboards are not covered.~~ **Done** — see §7 below. Still open: the
+**Handbook gaps.** ~~Grafana dashboards are not covered.~~ **Done** — handbook §8 covers them. Still open: the
 `Линкове към страниците за управление` link points at `sitemap=masterinit`, which **does not exist**
 on either OH5 or production — a dead link that needs rebuilding. All 18 operator links still point at
 `10.50.20.100` and will need reissuing at switchover.
@@ -295,7 +429,7 @@ on either OH5 or production — a dead link that needs rebuilding. All 18 operat
 
 ---
 
-## 6. The next milestone
+## 7. The next milestone
 
 **Production switchover** — when this OH5 server replaces the factory RPi4 as the live controller:
 
@@ -308,3 +442,13 @@ on either OH5 or production — a dead link that needs rebuilding. All 18 operat
 5. Restart openHAB and verify OH5 now owns the `cmnd/` traffic.
 
 Restore reference: git history of `conf/things/mqtt.things` **before commit `1d25316`**.
+
+When that happens, the flap control loop in `002 …md` §3 becomes buildable. Two details from the
+analysis that are easy to get wrong and are not obvious:
+
+- **Tunnel 8's loop must drive `FlapActuator_19_Target`, not `FlapActuator_8_Target`.**
+- **The integrator hold must be event-type-aware** — 45 min after a cart rotation, 10 min after an
+  extension. A flat 45 min blinds the loop for a third of every extension pass with no benefit,
+  because an extension is thermally almost invisible.
+- **Gate the loop on the tunnel actually running** — not preheating, not still being filled — and on
+  `0 ≤ FlapActuator_N_Current ≤ 200`. A third of the fleet would currently fail that validity check.
