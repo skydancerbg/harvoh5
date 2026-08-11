@@ -1,7 +1,34 @@
+// ============================================================================
+//  PORTED FROM PRODUCTION (openHAB 3 on the factory Pi) 2026-08-11.
+//  Source: harvOH3-2026 commits 53a58fc + aa31282.
+//
+//  Two things this brings that OH5 did not have:
+//    * the defaults auto-seeding (NULL -> factory value, then propagated to
+//      every tunnel), which system_defaults_enhancement_plan.md still calls
+//      'planned' but which has been running in production for days;
+//    * the 'Startup fallback after rules model loaded' rule, because the
+//      trigger is 'SystemStarting changed to OFF' and that never fires if the
+//      item was NULL at boot.
+//
+//  RENAMED for OH5: production's *_timer_missed_actinon_value items are
+//  spelled *_timer_missed_action_value here. Both systems are internally
+//  consistent; OH5 keeps the corrected spelling.
+//
+//  SEED VALUE DISCREPANCY, unresolved: production seeds missed-action = 7,
+//  while system_defaults_enhancement_plan.md and CLAUDE.md say 10. Production's
+//  7 is kept below for parity with the system OH5 is meant to replace. It only
+//  applies when the item is NULL -- a restored value always wins.
+//
+//  SAFE IN READ-ONLY MODE: the seeding block uses postUpdate only, never
+//  sendCommand, so it cannot reach MQTT. (The sendCommand(OFF) calls on
+//  gTnlLights/gBtnLights below are pre-existing and inert while mqtt.things
+//  has its commandTopics stripped.)
+// ============================================================================
 // https://community.openhab.org/t/what-is-the-best-method-to-start-executing-the-rules-when-all-bindings-are-loaded/5815/2
 
 var Timer startedTimer = null
 var Timer delayUpdateTimer = null
+var Boolean startupFallbackIssued = false
 
 rule "Init Items on startup" 
 when System started 
@@ -27,14 +54,25 @@ rule "System Started"
 when
     System started
 then
+    startupFallbackIssued = true
     SystemStarting.sendCommand(ON)
     startedTimer = createTimer(now.plusMinutes(1), [| SystemStarting.sendCommand(OFF)])
 end
 
+rule "Startup fallback after rules model loaded"
+when
+    Time cron "0 0/1 * * * ?"
+then
+    if(startupFallbackIssued == false && (SystemStarting.state == NULL || SystemStarting.state == UNDEF)) {
+        startupFallbackIssued = true
+        logInfo("delayedOnStartup", "SystemStarting was NULL after rules loaded; triggering startup initialization")
+        SystemStarting.postUpdate(OFF)
+    }
+end
+
 rule "Rule that should not run until bindings are loaded"
 when
-//    Item RuleTriggerItem received upadte
-   Item SystemStarting received command OFF
+   Item SystemStarting changed to OFF
 then
     if(SystemStarting.state == OFF) {
     // gTunnelTimerCurrentValues.allMembers.forEach [ item | item.postUpdate(110) ] //! set the  tnl_Timers_Default_Value here
@@ -49,6 +87,432 @@ then
     oneMinuteTriggerSwitch.sendCommand(OFF)
     gTnlLights.allMembers.forEach [ item | item.sendCommand(OFF) ]
     gBtnLights.allMembers.forEach [ item | item.sendCommand(OFF) ]
+
+    var Boolean seededDefaults = false
+    var Boolean seededTunnelValues = false
+
+    var Number defaultDrying = 120
+    if(default_tnl_timer_value.state == NULL || default_tnl_timer_value.state == UNDEF) {
+        default_tnl_timer_value.postUpdate(defaultDrying)
+        seededDefaults = true
+    } else {
+        defaultDrying = default_tnl_timer_value.state as DecimalType
+    }
+
+    var Number defaultMissedAction = 7
+    if(default_tnl_timer_missed_action_value.state == NULL || default_tnl_timer_missed_action_value.state == UNDEF) {
+        default_tnl_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededDefaults = true
+    } else {
+        defaultMissedAction = default_tnl_timer_missed_action_value.state as DecimalType
+    }
+
+    var Number defaultExtendedDrying = 30
+    if(default_tnl_timer_extendedDryingTime_value.state == NULL || default_tnl_timer_extendedDryingTime_value.state == UNDEF) {
+        default_tnl_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededDefaults = true
+    } else {
+        defaultExtendedDrying = default_tnl_timer_extendedDryingTime_value.state as DecimalType
+    }
+
+    if(default_tnl_warn_timer_value.state == NULL || default_tnl_warn_timer_value.state == UNDEF) {
+        default_tnl_warn_timer_value.postUpdate(10)
+        seededDefaults = true
+    }
+
+    if(default_tnl_temperature_alarm_value.state == NULL || default_tnl_temperature_alarm_value.state == UNDEF) {
+        default_tnl_temperature_alarm_value.postUpdate(86.0)
+        seededDefaults = true
+    }
+
+    // Seed only missing per-tunnel values. Existing restored countdowns are not overwritten.
+    var Number tnl_51_drying = defaultDrying
+    if(tnl_51_timer_default_value.state == NULL || tnl_51_timer_default_value.state == UNDEF) {
+        tnl_51_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_51_drying = tnl_51_timer_default_value.state as DecimalType
+    }
+    if(tnl_51_timer_missed_action_value.state == NULL || tnl_51_timer_missed_action_value.state == UNDEF) {
+        tnl_51_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_51_timer_extendedDryingTime_value.state == NULL || tnl_51_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_51_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_51_current_timer_value.state == NULL || tnl_51_current_timer_value.state == UNDEF) {
+        tnl_51_current_timer_value.postUpdate(tnl_51_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_1_drying = defaultDrying
+    if(tnl_1_timer_default_value.state == NULL || tnl_1_timer_default_value.state == UNDEF) {
+        tnl_1_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_1_drying = tnl_1_timer_default_value.state as DecimalType
+    }
+    if(tnl_1_timer_missed_action_value.state == NULL || tnl_1_timer_missed_action_value.state == UNDEF) {
+        tnl_1_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_1_timer_extendedDryingTime_value.state == NULL || tnl_1_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_1_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_1_current_timer_value.state == NULL || tnl_1_current_timer_value.state == UNDEF) {
+        tnl_1_current_timer_value.postUpdate(tnl_1_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_2_drying = defaultDrying
+    if(tnl_2_timer_default_value.state == NULL || tnl_2_timer_default_value.state == UNDEF) {
+        tnl_2_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_2_drying = tnl_2_timer_default_value.state as DecimalType
+    }
+    if(tnl_2_timer_missed_action_value.state == NULL || tnl_2_timer_missed_action_value.state == UNDEF) {
+        tnl_2_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_2_timer_extendedDryingTime_value.state == NULL || tnl_2_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_2_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_2_current_timer_value.state == NULL || tnl_2_current_timer_value.state == UNDEF) {
+        tnl_2_current_timer_value.postUpdate(tnl_2_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_3_drying = defaultDrying
+    if(tnl_3_timer_default_value.state == NULL || tnl_3_timer_default_value.state == UNDEF) {
+        tnl_3_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_3_drying = tnl_3_timer_default_value.state as DecimalType
+    }
+    if(tnl_3_timer_missed_action_value.state == NULL || tnl_3_timer_missed_action_value.state == UNDEF) {
+        tnl_3_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_3_timer_extendedDryingTime_value.state == NULL || tnl_3_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_3_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_3_current_timer_value.state == NULL || tnl_3_current_timer_value.state == UNDEF) {
+        tnl_3_current_timer_value.postUpdate(tnl_3_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_4_drying = defaultDrying
+    if(tnl_4_timer_default_value.state == NULL || tnl_4_timer_default_value.state == UNDEF) {
+        tnl_4_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_4_drying = tnl_4_timer_default_value.state as DecimalType
+    }
+    if(tnl_4_timer_missed_action_value.state == NULL || tnl_4_timer_missed_action_value.state == UNDEF) {
+        tnl_4_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_4_timer_extendedDryingTime_value.state == NULL || tnl_4_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_4_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_4_current_timer_value.state == NULL || tnl_4_current_timer_value.state == UNDEF) {
+        tnl_4_current_timer_value.postUpdate(tnl_4_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_5_drying = defaultDrying
+    if(tnl_5_timer_default_value.state == NULL || tnl_5_timer_default_value.state == UNDEF) {
+        tnl_5_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_5_drying = tnl_5_timer_default_value.state as DecimalType
+    }
+    if(tnl_5_timer_missed_action_value.state == NULL || tnl_5_timer_missed_action_value.state == UNDEF) {
+        tnl_5_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_5_timer_extendedDryingTime_value.state == NULL || tnl_5_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_5_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_5_current_timer_value.state == NULL || tnl_5_current_timer_value.state == UNDEF) {
+        tnl_5_current_timer_value.postUpdate(tnl_5_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_6_drying = defaultDrying
+    if(tnl_6_timer_default_value.state == NULL || tnl_6_timer_default_value.state == UNDEF) {
+        tnl_6_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_6_drying = tnl_6_timer_default_value.state as DecimalType
+    }
+    if(tnl_6_timer_missed_action_value.state == NULL || tnl_6_timer_missed_action_value.state == UNDEF) {
+        tnl_6_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_6_timer_extendedDryingTime_value.state == NULL || tnl_6_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_6_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_6_current_timer_value.state == NULL || tnl_6_current_timer_value.state == UNDEF) {
+        tnl_6_current_timer_value.postUpdate(tnl_6_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_7_drying = defaultDrying
+    if(tnl_7_timer_default_value.state == NULL || tnl_7_timer_default_value.state == UNDEF) {
+        tnl_7_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_7_drying = tnl_7_timer_default_value.state as DecimalType
+    }
+    if(tnl_7_timer_missed_action_value.state == NULL || tnl_7_timer_missed_action_value.state == UNDEF) {
+        tnl_7_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_7_timer_extendedDryingTime_value.state == NULL || tnl_7_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_7_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_7_current_timer_value.state == NULL || tnl_7_current_timer_value.state == UNDEF) {
+        tnl_7_current_timer_value.postUpdate(tnl_7_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_8_drying = defaultDrying
+    if(tnl_8_timer_default_value.state == NULL || tnl_8_timer_default_value.state == UNDEF) {
+        tnl_8_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_8_drying = tnl_8_timer_default_value.state as DecimalType
+    }
+    if(tnl_8_timer_missed_action_value.state == NULL || tnl_8_timer_missed_action_value.state == UNDEF) {
+        tnl_8_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_8_timer_extendedDryingTime_value.state == NULL || tnl_8_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_8_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_8_current_timer_value.state == NULL || tnl_8_current_timer_value.state == UNDEF) {
+        tnl_8_current_timer_value.postUpdate(tnl_8_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_9_drying = defaultDrying
+    if(tnl_9_timer_default_value.state == NULL || tnl_9_timer_default_value.state == UNDEF) {
+        tnl_9_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_9_drying = tnl_9_timer_default_value.state as DecimalType
+    }
+    if(tnl_9_timer_missed_action_value.state == NULL || tnl_9_timer_missed_action_value.state == UNDEF) {
+        tnl_9_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_9_timer_extendedDryingTime_value.state == NULL || tnl_9_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_9_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_9_current_timer_value.state == NULL || tnl_9_current_timer_value.state == UNDEF) {
+        tnl_9_current_timer_value.postUpdate(tnl_9_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_10_drying = defaultDrying
+    if(tnl_10_timer_default_value.state == NULL || tnl_10_timer_default_value.state == UNDEF) {
+        tnl_10_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_10_drying = tnl_10_timer_default_value.state as DecimalType
+    }
+    if(tnl_10_timer_missed_action_value.state == NULL || tnl_10_timer_missed_action_value.state == UNDEF) {
+        tnl_10_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_10_timer_extendedDryingTime_value.state == NULL || tnl_10_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_10_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_10_current_timer_value.state == NULL || tnl_10_current_timer_value.state == UNDEF) {
+        tnl_10_current_timer_value.postUpdate(tnl_10_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_11_drying = defaultDrying
+    if(tnl_11_timer_default_value.state == NULL || tnl_11_timer_default_value.state == UNDEF) {
+        tnl_11_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_11_drying = tnl_11_timer_default_value.state as DecimalType
+    }
+    if(tnl_11_timer_missed_action_value.state == NULL || tnl_11_timer_missed_action_value.state == UNDEF) {
+        tnl_11_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_11_timer_extendedDryingTime_value.state == NULL || tnl_11_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_11_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_11_current_timer_value.state == NULL || tnl_11_current_timer_value.state == UNDEF) {
+        tnl_11_current_timer_value.postUpdate(tnl_11_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_12_drying = defaultDrying
+    if(tnl_12_timer_default_value.state == NULL || tnl_12_timer_default_value.state == UNDEF) {
+        tnl_12_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_12_drying = tnl_12_timer_default_value.state as DecimalType
+    }
+    if(tnl_12_timer_missed_action_value.state == NULL || tnl_12_timer_missed_action_value.state == UNDEF) {
+        tnl_12_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_12_timer_extendedDryingTime_value.state == NULL || tnl_12_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_12_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_12_current_timer_value.state == NULL || tnl_12_current_timer_value.state == UNDEF) {
+        tnl_12_current_timer_value.postUpdate(tnl_12_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_13_drying = defaultDrying
+    if(tnl_13_timer_default_value.state == NULL || tnl_13_timer_default_value.state == UNDEF) {
+        tnl_13_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_13_drying = tnl_13_timer_default_value.state as DecimalType
+    }
+    if(tnl_13_timer_missed_action_value.state == NULL || tnl_13_timer_missed_action_value.state == UNDEF) {
+        tnl_13_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_13_timer_extendedDryingTime_value.state == NULL || tnl_13_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_13_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_13_current_timer_value.state == NULL || tnl_13_current_timer_value.state == UNDEF) {
+        tnl_13_current_timer_value.postUpdate(tnl_13_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_14_drying = defaultDrying
+    if(tnl_14_timer_default_value.state == NULL || tnl_14_timer_default_value.state == UNDEF) {
+        tnl_14_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_14_drying = tnl_14_timer_default_value.state as DecimalType
+    }
+    if(tnl_14_timer_missed_action_value.state == NULL || tnl_14_timer_missed_action_value.state == UNDEF) {
+        tnl_14_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_14_timer_extendedDryingTime_value.state == NULL || tnl_14_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_14_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_14_current_timer_value.state == NULL || tnl_14_current_timer_value.state == UNDEF) {
+        tnl_14_current_timer_value.postUpdate(tnl_14_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_15_drying = defaultDrying
+    if(tnl_15_timer_default_value.state == NULL || tnl_15_timer_default_value.state == UNDEF) {
+        tnl_15_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_15_drying = tnl_15_timer_default_value.state as DecimalType
+    }
+    if(tnl_15_timer_missed_action_value.state == NULL || tnl_15_timer_missed_action_value.state == UNDEF) {
+        tnl_15_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_15_timer_extendedDryingTime_value.state == NULL || tnl_15_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_15_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_15_current_timer_value.state == NULL || tnl_15_current_timer_value.state == UNDEF) {
+        tnl_15_current_timer_value.postUpdate(tnl_15_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_16_drying = defaultDrying
+    if(tnl_16_timer_default_value.state == NULL || tnl_16_timer_default_value.state == UNDEF) {
+        tnl_16_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_16_drying = tnl_16_timer_default_value.state as DecimalType
+    }
+    if(tnl_16_timer_missed_action_value.state == NULL || tnl_16_timer_missed_action_value.state == UNDEF) {
+        tnl_16_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_16_timer_extendedDryingTime_value.state == NULL || tnl_16_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_16_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_16_current_timer_value.state == NULL || tnl_16_current_timer_value.state == UNDEF) {
+        tnl_16_current_timer_value.postUpdate(tnl_16_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_17_drying = defaultDrying
+    if(tnl_17_timer_default_value.state == NULL || tnl_17_timer_default_value.state == UNDEF) {
+        tnl_17_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_17_drying = tnl_17_timer_default_value.state as DecimalType
+    }
+    if(tnl_17_timer_missed_action_value.state == NULL || tnl_17_timer_missed_action_value.state == UNDEF) {
+        tnl_17_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_17_timer_extendedDryingTime_value.state == NULL || tnl_17_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_17_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_17_current_timer_value.state == NULL || tnl_17_current_timer_value.state == UNDEF) {
+        tnl_17_current_timer_value.postUpdate(tnl_17_drying)
+        seededTunnelValues = true
+    }
+
+    var Number tnl_18_drying = defaultDrying
+    if(tnl_18_timer_default_value.state == NULL || tnl_18_timer_default_value.state == UNDEF) {
+        tnl_18_timer_default_value.postUpdate(defaultDrying)
+        seededTunnelValues = true
+    } else {
+        tnl_18_drying = tnl_18_timer_default_value.state as DecimalType
+    }
+    if(tnl_18_timer_missed_action_value.state == NULL || tnl_18_timer_missed_action_value.state == UNDEF) {
+        tnl_18_timer_missed_action_value.postUpdate(defaultMissedAction)
+        seededTunnelValues = true
+    }
+    if(tnl_18_timer_extendedDryingTime_value.state == NULL || tnl_18_timer_extendedDryingTime_value.state == UNDEF) {
+        tnl_18_timer_extendedDryingTime_value.postUpdate(defaultExtendedDrying)
+        seededTunnelValues = true
+    }
+    if(tnl_18_current_timer_value.state == NULL || tnl_18_current_timer_value.state == UNDEF) {
+        tnl_18_current_timer_value.postUpdate(tnl_18_drying)
+        seededTunnelValues = true
+    }
+
+    if(seededDefaults) {
+        logInfo("delayedOnStartup", "Seeded missing global tunnel defaults")
+    }
+    if(seededTunnelValues) {
+        logInfo("delayedOnStartup", "Seeded missing per-tunnel timer defaults")
+    }
+
     logInfo("delayedOnStartup", "Delayed OnStartUp Init Items rule executed")        // rule logic
     }
 end
