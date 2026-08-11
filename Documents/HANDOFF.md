@@ -80,6 +80,35 @@ being definite and stable.
   never moved for a season (2022: 12/18/19; 2023: 8/18; 2024: 10/11/18 — **flap 18 never, in any
   season**).
 
+### 2.4a Handbook v1.3 — four operator corrections (2026-08-11)
+
+Text only, no structural change, still 30 pages. All four came from the operator reviewing v1.2, and
+all four had been **factually wrong about the hardware**, not merely unclear.
+
+| § | Was | Now |
+|---|---|---|
+| 1 | „сигналните лампи от **двете** страни“ | „сигналните лампи от **топлите** страни“ |
+| 1 | „бутон и две лампи — сигнална лампа на тунела и лампа в самия бутон“ | „бутон със сигнална лампа в него, а **топлата страна има и сигнална лампа**, която дублира лампата в бутона“ |
+| 3 | „пали едновременно сигнал**ните лампи**“ | „пали едновременно сигнал**ната лампа**“ |
+| 8 | „защото горелката **е точно от нейната страна**“ | „защото горелката **вкарва топлия въздух** от нейната страна“ |
+
+**The first three are one fact: there is no cold-side signal lamp.** Each side has a button with a
+lamp inside it; the warm side additionally has a signal lamp that duplicates its own button lamp.
+
+> **The item model contradicts this and is not wrong to.** `in_N_tnl_light` Items and
+> `stat/in_N/POWER1` channels exist for all 18 cold sides, and the rules command them exactly like
+> the warm ones — they just drive no physical lamp. **Do not "fix" the cold-side items:** the rules,
+> the `gN_tnl_lights` groups and persistence all assume they exist. Equally, do not use the item
+> list as evidence of what is mounted in the building. Folded into
+> `system_operation_knowledge.md` and the vault (`Facility`, `UI-Design`, `Waveshare-Relay`).
+
+The fourth correction is about mechanism, not layout: the warm side recovers faster after a door
+opening because the burner **feeds hot air in from that side**, not because it happens to sit nearby.
+
+Consequence for the Modbus expansion: the relay allocation in `Waveshare-Relay.md` gives channel 0
+to a cold-side signal lamp that does not exist. Flagged in that file as an open decision for
+tunnels 19–24 — it was drawn from the software model, not from the building.
+
 ### 2.6 Naming settled (2026-08-11)
 
 Up to v1.1 the handbook's cover read **„НАРЪЧНИК НА ТЕХНОЛОГА“** while its file was named
@@ -89,7 +118,7 @@ only as the internal project/repo name, on no operator-facing document.
 
 | Cover | File | Running header |
 |---|---|---|
-| **РЪКОВОДСТВО ЗА ОПЕРАТОРА** | `Ръководство за оператора-v1.2.docx` | Ръководство за оператора · Система за сушене на сливи |
+| **РЪКОВОДСТВО ЗА ОПЕРАТОРА** | `Ръководство за оператора-v1.3.docx` | Ръководство за оператора · Система за сушене на сливи |
 | **НАРЪЧНИК НА ТЕХНОЛОГА** | `Наръчник на технолога-v1.0.docx` | Наръчник на технолога · Изводи от данните 2021–2024 |
 
 Filenames are sentence case; only covers are capitalised. **Three cross-references had to be
@@ -349,14 +378,18 @@ with tunnels 10 cold and 11 warm going high in the same window; 15.09 17:36–18
 
 ## 6. Open items
 
-**✅ Both documents published 2026-08-11, commit `de21212`.** `Documents/` now holds handbook
-**v1.0, v1.1 and v1.2** plus **Наръчник на технолога v1.0**. The `.md` reports and `analysis/` live
-in this workspace only and are **not** versioned with the openHAB repo.
+**✅ Published 2026-08-11, commit `de21212`:** handbook **v1.2** and **Наръчник на технолога v1.0**.
+`Documents/` therefore holds handbook v1.0, v1.1, v1.2 and the guide.
+
+**⚠️ Handbook v1.3 is built but NOT yet published** — it sits in `handbook_out/` only. It is the
+current operator document by content (see §2.4a) and supersedes v1.2. Publish with the method below.
+The `.md` reports and `analysis/` live in this workspace only and are **not** versioned with the
+openHAB repo.
 
 > **v1.1 is still in `Documents/` and its cover is wrong** — it reads „НАРЪЧНИК НА ТЕХНОЛОГА“ over
 > the company name *ХАРВЕСТА*, because it predates the 2026-08-11 naming fix (§2.6). It was kept
 > deliberately, on the same reasoning as v1.0: operators may have printed it and handed-out links
-> should not break. **v1.2 is the current operator document.** If v1.1 is ever withdrawn, withdraw
+> should not break. **v1.3 is the current operator document.** If v1.1 is ever withdrawn, withdraw
 > v1.0 with it and leave a note in `Documents/`, or the numbering will look like data loss.
 
 Publishing method, for next time — the CIFS mount **cannot create files** under `Documents/`, so
