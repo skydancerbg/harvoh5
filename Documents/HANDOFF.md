@@ -378,13 +378,18 @@ with tunnels 10 cold and 11 warm going high in the same window; 15.09 17:36–18
 
 ## 6. Open items
 
-**✅ Published 2026-08-11, commit `de21212`:** handbook **v1.2** and **Наръчник на технолога v1.0**.
-`Documents/` therefore holds handbook v1.0, v1.1, v1.2 and the guide.
+**✅ All documents published 2026-08-11.** `Documents/` holds handbook **v1.0, v1.1, v1.2, v1.3**
+plus **Наръчник на технолога v1.0**.
 
-**⚠️ Handbook v1.3 is built but NOT yet published** — it sits in `handbook_out/` only. It is the
-current operator document by content (see §2.4a) and supersedes v1.2. Publish with the method below.
-The `.md` reports and `analysis/` live in this workspace only and are **not** versioned with the
-openHAB repo.
+| Commit | What |
+|---|---|
+| `de21212` | handbook v1.2 + Наръчник на технолога v1.0 (first publication of both) |
+| `89c6909` | this handoff, refreshed |
+| `63bc03a` | handbook **v1.3** — the four operator corrections, §2.4a |
+
+**v1.3 is the current operator document.** The `.md` reports, the Obsidian vault, `analysis/` and the
+build scripts live in this workspace only and are **not** versioned with the openHAB repo — only
+`Documents/` and `conf/` are.
 
 > **v1.1 is still in `Documents/` and its cover is wrong** — it reads „НАРЪЧНИК НА ТЕХНОЛОГА“ over
 > the company name *ХАРВЕСТА*, because it predates the 2026-08-11 naming fix (§2.6). It was kept
