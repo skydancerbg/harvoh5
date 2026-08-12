@@ -21,8 +21,11 @@ logInfo("btn_controll.rules", "TIMER TICK DECREMENT")
 //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
 //  //  //  //  //  TUNNEL tnl_51   //  //  //  //  //  //  //  //
 //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
-/*    tnl_51_current_timer_value.postUpdate((tnl_51_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
+    //  tnl_51 is the TEST tunnel and the block tunnels 19-24 get copied from, so the
+    //  decrement must sit INSIDE the enable guard exactly as it does for 1-18.
+    //  It used to run unconditionally, which is audit finding P7.
     if(tnl_51_btnctrl_enable.state == ON) {
+        tnl_51_current_timer_value.postUpdate((tnl_51_current_timer_value.state as DecimalType) - 1)  // Decrement tunnel timer
         if(tnl_51_current_timer_value.state <= 1.0 ){   // If tunnel timer expired in this moment it will be set to 0
             tnl_51_btnaction_enable.sendCommand(ON) // Enable button press
             tnl_51_missed_action_countdown_enable_sw.sendCommand(ON)  // Enable Missed actioncountdown timer
@@ -35,7 +38,6 @@ logInfo("btn_controll.rules", "TIMER TICK DECREMENT")
         tnl_51_timer_missed_action_value.postUpdate((tnl_51_timer_missed_action_value.state as DecimalType) - 1) // Increment missed action timer
         }
     }
-*/
 //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
 //  //  //  //  //  TUNNEL tnl_1   //  //  //  //  //  //  //  //
 //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  // 
