@@ -217,11 +217,15 @@ push it at hardware, and every tunnel was disabled anyway):
 Both systems now read **19 × 120** timers, **19 × 10** missed-action, 19 enables OFF, 76 lamps OFF.
 Verified stable across ticks — nothing decrements, because everything is disabled.
 
-> **The 18 tunnels were set by REST at the operator's explicit direction.** The recommendation was
-> to press ПЪРВОНАЧАЛЕН ПУСК instead, because that is the designed path and it **records the press
-> as a durable event** — the whole point of `a66e7d2`. Setting the items directly reaches the same
-> numbers and produces **no season-start record**. Not wrong, but know that Stage 3 #10 has not been
-> exercised and no event exists in InfluxDB for today.
+> **The 18 tunnels were set by REST at the operator's explicit direction**, rather than by pressing
+> ПЪРВОНАЧАЛЕН ПУСК. Same numbers, no season-start record — and **on reflection that is the right
+> outcome, not a shortfall.** The button should be pressed **once, for real, when the season
+> starts**. Pressing it now would prove nothing (production is already in the state a press
+> produces) and would write a false anchor into the record it exists to build. Crucially, a test
+> press would also *capture* the "first press after a gap of months" heuristic meant to identify the
+> true start, so flagging it „тест“ would help a human and defeat the automatic rule. Full reasoning:
+> `006 …md` → *Why the button is not pressed early*. **Production's season record is pristine:
+> count 0, everything else NULL.**
 
 > **Do not copy a value just because the other system has it.** OH5's `tnl_7` at 117.0 and its 117/
 > stale-stamp leftovers are test residue. The target was the **globals** — 120 and 10 — not
