@@ -1,4 +1,4 @@
-sitemap dev label="ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА" {
+sitemap dev label="Development test page" {
 
 
         
@@ -8,7 +8,8 @@ sitemap dev label="ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА" {
         //  seeds any missing global, disables every tunnel, kills every lamp,
         //  copies the globals into all 18 tunnels, clears the latched
         //  switches below, and clears itself after 5 s.
-        //  Rule: rules/season_start.rules (generated, see make_season_start_rule.py)
+        //  Rule: rules/season_start.rules (generated, see make_generated_rules.py)
+        //  Also on its own page: ?sitemap=season_start -- keep the two in step.
         // ================================================================
         Frame label="ПУСК НА СИСТЕМАТА ЗА СЕЗОНА" {
             Text item=seasonStartedAt icon="time"  visibility=[seasonStartCount>0]
@@ -58,7 +59,7 @@ sitemap dev label="ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА" {
             }
         }
 
-        Frame label="РЪЧНА НАСТРОЙКА (за техник)" {
+        Frame label="DEV webpage" {
 
 
             Switch item=globalInit       label="Global initial INIT all tunnel values!"  labelcolor=[globalInit=="ON"="orange"]

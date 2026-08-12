@@ -1,0 +1,62 @@
+sitemap season_start label="ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА" {
+
+        //  NOTE: this same block also appears on the `dev` sitemap (the technical
+        //  page). If you change one, change the other -- sitemaps cannot include
+        //  each other, so the duplication is unavoidable and easy to forget.
+
+        // ================================================================
+        //  ONE BUTTON. Does the whole of handbook §4 in a single press:
+        //  seeds any missing global, disables every tunnel, kills every lamp,
+        //  copies the globals into all 18 tunnels, clears the latched
+        //  switches below, and clears itself after 5 s.
+        //  Rule: rules/season_start.rules (generated, see make_season_start_rule.py)
+        // ================================================================
+        Frame label="ПУСК НА СИСТЕМАТА ЗА СЕЗОНА" {
+            Text item=seasonStartedAt icon="time"  visibility=[seasonStartCount>0]
+            Text item=seasonStartCount icon="none" visibility=[seasonStartCount>0]
+            Text item=seasonStartInfo icon="none"  visibility=[seasonStartCount>0]
+            Text label="Системата още не е пускана за сезона." icon="time" visibility=[seasonStartCount==0]
+            Text item=none
+            Switch item=seasonStart label="ПУСК / РЕСТАРТ НА СИСТЕМАТА ЗА СЕЗОНА" icon="switch"  labelcolor=[seasonStart=="ON"="orange"]
+            Text item=none
+            Text label="ВНИМАНИЕ: нулира и РАБОТЕЩИ тунели. Не го натискайте при заредени колички." icon="error"
+            Text label="След спиране на тока НЕ е нужно! Таймерите се възстановяват сами." icon="error"
+            Text item=none
+            Text label="Кога и как се използва - натиснете тук за пълно обяснение" icon="text" {
+
+                Frame label="КОГА СЕ ИЗПОЛЗВА" {
+                    Text label="1. Веднъж в началото на сезона, преди първата количка." icon="none"
+                    Text label="2. След пълно спиране на цеха, когато ВСИЧКИ тунели са празни." icon="none"
+                    Text label="Друг случай почти няма. Ако се колебаете - не го натискайте." icon="none"
+                }
+
+                Frame label="КАК СЕ ИЗПОЛЗВА" {
+                    Text label="1. Проверете, че всички тунели са празни." icon="none"
+                    Text label="2. Натиснете бутона веднъж. Светва оранжево за 2 сек. и се връща сам." icon="none"
+                    Text label="3. Готово: всички тунели изключени, лампите угасени, таймери 120 мин." icon="none"
+                    Text label="4. Пускайте тунелите ЕДИН ПО ЕДИН от УПРАВЛЕНИЕ СИГНАЛИЗАЦИЯ," icon="none"
+                    Text label="   когато тунелът е загрят и зареден с колички." icon="none"
+                }
+
+                Frame label="КОГА НЕ СЕ ИЗПОЛЗВА" {
+                    Text label="НЕ при количка вътре - нулира таймера и количката остава без отчет." icon="error"
+                    Text label="НЕ след спиране на тока. Системата пази и възстановява таймерите" icon="error"
+                    Text label="   сама. Натискането ще изтрие точно това, което е възстановено." icon="error"
+                    Text label="НЕ за един проблемен тунел - виж следващата точка." icon="error"
+                }
+
+                Frame label="ЗА ЕДИН ТУНЕЛ" {
+                    Text label="Отворете МАСТЕР РЕСЕТ и натиснете Тунел N RESET." icon="none"
+                    Text label="Той нулира САМО този тунел и не пипа останалите." icon="none"
+                }
+
+                Frame label="КАКВО ПИШЕ НАД БУТОНА" {
+                    Text label="Последен пуск - датата на последното натискане." icon="none"
+                    Text label="Пускания за сезона - колко пъти е натискан. Нормално е 1." icon="none"
+                    Text label="Последният пуск беше - чист старт, или с работещи тунели и кои." icon="none"
+                    Text label="Ако видите дата отпреди седмици, сезонът вече е започнал." icon="none"
+                }
+            }
+        }
+
+}
