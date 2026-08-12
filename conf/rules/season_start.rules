@@ -231,10 +231,9 @@ then
     tnl_18_resetTimer_sw.postUpdate(OFF)
     tnl_18_set_all_to_defaults_sw.postUpdate(OFF)
 
-    // ---- 7. self-clear so the button is reusable ---------------------------
-    seasonStartClearTimer = createTimer(now.plusSeconds(5), [|
-        seasonStart.postUpdate(OFF)
-    ])
+    // ---- 7. the button releases itself ------------------------------------
+    //  Handled centrally now, by momentary_switches.rules, along with every
+    //  other action switch in the system.  Nothing to do here.
 
     logInfo("season_start", "=== ПЪРВОНАЧАЛЕН ПУСК: done. 18 tunnels OFF, lamps off, timers = {} min ===", drying)
 end

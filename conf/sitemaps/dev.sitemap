@@ -11,7 +11,7 @@ sitemap dev label="ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА" {
         //  Rule: rules/season_start.rules (generated, see make_season_start_rule.py)
         // ================================================================
         Frame label="ПУСК НА СИСТЕМАТА ЗА СЕЗОНА" {
-            Switch item=seasonStart label="ПУСК / РЕСТАРТ НА СИСТЕМАТА ЗА СЕЗОНА" icon="switch"
+            Switch item=seasonStart label="ПУСК / РЕСТАРТ НА СИСТЕМАТА ЗА СЕЗОНА" icon="switch"  labelcolor=[seasonStart=="ON"="orange"]
             Text item=none
             Text label="След натискане: всички тунели са ИЗКЛЮЧЕНИ, всички лампи са гаснати," icon="none"
             Text label="таймерите са на стандартната стойност. След това пускайте" icon="none"
@@ -23,14 +23,14 @@ sitemap dev label="ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА" {
         Frame label="РЪЧНА НАСТРОЙКА (за техник)" {
 
 
-            Switch item=globalInit       label="Global initial INIT all tunnel values!"
-            Switch item=sw_init_default_tnl_warn_timer_setpoint label="Init yellow collor display below x minutes"
-            Switch item=sw_init_default_tnl_temperature_alarm_setpoint label="Init temperature alarm setpoint value"
+            Switch item=globalInit       label="Global initial INIT all tunnel values!"  labelcolor=[globalInit=="ON"="orange"]
+            Switch item=sw_init_default_tnl_warn_timer_setpoint label="Init yellow collor display below x minutes"  labelcolor=[sw_init_default_tnl_warn_timer_setpoint=="ON"="orange"]
+            Switch item=sw_init_default_tnl_temperature_alarm_setpoint label="Init temperature alarm setpoint value"  labelcolor=[sw_init_default_tnl_temperature_alarm_setpoint=="ON"="orange"]
 
             Text item=none                  
             Text item=none                  
-            Switch item=enableAllTunnels label="Global ENABLE all tunnels!"
-            Switch item=disableAllTunnels label="Global DISABLE all tunnels!"
+            Switch item=enableAllTunnels label="Global ENABLE all tunnels!"  labelcolor=[enableAllTunnels=="ON"="orange"]
+            Switch item=disableAllTunnels label="Global DISABLE all tunnels!"  labelcolor=[disableAllTunnels=="ON"="orange"]
 
             Text item=none                  
             Text item=none  

@@ -28,125 +28,125 @@ sitemap masterRESET label="МАСТЕР РЕСЕТ" {
                           
         Text item=none  
         Text item=none
-        Switch item=tnl_1_resetTimer_sw   label="Тунел 1 RESET"
+        Switch item=tnl_1_resetTimer_sw   label="Тунел 1 RESET"  labelcolor=[tnl_1_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_2_set_all_to_defaults_sw  label="Tunnel tnl_2 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_2_resetTimer_sw   label="Тунел 2 RESET"
+        Switch item=tnl_2_resetTimer_sw   label="Тунел 2 RESET"  labelcolor=[tnl_2_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_3_set_all_to_defaults_sw  label="Tunnel tnl_3 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_3_resetTimer_sw   label="Тунел 3 RESET"
+        Switch item=tnl_3_resetTimer_sw   label="Тунел 3 RESET"  labelcolor=[tnl_3_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_4_set_all_to_defaults_sw  label="Tunnel tnl_4 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_4_resetTimer_sw   label="Тунел 4 RESET"
+        Switch item=tnl_4_resetTimer_sw   label="Тунел 4 RESET"  labelcolor=[tnl_4_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_5_set_all_to_defaults_sw  label="Tunnel tnl_5 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_5_resetTimer_sw   label="Тунел 5 RESET"
+        Switch item=tnl_5_resetTimer_sw   label="Тунел 5 RESET"  labelcolor=[tnl_5_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_6_set_all_to_defaults_sw  label="Tunnel tnl_6 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_6_resetTimer_sw   label="Тунел 6 RESET"
+        Switch item=tnl_6_resetTimer_sw   label="Тунел 6 RESET"  labelcolor=[tnl_6_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_7_set_all_to_defaults_sw  label="Tunnel tnl_7 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_7_resetTimer_sw   label="Тунел 7 RESET"
+        Switch item=tnl_7_resetTimer_sw   label="Тунел 7 RESET"  labelcolor=[tnl_7_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_8_set_all_to_defaults_sw  label="Tunnel tnl_8 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_8_resetTimer_sw   label="Тунел 8 RESET"
+        Switch item=tnl_8_resetTimer_sw   label="Тунел 8 RESET"  labelcolor=[tnl_8_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_9_set_all_to_defaults_sw  label="Tunnel tnl_9 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_9_resetTimer_sw   label="Тунел 9 RESET"
+        Switch item=tnl_9_resetTimer_sw   label="Тунел 9 RESET"  labelcolor=[tnl_9_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_10_set_all_to_defaults_sw  label="Tunnel tnl_10 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_10_resetTimer_sw   label="Тунел 10 RESET"
+        Switch item=tnl_10_resetTimer_sw   label="Тунел 10 RESET"  labelcolor=[tnl_10_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_11_set_all_to_defaults_sw  label="Tunnel tnl_11 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_11_resetTimer_sw   label="Тунел 11 RESET"
+        Switch item=tnl_11_resetTimer_sw   label="Тунел 11 RESET"  labelcolor=[tnl_11_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_12_set_all_to_defaults_sw  label="Tunnel tnl_12 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_12_resetTimer_sw   label="Тунел 12 RESET"
+        Switch item=tnl_12_resetTimer_sw   label="Тунел 12 RESET"  labelcolor=[tnl_12_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_12_set_all_to_defaults_sw  label="Tunnel tnl_12 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_13_resetTimer_sw   label="Тунел 13 RESET"
+        Switch item=tnl_13_resetTimer_sw   label="Тунел 13 RESET"  labelcolor=[tnl_13_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_13_set_all_to_defaults_sw  label="Tunnel tnl_13 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_14_resetTimer_sw   label="Тунел 14 RESET"
+        Switch item=tnl_14_resetTimer_sw   label="Тунел 14 RESET"  labelcolor=[tnl_14_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_14_set_all_to_defaults_sw  label="Tunnel tnl_14 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_15_resetTimer_sw   label="Тунел 15 RESET"
+        Switch item=tnl_15_resetTimer_sw   label="Тунел 15 RESET"  labelcolor=[tnl_15_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_15_set_all_to_defaults_sw  label="Tunnel tnl_15 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_16_resetTimer_sw   label="Тунел 16 RESET"
+        Switch item=tnl_16_resetTimer_sw   label="Тунел 16 RESET"  labelcolor=[tnl_16_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_16_set_all_to_defaults_sw  label="Tunnel tnl_16 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_17_resetTimer_sw   label="Тунел 17 RESET"
+        Switch item=tnl_17_resetTimer_sw   label="Тунел 17 RESET"  labelcolor=[tnl_17_resetTimer_sw=="ON"="orange"]
         // Text item=none                  
         // Text item=none        
         // Switch item=tnl_17_set_all_to_defaults_sw  label="Tunnel tnl_17 - Set values to default"
         // Text item=none                  
         Text item=none  
         Text item=none
-        Switch item=tnl_18_resetTimer_sw   label="Тунел 18 RESET"
+        Switch item=tnl_18_resetTimer_sw   label="Тунел 18 RESET"  labelcolor=[tnl_18_resetTimer_sw=="ON"="orange"]
     }
 } 
