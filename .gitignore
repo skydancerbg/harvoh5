@@ -12,3 +12,12 @@ userdata/jsondb/backup/
 # WatchService/*.config is a per-boot UUID file that churns on every restart.
 userdata/jsondb/users.json
 userdata/config/org/openhab/core/service/WatchService/
+
+# Backup artefacts left beside edited config files. Mirrors the production
+# repo (harvOH3-2026 cb942f7) so a `git add -A` on either box cannot commit
+# a *.bak-YYYYMMDD copy of a rules or items file.
+*.bak
+*.bak-*
+*.bak.*
+*.orig
+*.rej
