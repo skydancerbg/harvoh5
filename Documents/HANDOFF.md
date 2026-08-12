@@ -155,6 +155,39 @@ and a snapshot showing those two at `119.0` against `120.0` for the rest. Second
 > to `sitemaps/dev.sitemap` raised `PermissionError` and left the file **empty**. Recovered with
 > `git checkout --`. Edit a local copy and `scp` it back; never open a file on the mount for writing.
 
+### The season-start page now explains itself — OH5 commit `d8ed47c`
+
+The page was a button and a date. It is now self-teaching, without becoming a leaflet.
+
+**On the surface, two warnings only** — the one that costs money, and the counter-intuitive one:
+
+```
+ВНИМАНИЕ: нулира и РАБОТЕЩИ тунели. Не го натискайте при заредени колички.
+След спиране на тока НЕ е нужно! Таймерите се възстановяват сами.
+```
+
+**Everything else is one tap down**, as a linked sub-page (`Text label="…" { Frame … }`):
+КОГА СЕ ИЗПОЛЗВА · КАК СЕ ИЗПОЛЗВА · КОГА НЕ СЕ ИЗПОЛЗВА · ЗА ЕДИН ТУНЕЛ · КАКВО ПИШЕ НАД БУТОНА.
+
+> A drill-down rather than rows on the main page. A wall of text buries the button, and the two lines
+> that actually prevent the expensive mistake would be lost inside it.
+
+**The read-outs are now gated** on `seasonStartCount`, so before the first ever press the page says
+*"Системата още не е пускана за сезона"* instead of showing a blank date and an empty string — which
+is what production will look like on first deploy.
+
+> ⚠️ **That gate needed a guard against the bug we already hit once.** `visibility=[seasonStartCount>0]`
+> and `[==0]`: a **NULL matches neither**, and all four rows would vanish — precisely what blanked
+> `set_ON_OFF`. A startup rule now seeds the counter to 0 so the gate can never fall through. When you
+> add a visibility gate, ask what the item does before anything has ever written it.
+
+Also learned here: **`restoreOnStartup` will resurrect values you thought you cleared.** Setting the
+items to `UNDEF` over REST looked like it worked, but `UNDEF` is not persisted, so the restart
+restored the last *real* values and the page showed a stale test timestamp again. The gate is what
+actually solved it.
+
+Same text belongs in **handbook §4 for v1.4**, so page and book agree.
+
 ### Still to do — Stage 2, production (approved scope was Stage 1 only)
 
 Items and rules **hot-reload** on the Pi, so none of this needs a restart:
