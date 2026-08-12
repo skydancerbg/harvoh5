@@ -16,6 +16,18 @@ Switch disableAllTunnels
 // ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА - one button, see rules/season_start.rules
 Switch seasonStart
 
+// The season-start EVENT, recorded so it outlives openhab.log (which rotates
+// on SIZE, not time -- three rotations in 21 minutes were seen on a restart-heavy
+// day). These are what tell you, next spring, when the season actually began and
+// what was only set-up and testing before it. Facts, not judgements: the rule
+// does not decide which press was "the real start" -- that is computable later.
+Number   seasonStartCount      "Пускания за сезона [%d]"                (gPersist_On_Every_Change)
+DateTime seasonStartedAt       "Последен пуск [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"  (gPersist_On_Every_Change)
+String   seasonStartInfo       "Последният пуск беше [%s]"              (gPersist_On_Every_Change)
+// Every countdown as it stood immediately BEFORE the reset, so a mis-press
+// mid-season is recoverable by hand rather than simply gone.
+String   seasonStartPrevTimers "Таймери преди пуска [%s]"               (gPersist_On_Every_Change)
+
 
 
 Number  tnl_1_displayCurrentTimerValue
