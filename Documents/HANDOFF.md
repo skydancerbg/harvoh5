@@ -125,6 +125,43 @@ Items and rules **hot-reload** on the Pi, so none of this needs a restart:
    structurally, not yet by a real restart
 5. Handbook §4 rewrite: eight steps become one. That is a **v1.4** change
 
+### Push state, and a silent backup failure found on the way (2026-08-12 morning)
+
+**OH5 is pushed** — `8310e20`, `0 ahead / 0 behind`. Four commits: the season start + persistence
+fix, the temperature alarm + momentary switches, the flap pages, and a refresh of
+`Documents/HANDOFF.md`, which had stopped at `cbf574d` and knew nothing of the last two sessions.
+
+**Production `d9e9bd5` is still NOT pushed**, and finding out why turned up something worth keeping:
+
+> **Never pass `-c user.email` when committing.** Both repos already carry
+> `skydancerbg / 13396312+skydancerbg@users.noreply.github.com`. GitHub has **"block command line
+> pushes that expose my email"** on this account, so a commit authored as `schivarov@gmail.com` is
+> rejected **at push time, not at commit time** — it commits cleanly and then will not go anywhere.
+> Fix: `git rebase <base> --exec "git commit --amend --no-edit --reset-author"`, with `--autostash`
+> for the permanent `userdata/` churn. That is what unblocked OH5.
+
+**Separately, the nightly backup never pushes hand-made commits.** `/var/log/harvesta-backup.log`
+gives the whole behaviour in three lines:
+
+```
+2026-08-11 19:25:42  git        OK   committed and pushed 1 changed file(s)
+2026-08-11 19:35:22  git        clean, nothing to commit
+2026-08-12 03:33:14  git        clean, nothing to commit      <- ours was already committed, so no push
+```
+
+The push lives **inside** its "something changed" branch. A commit made by hand leaves the tree
+clean, so the backup reports `clean, nothing to commit`, skips the push, and exits `rc=0` — correctly,
+by its own logic. `d9e9bd5` could have sat there all season.
+
+> **A first pass here claimed the backup's push was *failing* on the bad email and hiding it behind
+> `rc=0`. That was wrong.** It never attempted a push at all. The email problem was real but only
+> ever blocked the *manual* push. Corrected before it reached anyone.
+
+Fix, when someone has sudo on the Pi: push whenever `git rev-list @{u}..HEAD` is non-empty, not only
+after it commits something itself. Until then: **push by hand after any hand-made commit.**
+
+⚠️ **The Pi's local git history is safe either way** — this only ever affected the off-box copy.
+
 ### Standing rule added
 
 **Every production change is mirrored to OH5 in the same session.** Procedure and its traps are in
