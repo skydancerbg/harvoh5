@@ -6,6 +6,58 @@ is still open**. Data coverage per season is in `data_inventory.md`.
 
 ---
 
+## START HERE — state as of 2026-08-12
+
+### The two systems
+
+| | version | role | repo | git state |
+|---|---|---|---|---|
+| **Production** — factory RPi4 | openHAB **3.1.0** | the live controller | `harvOH3-2026` | pushed, `0/0` |
+| **OH5** — lab LXC | openHAB **5.1.4** | read-only observer; **all new work is built and tested here first** | `harvoh5` | pushed, `0/0` |
+
+**Season is imminent and the plant is off-season right now.** OH5 is left clean: no tunnels enabled,
+no lamps on, alarm threshold 86.0, season counters at 0.
+
+### What is DONE on production
+
+Exactly one change: **`85ab696`** — `gEnableTunnelsw` joined `gPersist_On_Every_Change`. Plus the
+2026-08-11 infrastructure work in §0.
+
+### What is BUILT AND TESTED on OH5 but NOT on production — this is Stage 2
+
+| | |
+|---|---|
+| 5 generated rules | `season_start`, `season_end`, `temperature_alarm`, `momentary_switches`, `flap_init` |
+| 11 new Items | `seasonStart`, `seasonEnd`, `seasonActive`, the 4 start + 4 end record Items, `lastTunnelActivityAt`, `seasonActivityWhileClosed`, `anyTemperatureAlarm` |
+| 2 new sitemaps | `season_start`, `season_end` |
+| edits | alarm Item persistence, `labelcolor` on 24 switches, HABPanel flap tiles, seed 7→10, tnl_51 guard |
+
+Porting order and the full list: *Still to do — Stage 2* in §0c.
+Design, evidence and the ten audit findings: **`006 Production audit and one-button season start.md`**.
+
+### The five traps most likely to bite a fresh session
+
+1. **A NULL Item blanks the whole control, not just a value.** Every BasicUI switch is gated
+   `visibility=[..==ON]`/`[..==OFF]`; NULL matches neither, so the row vanishes and the operator sees
+   a page of horizontal lines. This is what blanked `set_ON_OFF`. Check with
+   `/rest/sitemaps/<name>/<name>` and count real widgets vs `item=none`.
+2. **Only `gPersist_On_Every_Change*` restores.** `gPersist_On_Change_1minute*` records history and
+   restores **nothing** — an Item can have thousands of datapoints and still come back NULL.
+3. **`open(path,'wb')` on the CIFS mount truncates before it fails.** It emptied `dev.sitemap`.
+   Edit a local copy and `scp` it back. The mount also cannot create files.
+4. **Never pass `-c user.email`** — both repos carry the right identity and GitHub rejects the
+   personal address **at push time, not commit time**.
+5. **Production is openHAB 3.1.0.** The `Input` sitemap widget does not exist there; an unknown
+   element would most likely fail the whole sitemap on the live plant. Check the model jar first.
+
+### Everything is generated — edit the generator, never the output
+
+`make_generated_rules.py` emits all five rule files for **both** systems from one template.
+`make_flap_tiles.py` rebuilds the 36 HABPanel flap tiles.
+`analysis/audit_prod.py [--pull|--diff-oh5]` audits production and shows real drift.
+
+---
+
 ## 0c. Session of 2026-08-12 — full production audit, and the one-button season start
 
 Full write-up: **`006 Production audit and one-button season start.md`**. Re-runnable audit:
