@@ -20,19 +20,16 @@ no lamps on, alarm threshold 86.0, season counters at 0.
 
 ### What is DONE on production
 
-Exactly one change: **`85ab696`** — `gEnableTunnelsw` joined `gPersist_On_Every_Change`. Plus the
+**Stage 2 is COMPLETE** — `0035889` + `58c285f`, pushed, `0/0`. All five generated rules, the 13 new
+Items, both season sitemaps, the `labelcolor` edits, P5, P7, and the HABPanel flap tiles.
+**Stage 3 #9 is also done**: the plant was restarted for the tiles, and that restart finally
+**proved the `gEnableTunnelsw` fix** — 0 NULL enables, where there used to be 19. Detail in §0d.
+
+OH5 is in step — `d8bf583`, pushed, `0/0`.
+
+Before that: **`85ab696`** — `gEnableTunnelsw` joined `gPersist_On_Every_Change` — plus the
 2026-08-11 infrastructure work in §0.
 
-### What is BUILT AND TESTED on OH5 but NOT on production — this is Stage 2
-
-| | |
-|---|---|
-| 5 generated rules | `season_start`, `season_end`, `temperature_alarm`, `momentary_switches`, `flap_init` |
-| 11 new Items | `seasonStart`, `seasonEnd`, `seasonActive`, the 4 start + 4 end record Items, `lastTunnelActivityAt`, `seasonActivityWhileClosed`, `anyTemperatureAlarm` |
-| 2 new sitemaps | `season_start`, `season_end` |
-| edits | alarm Item persistence, `labelcolor` on 24 switches, HABPanel flap tiles, seed 7→10, tnl_51 guard |
-
-Porting order and the full list: *Still to do — Stage 2* in §0c.
 Design, evidence and the ten audit findings: **`006 Production audit and one-button season start.md`**.
 
 ### The five traps most likely to bite a fresh session
@@ -61,6 +58,205 @@ cannot be mistaken for the live file. **`CLAUDE.md` is the one to read.**
 `make_generated_rules.py` emits all five rule files for **both** systems from one template.
 `make_flap_tiles.py` rebuilds the 36 HABPanel flap tiles.
 `analysis/audit_prod.py [--pull|--diff-oh5]` audits production and shows real drift.
+
+---
+
+## 0d. Session of 2026-08-12 (afternoon) — Stage 2 ported to production
+
+**Production commit `0035889`, pushed, `0/0`.** 13 files, +2218/−43. Everything in it came from
+OH5, unchanged except the two documented identifier divergences.
+
+| deployed | |
+|---|---|
+| 5 rule files | `season_start`, `season_end`, `temperature_alarm`, `momentary_switches`, `flap_init` — from `build/*.prod.rules` |
+| 13 new Items | the 4 start + 4 end record Items, `seasonStart`, `seasonEnd`, `lastTunnelActivityAt`, `seasonActivityWhileClosed`, `anyTemperatureAlarm`. Items 685 → 699 |
+| 2 new sitemaps | `?sitemap=season_start`, `?sitemap=season_end` |
+| edits | 18 `labelcolor` on `masterRESET`, season frame + 5 `labelcolor` on `dev`, alarm-Item persistence, P5, P7 |
+
+**Verified live, not assumed:** every model loads clean; **no command reached hardware** across the
+whole deploy — `events.log` shows only `oneMinuteTriggerSwitch`; all 76 lamps still OFF; every
+sitemap still renders (widget counts via `/rest/sitemaps/<n>/<n>`); `tnl_51` frozen at `-3782` over
+three checks in 15 min; `temperature_alarm` firing on the minute tick.
+
+### Method that mattered: patch in place, never copy the OH5 file over
+
+`dev.sitemap` and `masterRESET.sitemap` were **edited in place on the production copy**, not
+overwritten from OH5 — production's `dev.sitemap` keeps its own `actinon` spelling and its own
+pre-existing dead refs (`Gr_HVAC_*`, `tnl_Timers_*`). Copying OH5's file across would have imported
+OH5-only item names onto the plant. Only genuinely new files were copied verbatim.
+
+### Traps found doing this — do not rediscover
+
+> **`scp` of several rule files at once trips the file watcher mid-write.** All five logged
+> *"is either empty or cannot be parsed correctly"* at the same second, then some — not all —
+> reloaded on their own. **Deploy one file at a time**, ideally `scp` to `/tmp` then `mv` into place,
+> and **check each one actually reloaded afterwards**. `season_start.rules` was the one left
+> unparsed; `touch` did not revive it, a delete-and-restore cycle did. Verify with `md5sum` on both
+> sides, then look for `Loading model` with no following warning.
+
+> **`System started` does NOT re-fire when a DSL file is reloaded on openHAB 3.1.0.** This was
+> expected to, and the risk was raised before deploying `on_startup.rules`: its `SystemStarting`
+> cycle ends in `gTnlLights`/`gBtnLights` `sendCommand(OFF)` across ~78 real lamps. **It never
+> happened** — zero `SystemStarting` events, zero light commands, zero state changes. Good to know,
+> but check rather than trust it: the lamps were all OFF anyway, so the blast radius was nil.
+
+> **P5 was not what its name suggested.** "Seed 7 → 10" is the constant in `on_startup.rules`, and
+> that constant **only applies when the Item is NULL**. The live global was a real persisted `7.0`,
+> so changing the constant alone would have left production running at 7 forever. Both were
+> changed — constant **and** the live Item, over REST. Decided with the operator. The 19 per-tunnel
+> copies were left alone: 15 hold large negative free-run values that season-start resets anyway.
+
+### P7 was done twice, and the second way is the right one
+
+**First attempt (`0035889`): the whole `tnl_51` block was commented out**, `/* … */`, mirroring what
+OH5 had done. **That was wrong**, and the operator said why: *tnl_51 is the tunnel used to test code
+and rules.* Commenting it out silences the finding but kills the test tunnel, and leaves tunnels
+19–24 a template that still carries the bug the moment anyone uncomments it.
+
+**Corrected (`58c285f`, OH5 `d8bf583`): the decrement moved INSIDE the enable guard**, which is
+exactly how tunnels 1–18 are written. tnl_51 keeps working, and it is now a correct template.
+
+> ⚠️ **Putting the block back live exposed something. With `tnl_51_btnctrl_enable` restored to ON
+> and its timer at `-3782`, the "timer expired" branch fired on EVERY tick and commanded all four
+> tnl_51 lamps ON over live MQTT** — `cmnd/in_51/POWER1 ON` and three more, once a minute.
+>
+> **This is not new and not a bug in the fix.** The same thing is in `events.log` for 2026-08-10
+> under the original unguarded code. It was dormant *today* only because the enable came back NULL —
+> the very defect §0b fixed. Fixing the restore un-masked it.
+>
+> **Tunnels 1–18 behave identically** if enabled with an expired timer: lamps ON every minute is the
+> "action needed" signal, working as designed. tnl_51 was simply left enabled off-season with a
+> stale timer. **Resolved by disabling tnl_51** — the correct off-season state, matching the other
+> 18. Its lamps went off through the normal cascade. Re-enable it to test, but **reset its timer
+> first** or it will start signalling immediately.
+
+### The restart proved §0b, and that closes Stage 3 #9
+
+The flap-tile install needed openHAB stopped, so the plant got its first real restart since the
+`gEnableTunnelsw` fix. **All 19 `tnl_N_btnctrl_enable` came back non-NULL** — 18 OFF and tnl_51 ON
+(its genuine last value). Before the fix all 19 came back NULL, which is what blanked `set_ON_OFF`.
+**The fix is now proven by an actual restart, not just structurally.**
+
+Also confirmed to survive the restart: `seasonStartCount` 0.0, `seasonEndCount` 0.0, `seasonActive`
+OFF, and `default_tnl_timer_missed_actinon_value` **10.0** — the P5 value held.
+
+`anyTemperatureAlarm` came back NULL and was re-set OFF on the first tick, as expected: it is in
+`gPersist_On_Change_1minute`, which does not restore.
+
+### The alarm Items are still NULL, on both systems, and that is the tested behaviour
+
+`temperature_alarm.rules` writes an Item **only on a transition**, so a tunnel that has never
+overheated is never written. Production shows 18 × NULL with `anyTemperatureAlarm` OFF — and **OH5
+shows exactly the same**, so this is not drift. It does not defeat the purpose: the first real
+overheat is a NULL→ON change and *is* recorded, which is the history that never existed before.
+
+Checked before leaving it: **nothing binds `tnl<N>_temperature_alarm`** — 0 occurrences in the
+HABPanel jsondb, and the apparent hits in `dev.sitemap` and `tnl_dislay.rules` are all the
+*setpoint* `default_tnl_temperature_alarm_value`, a different Item. That independently confirms
+audit finding P1. Worth revisiting only if something ever gates a widget on them — a NULL would
+blank it.
+
+### Residual OH5↔production drift, after `audit_prod.py --pull --diff-oh5`
+
+**Zero functional drift.** Everything left is comments, blank lines, or the two documented
+identifier divergences:
+
+| file | lines | what |
+|---|---|---|
+| `items/btn_controll.items` | 323 | **all** blank or comment |
+| `rules/on_startup.rules` | 26 | **all** the OH5 header comment block |
+| `items/temperature_alarm.items` | 38 | `tnlN_` vs `tnl_N_` alarm naming |
+| `rules/temperature_alarm.rules` | 110 | same naming |
+| `rules/btn_controll.rules` | 41 | the `actioncoountdown` comment typo ×19, + 1 blank. Code identical |
+| `season_start` / `season_end` / `momentary_switches`.rules | 2 each | the generator's own `// Variant:` header line |
+| `sitemaps/dev.sitemap` | 1 | one blank line |
+| `masterRESET`, both season sitemaps, `flap_init.rules` | — | **identical** |
+
+### HABPanel flap tiles — ✅ done, run by the operator
+
+**36 tiles rebuilt** (18 on `УПРАВЛЕНИЕ-КЛАПИ`, 18 on `FlapControl-phone`), 0 leftover `dummy`
+widgets. Panel config backed up as
+`/var/lib/openhab/jsondb/uicomponents_habpanel_panelconfig.json.bak-20260812-132716`.
+
+**The agent cannot do this one.** It needs openHAB **stopped** (openHAB holds the panel config in
+memory and rewrites it on shutdown; the REST components API needs admin auth and 401s), and
+**`openhabian` has no passwordless sudo** — the harness correctly refuses to read the password out
+of the credentials file to escalate on the plant controller. The working split is: agent stages the
+script, operator runs one line.
+
+> **It must be `ssh -t`.** Without a TTY, sudo cannot prompt and fails with
+> *"no tty present and no askpass program specified"*. This wasted two attempts.
+>
+> ```bash
+> ssh -t harvesta-pi 'sudo bash /tmp/apply-flap-tiles.sh'
+> ```
+
+The script stops openHAB, waits for it, backs up the config, rebuilds the tiles, restores ownership,
+starts openHAB, and prints the rollback commands. **Full startup takes ~4 minutes** on the Pi —
+the rule engine did not report ready until 13:31 after a 13:27 stop. Do not conclude anything is
+broken before then.
+
+Recreate it with `make_flap_tiles.py --jsondb <file>` (dry-run first); `/tmp` clears on reboot.
+
+### Runtime STATE was mirrored too, not just config — and that is the easy half to forget
+
+Config parity is what `audit_prod.py --diff-oh5` measures, and it was green. **Item state is not, and
+it had drifted.** Worth making a habit of: after mirroring a config change, diff the live item
+states as well.
+
+What was equalised, all by `PUT /rest/items/<n>/state` (an **update**, not a command — no rule can
+push it at hardware, and every tunnel was disabled anyway):
+
+| | |
+|---|---|
+| OH5 | `tnl_51_btnaction_enable`, `tnl_51_missed_action_countdown_enable_sw` NULL → **OFF** (production got these from the disable cascade; OH5 never did) |
+| OH5 | `tnl_7_current_timer_value` 117.0 → **120** — a test leftover, not a value to copy onto production |
+| production | `tnl_51_current_timer_value` −3792 → **120**, `tnl_51_timer_missed_actinon_value` −2991 → **10** |
+| production | **32 per-tunnel items**: 14 × `current_timer_value` at −2535 → 120, and 18 × `timer_missed_actinon_value` at −2527 or the old seed 7.0 → 10 |
+
+Both systems now read **19 × 120** timers, **19 × 10** missed-action, 19 enables OFF, 76 lamps OFF.
+Verified stable across ticks — nothing decrements, because everything is disabled.
+
+> **The 18 tunnels were set by REST at the operator's explicit direction.** The recommendation was
+> to press ПЪРВОНАЧАЛЕН ПУСК instead, because that is the designed path and it **records the press
+> as a durable event** — the whole point of `a66e7d2`. Setting the items directly reaches the same
+> numbers and produces **no season-start record**. Not wrong, but know that Stage 3 #10 has not been
+> exercised and no event exists in InfluxDB for today.
+
+> **Do not copy a value just because the other system has it.** OH5's `tnl_7` at 117.0 and its 117/
+> stale-stamp leftovers are test residue. The target was the **globals** — 120 and 10 — not
+> whichever system was asked first.
+
+### What will never be equal, and should not be
+
+Fourteen items still differ, and all fourteen are correct:
+
+| items | why |
+|---|---|
+| `FlapActuator_{2,3,12,17}_Target` | seeded by `flap_init` from **live pot readings**, which drift 1–3 mm between reads |
+| `out_13_RSSI` | wifi signal strength |
+| `oneMinuteTriggerSwitch` | the two clocks tick out of phase; ON on one, OFF on the other |
+| `lastTunnelActivityAt`, `seasonActivityWhileClosed` | **real recorded data, and different on each box.** Production's reads 13:40 today — that is the new `season_end` rule correctly noticing tnl_51 running while the season was marked closed. The feature working, not drift |
+| `seasonStartedAt/Info/PrevTimers`, `seasonEndedAt/Info/PrevTimers` | **OH5 test residue from `a66e7d2`.** `UNDEF` is not persisted, so `restoreOnStartup` resurrects them at every boot; clearing them properly means deleting the InfluxDB series. **Left deliberately** — the `visibility=[seasonStartCount>0]` gate hides all six on both systems, so no operator sees them, and the first real season-start overwrites them |
+
+### Backups, and a `.gitignore` gap that had gone unnoticed
+
+`*.bak-20260812-stage2` beside each of the six edited files on the Pi, plus
+`conf/rules/btn_controll.rules.bak-20260812-p7` on OH5.
+
+**Production ignored those; OH5 did not.** The `*.bak*` / `*.orig` / `*.rej` patterns went into the
+Pi's repo as `cb942f7` and were never mirrored here, so a `git add -A` on OH5 would have committed
+backup copies of rules and items files. Fixed: OH5 `8e0561e`. Both repos now ignore them.
+
+### Both systems, end of session
+
+| | production | OH5 |
+|---|---|---|
+| repo | `harvOH3-2026` @ `58c285f`, `0/0` | `harvoh5` @ `8e0561e`, `0/0` |
+| items | 699 | 705 — the six extra are OH5's `test_*` replay items, by design |
+| tunnels | 19 enables OFF, timers **19 × 120**, missed-action **19 × 10** | identical |
+| lamps | 76 OFF | 76 OFF |
+| `anyTemperatureAlarm` | OFF | OFF |
 
 ---
 
@@ -321,19 +517,17 @@ Things that are **impossible while production is openHAB 3.1.0**, to be done onc
 | 2 | Replace the deprecated `getZonedDateTime()` in `season_end.rules` | kept only because OH3 has no alternative |
 | 3 | Re-check `analysis/audit_prod.py --diff-oh5` | once there is only one system, the two spellings (`missed_actinon`, `tnl1_..._alarm`) can finally be unified |
 
-### Still to do — Stage 2, production (approved scope was Stage 1 only)
+### Stage 2 — ✅ **DONE 2026-08-12**, production commit `0035889` (see §0d)
 
-Items and rules **hot-reload** on the Pi, so none of this needs a restart:
-
-1. Port all four generated rules — `build/*.prod.rules` — plus the `seasonStart` and
-   `anyTemperatureAlarm` items, the alarm-item persistence, and the sitemap edits (season-start
-   frame, page title, and `labelcolor` on 24 switches), and the HABPanel flap tiles
-   (`make_flap_tiles.py --jsondb`, openHAB stopped). **All of it is built and tested on OH5**
-2. Seed 7 → 10 on production (P5), decided: **10**
-3. tnl_51 decrement guard (P7)
-4. **Restart production once, deliberately, and re-run the audit** — the §0b fix is proven
-   structurally, not yet by a real restart
-5. Handbook §4 rewrite: eight steps become one. That is a **v1.4** change
+1. ~~Port all five generated rules, the new items, the alarm-item persistence and the sitemap
+   edits~~ ✅ — items and rules **hot-reload** on the Pi, no restart needed
+2. ~~Seed 7 → 10 on production (P5)~~ ✅ — **and** the live global, which the seed alone would not
+   have changed
+3. ~~tnl_51 decrement guard (P7)~~ ✅
+4. ~~HABPanel flap tiles~~ ✅ — 36 rebuilt, run by the operator with `ssh -t` + sudo
+5. ~~Restart production once, deliberately~~ ✅ — the tile install required it, and it **proved the
+   §0b `gEnableTunnelsw` fix**: 0 NULL enables where there were 19. That is Stage 3 #9
+6. Handbook §4 rewrite: eight steps become one. That is a **v1.4** change — **still open**
 
 ### Push state, and a silent backup failure found on the way (2026-08-12 morning)
 
