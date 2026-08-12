@@ -204,6 +204,65 @@ pointing at the other. **If you change one, change the other.**
 > **Handbook §4 must point at `?sitemap=season_start` in v1.4**, not at the dev page, and the
 > `dev_page.png` screenshot should be retaken from the new page.
 
+### КРАЙ НА СЕЗОНА — the season-end page, OH5 commit `48ca629`
+
+`?sitemap=season_end`. The counterpart to the start page, and deliberately **not its twin**:
+
+| | |
+|---|---|
+| season **start** | prepare and zero — seeds globals, resets every timer |
+| season **end** | **stop and record** — stops everything, **changes no value** |
+
+Timers are left exactly as the season finished; that final state is data, and the next start resets
+them anyway. The page carries the warning **in red** that the button stops the whole system, plus a
+drill-down: when to use it, how, when not to, what happens if they forget, and what the read-outs mean.
+
+**The auto-close, and why it is shaped this way — this is the part worth not re-deriving:**
+
+> **An idle-duration threshold alone can never be safe here.** The loading machine can fail and its
+> spare parts come from abroad, so a mid-season pause has **no bounded length** — 8 days or 40,
+> nobody knows in advance. *"Quiet for N days"* cannot tell a broken loader from a finished season,
+> whatever N is. The four recorded seasons show a 3-day maximum in-season gap **only because no
+> breakdown happened in them** — the data never contained the failure a threshold would have to survive.
+>
+> So the **calendar is the detector**: after mid-October there are no plums, so nothing can resume.
+> Idle time is only a courtesy check — *don't close while they're visibly working*. From **15 October
+> + 7 idle days** the earliest close is **22 October**; the latest real finish on record is
+> **27 Sep 2021**, so 25 days clear.
+
+Three honest outcomes, no invented dates:
+
+| | date recorded |
+|---|---|
+| **declared** | theirs, real |
+| **auto-closed** | `lastTunnelActivityAt` — the measured last day a tunnel ran, *not* the date it noticed |
+| **forgotten, closed by the next start** | **none.** We know it's over, not when. The last cart cycle in the data is the authority |
+
+The scheduled rule **never touches a tunnel** — it closes the marker only. And activity while the
+season is marked closed is recorded in `seasonActivityWhileClosed` and **never acted on**: it means
+either a resumption after a breakdown or somebody testing out of season, and a rule cannot tell those
+apart while a human can.
+
+> **`getZonedDateTime()` is deprecated on OH5 and kept deliberately** — it is the only accessor
+> *both* versions have, and production is still openHAB 3.1.0. It logs a validation notice at load;
+> that is expected, not a fault.
+
+Verified: start → `seasonActive` ON; with tunnel 4 running, end recorded *"обявен край, с работещи
+тунели: 4"*, all tunnels stopped, lamps off, timers untouched; the activity tracker populated on the
+minute tick, and `seasonActivityWhileClosed` fired when a tunnel ran with the season closed.
+
+---
+
+## TODO — after the switchover to openHAB 5
+
+Things that are **impossible while production is openHAB 3.1.0**, to be done once OH5 *is* production:
+
+| # | item | why it has to wait |
+|---|---|---|
+| 1 | **Free-text reason field on the season pages** — an operator types *why* they pressed it (empty by default), stored with the timestamp | The `Input` sitemap widget arrived in openHAB 4. Verified: `Input.class` is present in OH5's `org.openhab.core.model.sitemap-5.1.4.jar` and **absent** from production's `3.1.0` jar. Putting `Input` in a shared sitemap would give OH3's parser an unknown element and most likely fail the **whole sitemap** — the blank-page class of failure, on the live plant. **Interim: a `Selection` of predefined reasons works on both** |
+| 2 | Replace the deprecated `getZonedDateTime()` in `season_end.rules` | kept only because OH3 has no alternative |
+| 3 | Re-check `analysis/audit_prod.py --diff-oh5` | once there is only one system, the two spellings (`missed_actinon`, `tnl1_..._alarm`) can finally be unified |
+
 ### Still to do — Stage 2, production (approved scope was Stage 1 only)
 
 Items and rules **hot-reload** on the Pi, so none of this needs a restart:
