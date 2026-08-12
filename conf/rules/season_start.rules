@@ -161,6 +161,16 @@ then
     seasonStartPrevTimers.postUpdate(snap.trim())
     logInfo("season_start", "press #{} recorded; timers before the reset were: {}", prevCount + 1, snap)
 
+    //  Open the season.  If the previous one was never closed, say so and close
+    //  it here -- but do NOT invent an end date for it.  We know it is over; we
+    //  do not know when it ended, and the last cart cycle in the data is the
+    //  authority for that.
+    if(seasonActive.state == ON) {
+        seasonEndInfo.postUpdate("предишният сезон не е приключен - затворен при новия пуск")
+        logWarn("season_start", "the previous season was never closed - closing it now, with NO end date invented")
+    }
+    seasonActive.postUpdate(ON)
+
     // ---- 3. disable every tunnel (cascades to buttons and lamps) -----------
     gEnableTunnelsw.allMembers.forEach [ item | item.sendCommand(OFF) ]
 

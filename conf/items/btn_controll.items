@@ -28,6 +28,26 @@ String   seasonStartInfo       "Последният пуск беше [%s]"    
 // mid-season is recoverable by hand rather than simply gone.
 String   seasonStartPrevTimers "Таймери преди пуска [%s]"               (gPersist_On_Every_Change)
 
+// КРАЙ НА СЕЗОНА - the counterpart. Season start prepares and zeroes; season
+// end STOPS and RECORDS, and deliberately changes no timer value: the state the
+// season finished in is data, and the next start resets it anyway.
+Switch   seasonEnd
+Switch   seasonActive          "Сезонът е активен [%s]"                 (gPersist_On_Every_Change)
+Number   seasonEndCount        "Приключвания на сезон [%d]"             (gPersist_On_Every_Change)
+DateTime seasonEndedAt         "Край на сезона [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" (gPersist_On_Every_Change)
+String   seasonEndInfo         "Как приключи [%s]"                      (gPersist_On_Every_Change)
+String   seasonEndPrevTimers   "Таймери при приключване [%s]"           (gPersist_On_Every_Change)
+
+// A plain fact, maintained every minute while any tunnel is in use. The
+// auto-close writes THIS as the season end date rather than the calendar date
+// it happened to notice on.
+DateTime lastTunnelActivityAt  "Последна работа на тунел [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" (gPersist_On_Every_Change)
+// Activity recorded while the season was marked closed: either they resumed
+// after a long breakdown without pressing ПЪРВОНАЧАЛЕН ПУСК, or somebody is
+// testing out of season. Recorded, never acted on - a rule cannot tell those
+// apart and a human can.
+DateTime seasonActivityWhileClosed "Работа след края на сезона [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" (gPersist_On_Every_Change)
+
 
 
 Number  tnl_1_displayCurrentTimerValue

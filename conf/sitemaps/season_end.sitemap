@@ -1,0 +1,66 @@
+sitemap season_end label="КРАЙ НА СЕЗОНА" {
+
+        // ================================================================
+        //  The counterpart to ?sitemap=season_start.
+        //    season start = prepare and zero  (seeds globals, resets timers)
+        //    season end   = STOP and RECORD   (stops everything, changes no value)
+        //  Rule: rules/season_end.rules (generated, see make_generated_rules.py)
+        // ================================================================
+        Frame label="ПРИКЛЮЧВАНЕ НА СЕЗОНА" {
+
+            Text item=seasonActive icon="switch"
+            Text item=seasonEndedAt icon="time" visibility=[seasonEndCount>0]
+            Text item=seasonEndInfo icon="none" visibility=[seasonEndCount>0]
+            Text item=lastTunnelActivityAt icon="time" visibility=[seasonStartCount>0]
+            Text item=none
+
+            Switch item=seasonEnd label="КРАЙ НА СЕЗОНА - СПИРА ЦЯЛАТА СИСТЕМА" icon="switch" labelcolor=[seasonEnd=="ON"="orange"]
+
+            Text item=none
+            Text label="ВНИМАНИЕ! Този бутон СПИРА ЦЯЛАТА СИСТЕМА." icon="error" labelcolor=["red"]
+            Text label="Всички 18 тунела се изключват и всички лампи угасват." icon="error" labelcolor=["red"]
+            Text label="Не го натискайте, ако в някой тунел още има колички." icon="error" labelcolor=["red"]
+            Text item=none
+            Text label="Таймерите НЕ се нулират - остават както е свършил сезонът." icon="none"
+            Text item=none
+
+            Text label="Кога и как се използва - натиснете тук за пълно обяснение" icon="text" {
+
+                Frame label="КОГА СЕ ИЗПОЛЗВА" {
+                    Text label="Веднъж, в края на сезона, когато последната количка е излязла" icon="none"
+                    Text label="   и повече няма да се суши." icon="none"
+                    Text label="Преди да го натиснете, извадете количките от всички тунели." icon="none"
+                }
+
+                Frame label="КАК СЕ ИЗПОЛЗВА" {
+                    Text label="1. Проверете, че всички тунели са празни." icon="none"
+                    Text label="2. Натиснете бутона веднъж. Светва оранжево за 2 сек. и се връща сам." icon="none"
+                    Text label="3. Готово: всички тунели са спрени, лампите са угасени," icon="none"
+                    Text label="   а датата на края е записана." icon="none"
+                    Text label="4. Следващият сезон се пуска от страница ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА." icon="none"
+                }
+
+                Frame label="КОГА НЕ СЕ ИЗПОЛЗВА" {
+                    Text label="НЕ при количка вътре - тя остава без отчет и без сигнализация." icon="error"
+                    Text label="НЕ при кратка пауза - например докато чакате плодове или ремонт." icon="error"
+                    Text label="   Сезонът не е свършил, само работата е спряла за малко." icon="error"
+                    Text label="НЕ за един тунел - за това има МАСТЕР РЕСЕТ, Тунел N RESET." icon="error"
+                }
+
+                Frame label="АКО ЗАБРАВИТЕ ДА ГО НАТИСНЕТЕ" {
+                    Text label="Нищо страшно. След 15 октомври, ако седем дни никой тунел" icon="none"
+                    Text label="   не е работил, системата сама отбелязва края на сезона." icon="none"
+                    Text label="За дата се записва последният ден, в който наистина е работил тунел," icon="none"
+                    Text label="   а не датата, на която системата го е забелязала." icon="none"
+                    Text label="Автоматичното приключване НЕ пипа нито един тунел." icon="none"
+                }
+
+                Frame label="КАКВО ПИШЕ НАД БУТОНА" {
+                    Text label="Сезонът е активен - ON от пуска до края на сезона." icon="none"
+                    Text label="Край на сезона - датата на последното приключване." icon="none"
+                    Text label="Как приключи - обявен от оператор, или автоматично." icon="none"
+                    Text label="Последна работа на тунел - кога за последно е работил тунел." icon="none"
+                }
+            }
+        }
+}
