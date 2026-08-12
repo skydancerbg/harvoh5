@@ -268,6 +268,24 @@ may have printed them.
 > touches text wrapping. Shot at 760 px with wrapping forced, or the warnings ellipsise to
 > *"ВНИМАНИЕ: нулира и РАБОТЕЩИ т…"*.
 
+### Open, and deliberately not scheduled: waking somebody up for an overheat
+
+P1 had two halves. The alarm now **exists and records** on both systems. It still **does not reach
+anybody who is not looking at a screen** — and the operator deferred that on 2026-08-12: no time to
+work on it now, revisit later.
+
+Candidates raised, none evaluated: a **Viber** message, a **direct phone push**, or some other
+notification path.
+
+**Hang whatever is chosen off `anyTemperatureAlarm`.** It was built for exactly this — one
+subscription instead of eighteen — so no rule change is needed later. One constraint to remember:
+**openHAB Cloud was disabled on 2026-08-11** because it errored every ~70 s, so any Cloud-based push
+requires fixing that first.
+
+> The 2021 incident is the argument: burner sensor failed, its controller kept heating, tunnel 10
+> hit **101.9 °C**, and it was caught **only because somebody was watching**. Recording it is
+> progress. It is not the same as telling someone.
+
 ### Backups, and a `.gitignore` gap that had gone unnoticed
 
 `*.bak-20260812-stage2` beside each of the six edited files on the Pi, plus
