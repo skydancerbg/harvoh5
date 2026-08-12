@@ -239,6 +239,31 @@ Fourteen items still differ, and all fourteen are correct:
 | `lastTunnelActivityAt`, `seasonActivityWhileClosed` | **real recorded data, and different on each box.** Production's reads 13:40 today — that is the new `season_end` rule correctly noticing tnl_51 running while the season was marked closed. The feature working, not drift |
 | `seasonStartedAt/Info/PrevTimers`, `seasonEndedAt/Info/PrevTimers` | **OH5 test residue from `a66e7d2`.** `UNDEF` is not persisted, so `restoreOnStartup` resurrects them at every boot; clearing them properly means deleting the InfluxDB series. **Left deliberately** — the `visibility=[seasonStartCount>0]` gate hides all six on both systems, so no operator sees them, and the first real season-start overwrites them |
 
+### Handbook v1.4 and technologist guide v1.1 — `da4d68c`
+
+Stage 2 made three statements in the operator handbook **factually wrong**, so v1.3 could not stand.
+
+| § | fixed |
+|---|---|
+| **4** | eight steps → the one button on `?sitemap=season_start`. New screenshots of that page and its drill-down. The old *"Global initial INIT all tunnel values!"* instruction is gone |
+| **4** | the red box *"превключвателите не се връщат сами"* is replaced — 44 switches now self-clear in 2 s and show an orange label. `tnl_N_btnctrl_enable` named as the deliberate exception |
+| **4.1** | **new** — КРАЙ НА СЕЗОНА, and why it is not the start button's mirror image: it stops and records, and changes no timer |
+| **6.3** | **the callout said the flap page has NO colour coding. It now has.** Blue in range, red outside 0–200 mm or missing. Reshot from production: flaps 4/7/8/16 red NULL, 10 at 491 and 18 at 267 red, twelve healthy in blue. A second callout warns red = broken *measurement*, not necessarily a broken flap |
+| **7.1.1** | points at the one button, not the old manual stop-all |
+| **7.2** | the 86 °C alarm is now recorded, not only drawn. Operator-visible behaviour unchanged |
+
+33 pages, was 30. Technologist guide → **v1.1**, 16 pages: its analysis is untouched by Stage 2, only
+the cover cross-reference moved from handbook v1.2 to v1.4. v1.0–v1.3 stay in `Documents/` — operators
+may have printed them.
+
+> **Two build traps.** A new `h2` must be added to **both** `build_handbook.py`'s TOC list *and*
+> `make_handbook.py`'s `HEADINGS`, or pass 2 cannot find its page number. And when screenshotting
+> BasicUI, **never inject `display:… !important` on `.mdl-form__row`** — BasicUI renders
+> visibility-gated widgets into the DOM and hides them with `display:none`, so that override
+> un-hides them. It briefly put a **stale test timestamp** on the season-start shot; the CSS now only
+> touches text wrapping. Shot at 760 px with wrapping forced, or the warnings ellipsise to
+> *"ВНИМАНИЕ: нулира и РАБОТЕЩИ т…"*.
+
 ### Backups, and a `.gitignore` gap that had gone unnoticed
 
 `*.bak-20260812-stage2` beside each of the six edited files on the Pi, plus
