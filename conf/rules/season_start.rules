@@ -299,3 +299,20 @@ then
 
     logInfo("season_start", "=== ПЪРВОНАЧАЛЕН ПУСК: done. 18 tunnels OFF, lamps off, timers = {} min ===", drying)
 end
+
+
+rule "Season start counters - seed on startup"
+when
+    Item SystemStarting changed to OFF
+then
+    //  seasonStartCount MUST NOT be NULL.  The ПЪРВОНАЧАЛЕН ПУСК page gates its
+    //  read-outs on it -- `visibility=[seasonStartCount>0]` for the three values
+    //  and `[seasonStartCount==0]` for the "not started yet" line.  A NULL
+    //  matches NEITHER, and every one of those rows would silently disappear,
+    //  which is exactly the failure that blanked set_ON_OFF on 2026-08-12.
+    //  Seeding 0 here is what makes that gate safe.
+    if(seasonStartCount.state == NULL || seasonStartCount.state == UNDEF) {
+        seasonStartCount.postUpdate(0)
+        logInfo("season_start", "seasonStartCount seeded to 0 - never started for a season")
+    }
+end
