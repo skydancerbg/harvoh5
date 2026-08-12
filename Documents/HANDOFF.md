@@ -131,7 +131,8 @@ Items and rules **hot-reload** on the Pi, so none of this needs a restart:
 fix, the temperature alarm + momentary switches, the flap pages, and a refresh of
 `Documents/HANDOFF.md`, which had stopped at `cbf574d` and knew nothing of the last two sessions.
 
-**Production `d9e9bd5` is still NOT pushed**, and finding out why turned up something worth keeping:
+**Production is pushed too** — `85ab696`, `0 ahead / 0 behind`. Getting it there turned up two things
+worth keeping:
 
 > **Never pass `-c user.email` when committing.** Both repos already carry
 > `skydancerbg / 13396312+skydancerbg@users.noreply.github.com`. GitHub has **"block command line
@@ -151,14 +152,22 @@ gives the whole behaviour in three lines:
 
 The push lives **inside** its "something changed" branch. A commit made by hand leaves the tree
 clean, so the backup reports `clean, nothing to commit`, skips the push, and exits `rc=0` — correctly,
-by its own logic. `d9e9bd5` could have sat there all season.
+by its own logic. `85ab696` (then `d9e9bd5`) could have sat there all season.
 
 > **A first pass here claimed the backup's push was *failing* on the bad email and hiding it behind
 > `rc=0`. That was wrong.** It never attempted a push at all. The email problem was real but only
 > ever blocked the *manual* push. Corrected before it reached anyone.
 
-Fix, when someone has sudo on the Pi: push whenever `git rev-list @{u}..HEAD` is non-empty, not only
-after it commits something itself. Until then: **push by hand after any hand-made commit.**
+Script confirmed 2026-08-12 (section 4 of `/usr/local/bin/harvesta-backup.sh`). **Its push-failure
+handling is fine** — when it does push and the push fails it logs `PUSH FAILED (offline?)` and sets
+`RC=1`. The only gap is that the push sits inside the dirty-tree branch, so the clean path never
+reaches it.
+
+**The fix is written and ready: `build/harvesta-backup-push-fix.patch.md`** — one additive block
+after section 4 that pushes whenever `rev-list --count '@{u}..HEAD'` is non-zero, whoever made the
+commit. Additive on purpose: the tidier restructure is a bigger diff against a script that works on a
+live plant. **Not applied** — it needs root on the Pi. Until it is: **push by hand after any
+hand-made commit.**
 
 ⚠️ **The Pi's local git history is safe either way** — this only ever affected the off-box copy.
 
@@ -173,7 +182,8 @@ hot-reloads and OH5 does not.
 
 ## 0b. Session of 2026-08-12 (night) — the blank `set_ON_OFF` page, and the restore gap behind it
 
-**Fixed on production. Commit `d9e9bd5` in `/etc/openhab` on the Pi.** One line.
+**Fixed on production. Commit `85ab696` in `/etc/openhab` on the Pi.** One line.
+(Was `d9e9bd5`; rewritten 2026-08-12 to carry the repo's own commit identity so it would push.)
 
 ### What the operator saw
 
