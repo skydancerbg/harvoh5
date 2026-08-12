@@ -6,6 +6,49 @@ is still open**. Data coverage per season is in `data_inventory.md`.
 
 ---
 
+## ⏭️ NEXT SESSION: flap controller firmware **v4**
+
+**This is the active work. Everything below it is finished and pushed.**
+
+**v3 has been flashed onto real hardware by the operator, and it has faults.** That contradicts
+every "nothing flashed" line elsewhere in this file and in `005 …md` — those are historical and are
+now stamped as such. **The faults are NOT written down anywhere**: the operator will describe them
+at the start of the v4 session.
+
+### What the next session must establish first — do not assume any of it
+
+| question | why it changes the work |
+|---|---|
+| **Which units were flashed, and how many?** | The plan on record was *flap 18 first* (it has never moved in any season, so a brick costs nothing), then one healthy unit. Whether that was followed is unknown |
+| **What are the faults, concretely?** | Symptom, not diagnosis. "Reads wrong", "does not move", "loses wifi", "wrong direction" are entirely different bugs |
+| **Is flap 18 among them?** | It is the one unit that needs `DIRECTION REVERSED` set **before** being commanded. A unit on the wrong direction setting **reports a mirrored position that looks entirely plausible** — 40 mm where it should say 160 mm, with no error anywhere |
+| **Was `ROD 200` or `ROD 350` set?** | Changing it re-derives `workMm`, the move timeout (90 s → 58.5 s) and the minimum usable ADC span (150 → 86 counts), **and discards the calibration** |
+| **Did calibration run, and what did it report?** | v2+ grades the track in ten zones and says *THIS ACTUATOR NEEDS REPLACEMENT!* when it should. Compare against the 2023 bench pot endpoints transcribed in `005 …md` §5 |
+| **Is the fault firmware, or the known bad hardware?** | **7 of 19 pots are physically broken and under repair** — 4, 7, 8, 16 read NULL; 10 reads 491; 18 reads 267 (live values 2026-08-12). A unit with a dead pot will misbehave on any firmware |
+
+### Where the code and the context are
+
+| | |
+|---|---|
+| v3 source | `CONTROLLER SOFTWARE _PIO/aaFINALL_VERSIONS/aLinearActuator_Ctrler_v3.0/` (+ a `.zip` beside it) |
+| earlier | `…_v2 .0/`, `…_v1 .1/`, and `…__Reversed_for_tnl18_v1 .1/` — the hand-maintained fork v3 replaced with a setting |
+| design + why | **`005 Flap controller v3 - tunnel 18 reversal and 200 mm rod.md`** (v3, tunnel 18, 200 mm rod, the IP/MAC inventory, 2023 bench endpoints) |
+| the pot diagnosis | **`003 Flap actuator potentiometer diagnosis and firmware v2.md`** — the pots do **not** drift; the wipers lose contact intermittently. Read before touching the code |
+| mapping | **flap N → tunnel N, except flap 19 → tunnel 8.** Derived from step responses, recorded nowhere in the config |
+| tests | `test/verify_mapping.py` — five checks, proves v3 reproduces both v1.1 firmwares and covers the 200 mm rod |
+
+### Three constraints that must survive v4
+
+1. **openHAB must not need changing.** v2 and v3 keep the three MQTT topics openHAB binds to
+   byte-identical. Keep that, or `mqtt.things` and the HABPanel tiles both need work.
+2. **0 mm = flap closed on all 19 units**, tunnel 18 included — its mirrored linkage is absorbed in
+   the controller. **Never add a per-tunnel inversion in openHAB**; it would double-invert.
+3. **`flap_actuator_14` may be answering on two devices**, one at flap 5's IP `.135`. That is a
+   transcription of a 2023 note, *not* a live observation — check with `SEND_IP` before acting. If
+   real, it is a duplicate-client-ID eviction loop.
+
+---
+
 ## START HERE — state as of 2026-08-12
 
 ### The two systems
@@ -15,8 +58,15 @@ is still open**. Data coverage per season is in `data_inventory.md`.
 | **Production** — factory RPi4 | openHAB **3.1.0** | the live controller | `harvOH3-2026` | pushed, `0/0` |
 | **OH5** — lab LXC | openHAB **5.1.4** | read-only observer; **all new work is built and tested here first** | `harvoh5` | pushed, `0/0` |
 
-**Season is imminent and the plant is off-season right now.** OH5 is left clean: no tunnels enabled,
-no lamps on, alarm threshold 86.0, season counters at 0.
+**Season is imminent and the plant is off-season right now.** **Both systems are finished, in step
+and pushed** — nothing is half-done. 19 enables OFF, timers 19 × 120, missed-action 19 × 10,
+76 lamps OFF, alarm threshold 86.0, season counters 0 **on both**.
+
+> **The openHAB work is closed. Do not reopen it looking for something to finish.** Stage 2 is
+> deployed, the handbooks are reissued, and the two remaining season items are *decisions already
+> taken*, not tasks: **press ПЪРВОНАЧАЛЕН ПУСК once when the season really starts** (deliberately not
+> pressed early — see §0d), and **the overheat notification is deferred** (open question, not
+> scheduled — see §0d). The active work is **flap firmware v4**, at the top of this file.
 
 ### What is DONE on production
 
@@ -731,7 +781,9 @@ Not pushed — the 03:30 nightly backup pushes `/etc/openhab` itself.
 
 Full write-up: **`005 Flap controller v3 - tunnel 18 reversal and 200 mm rod.md`**.
 Code: `CONTROLLER SOFTWARE _PIO/aaFINALL_VERSIONS/aLinearActuator_Ctrler_v3.0/`.
-Builds clean — RAM 50.9 %, flash 42.6 %, no warnings. **Nothing flashed. Nothing in openHAB changed.**
+Builds clean — RAM 50.9 %, flash 42.6 %, no warnings. Nothing in openHAB changed.
+**⚠️ "Nothing flashed" was true when this was written and is NOT true now — v3 has since been
+installed on hardware and has faults. See the v4 section at the top of this file.**
 
 ### The finding, which was recorded nowhere
 
@@ -1303,7 +1355,8 @@ never moved in any season on record**, and flap 8 was replaced by flap 19 on tun
 > NodeMCU's 320 kΩ A0 divider means rising wiper contact resistance. See
 > **`003 Flap actuator potentiometer diagnosis and firmware v2.md`** for the evidence and the
 > reasoning, and `CONTROLLER SOFTWARE _PIO/aaFINALL_VERSIONS/aLinearActuator_Ctrler_v3.0/` for the
-> replacement firmware (builds clean, **nothing flashed yet**). It keeps the three MQTT topics
+> replacement firmware (builds clean; **v3 has SINCE BEEN FLASHED and has faults — see the v4
+> section at the top of this file**). It keeps the three MQTT topics
 > openHAB binds to unchanged, so no openHAB change is needed to adopt it. **v3 supersedes v2** —
 > tunnel 18's reversed linkage and the 200 mm rod, `005 …md` and §0a above.
 
