@@ -25,7 +25,7 @@ left whose gating item fails a restart. That class is closed for sitemaps.
 |---|---|
 | **P1** ⚠️ | **The high-temperature alarm is only a colour, on one page.** Production has **no `temperature_alarm.rules`**. The 18 `tnlN_temperature_alarm` items are written by no rule and bound by nothing in HABPanel (0 occurrences). The alarm is computed **client-side in the browser** by the ДИСПЛЕЙ widget against `default_tnl_temperature_alarm_value`. Nothing logs, persists or raises it. Same exposure as 2021, when tunnel 10 hit 101.9 °C and was caught only because someone was watching |
 | **P2** ⚠️ | `globalInit` rewrites `current_timer_value` for all 19 tunnels **with no enable check**, while its sibling `set_all_to_defaults_sw` guards properly (`&& btnctrl_enable == OFF`). The handbook warns in red; the software does not |
-| **P3** | Season start was 8 steps on a page titled *"Development test page"* — **fixed**, below |
+| **P3** | Season start was 8 steps on a page titled *"Development test page"* — **fixed**: it now has its own page, `?sitemap=season_start` |
 | **P4** | 40+ momentary switches never self-clear; every auto-off timer is commented out |
 | **P5** | Seed was **7**, handbook says **10** — **fixed on OH5**, still 7 on production |
 | **P6** | 36 items written and read by nothing: `tnlN_temperature_alarm` ×18, `tnl_N_displayCurrentTimerValue` ×18 |
@@ -187,6 +187,22 @@ restored the last *real* values and the page showed a stale test timestamp again
 actually solved it.
 
 Same text belongs in **handbook §4 for v1.4**, so page and book agree.
+
+### The season page is its own page — OH5 commit `e0aa74b`
+
+`?sitemap=season_start`, **ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА** — the season-start block and nothing else.
+That is the operator page.
+
+`?sitemap=dev` is **"Development test page"** with its **"DEV webpage"** frame again. I had renamed
+it when I first added the block, which I should not have done: it is the technical page, and its name
+is not mine to change. Restored to exactly what it was.
+
+The block appears on **both** pages — the technical page keeps a copy so a technician has it to hand.
+Sitemaps cannot include one another, so that duplication is real; both copies carry a comment
+pointing at the other. **If you change one, change the other.**
+
+> **Handbook §4 must point at `?sitemap=season_start` in v1.4**, not at the dev page, and the
+> `dev_page.png` screenshot should be retaken from the new page.
 
 ### Still to do — Stage 2, production (approved scope was Stage 1 only)
 
