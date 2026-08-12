@@ -111,6 +111,50 @@ Screenshot verified: 14 sliders at real positions, 4 red NULL tiles, `NaNmm` on 
 flaps. Incidentally the tile labelled **КЛАПА 8** binds `FlapActuator_19_Current` — independent
 corroboration of the flap 19 → tunnel 8 mapping derived from step responses in `000 …md`.
 
+### Also on OH5 — commit `a66e7d2`, the season start is now a recorded EVENT
+
+Asked before porting, and the answer was **no, nothing was stored**: `seasonStart` had no
+persistence group and **0 datapoints** in InfluxDB. The only trace was `openhab.log`, which rotates
+on **size (16 MB), not time** — `.1.gz` 01:01, `.2.gz` 01:18, `.3.gz` 01:22 on a restart-heavy night,
+so the record could vanish in minutes.
+
+That matters because the four-season analysis had to **reconstruct** start-ups from timer behaviour
+(the "62 start-ups, automation ON ~14 min before the tunnel is hot" finding was inferred, not read).
+A recorded marker makes every future season one query instead of a modelling exercise.
+
+Four items, all in `gPersist_On_Every_Change`:
+
+| item | why |
+|---|---|
+| `seasonStartCount` | increments per press. **Every increment is timestamped by InfluxDB**, so one numeric Item carries the whole press history and none of it depends on how DateTime persists. The analysis anchor |
+| `seasonStartedAt` | what the operator reads on the page |
+| `seasonStartInfo` | `чист старт` / `с работещи тунели: 6 12` — the fact that separates a season start from a mid-season reset. The rule already computed it |
+| `seasonStartPrevTimers` | every countdown as it stood **immediately before** the wipe. A mis-press was otherwise unrecoverable |
+
+> **Facts, not judgements.** The rule does **not** decide which press was "the real season start".
+> During set-up the crew may press it several times while testing, and an auto-classifier would label
+> the first *test* press as the boundary and be confidently wrong. The true start is *"the first press
+> after a gap of months"* — computable later, once what followed can be seen. Same trap as the two
+> already recorded in `000 …md`.
+
+The three read-outs sit **above** the button, so an operator about to press it in September sees a
+date from August and stops — cheaper and more effective than a dialog people learn to click through.
+
+**When it is legitimate to press again** (for handbook v1.4, and it corrects a natural assumption):
+**a power cut is NOT a reason.** That is exactly what freeze/resume exists for — every timer, enable
+flag and setpoint restores. Pressing after an outage would *destroy* the state persistence just
+restored. Legitimate: once at season start with tunnels empty; after a full mid-season shutdown with
+every tunnel emptied. **Never with carts inside** — use the per-tunnel RESET on МАСТЕР РЕСЕТ for one
+misbehaving tunnel.
+
+Verified: press with tunnels 6 and 12 running gave count 1, a timestamp, `с работещи тунели: 6 12`,
+and a snapshot showing those two at `119.0` against `120.0` for the rest. Second press: count 2,
+`чист старт`. Both in InfluxDB. Test values cleared afterwards, so OH5 ships at count 0.
+
+> **Trap found doing this: `open(path, 'wb')` on the CIFS mount TRUNCATES BEFORE IT FAILS.** A write
+> to `sitemaps/dev.sitemap` raised `PermissionError` and left the file **empty**. Recovered with
+> `git checkout --`. Edit a local copy and `scp` it back; never open a file on the mount for writing.
+
 ### Still to do — Stage 2, production (approved scope was Stage 1 only)
 
 Items and rules **hot-reload** on the Pi, so none of this needs a restart:
