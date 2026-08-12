@@ -163,11 +163,24 @@ handling is fine** — when it does push and the push fails it logs `PUSH FAILED
 `RC=1`. The only gap is that the push sits inside the dirty-tree branch, so the clean path never
 reaches it.
 
-**The fix is written and ready: `build/harvesta-backup-push-fix.patch.md`** — one additive block
-after section 4 that pushes whenever `rev-list --count '@{u}..HEAD'` is non-zero, whoever made the
-commit. Additive on purpose: the tidier restructure is a bigger diff against a script that works on a
-live plant. **Not applied** — it needs root on the Pi. Until it is: **push by hand after any
-hand-made commit.**
+**FIXED 2026-08-12 07:40**, by the operator running the patch from
+`build/harvesta-backup-push-fix.patch.md` (the harness blocks the agent from reading the sudo
+password out of the credentials file, correctly — that is credential mining to escalate on the plant
+controller). New section 4b pushes whenever `rev-list --count '@{u}..HEAD'` is non-zero, whoever made
+the commit. Additive on purpose: the tidier restructure is a bigger diff against a script that works
+on a live plant. Original kept as `harvesta-backup.sh.bak-20260812`.
+
+Proved rather than assumed — with both repos at `0 ahead` a correct run is silent, so the test made
+an `--allow-empty` commit first and then ran the timer by hand:
+
+```
+   85ab696..45e65bd  main -> main
+2026-08-12 07:41:52  git        OK   pushed 1 commit(s) made outside the backup
+2026-08-12 07:41:52  ===== backup end, rc=0, total 953M, free 98G =====
+```
+
+That empty `45e65bd` is deliberately **left in the history** — removing it would mean force-pushing
+the plant's config repo to tidy away a harmless marker, which is the worse trade.
 
 ⚠️ **The Pi's local git history is safe either way** — this only ever affected the off-box copy.
 
