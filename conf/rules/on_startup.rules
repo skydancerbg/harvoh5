@@ -99,7 +99,7 @@ then
         defaultDrying = default_tnl_timer_value.state as DecimalType
     }
 
-    var Number defaultMissedAction = 7
+    var Number defaultMissedAction = 10
     if(default_tnl_timer_missed_action_value.state == NULL || default_tnl_timer_missed_action_value.state == UNDEF) {
         default_tnl_timer_missed_action_value.postUpdate(defaultMissedAction)
         seededDefaults = true

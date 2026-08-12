@@ -1,6 +1,6 @@
 Group gTunnelItems
 Group gCurrentTnlTimers
-Group gEnableTunnelsw (gPersist_On_Change_1minute)
+Group gEnableTunnelsw (gPersist_On_Change_1minute, gPersist_On_Every_Change)
 
 Switch oneMinuteTriggerSwitch   //Using this as a rule trigger for the other rules, in order not to do heavy operations in a chron job.
                                 // By default, there are only 2 threads allocated to Quartz, the scheduler. 
@@ -12,6 +12,10 @@ Number default_tnl_timer_extendedDryingTime_value (gPersist_On_Every_Change)
 Switch globalInit // init all tunnel values to defaults. Init defaults in DB on the first run Then comment the lines in tnl.rules rule! Note: Tunnels should not be enabled when using
 Switch enableAllTunnels
 Switch disableAllTunnels
+
+// ПЪРВОНАЧАЛЕН ПУСК ЗА СЕЗОНА - one button, see rules/season_start.rules
+Switch seasonStart
+
 
 
 Number  tnl_1_displayCurrentTimerValue
