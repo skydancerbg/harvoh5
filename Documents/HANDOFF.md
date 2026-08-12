@@ -50,6 +50,13 @@ Design, evidence and the ten audit findings: **`006 Production audit and one-but
 5. **Production is openHAB 3.1.0.** The `Input` sitemap widget does not exist there; an unknown
    element would most likely fail the whole sitemap on the live plant. Check the model jar first.
 
+### ⚠️ `CLAUDE (Copy).md` in the project root is STALE — do not read it
+
+Dated **21 May 2026**, 259 lines adrift from `CLAUDE.md`, and it predates the MQTT switchover, the
+four-season analysis, the flap firmware work and everything in this file. It has no current purpose;
+it is kept only because deleting a user's file is not the agent's call. **`CLAUDE.md` is the one to
+read.**
+
 ### Everything is generated — edit the generator, never the output
 
 `make_generated_rules.py` emits all five rule files for **both** systems from one template.
