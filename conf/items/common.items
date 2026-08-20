@@ -1,6 +1,7 @@
 /// PERSISTENCE
 // !!! All ITEMS IN THIS GROUP WILL BE PERSISTED ON EVERY CHANGE AND ON STARTUP
 Group gPersist_On_Change_1minute
+Group gPersist_1minute_only
 Group gPersist_On_Every_Change
 // Group Gr_Persist_On_Statup
 // Group Gr_Persist_On_Change

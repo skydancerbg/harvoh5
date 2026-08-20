@@ -20,7 +20,7 @@
 //  Reference restore point: git history of this file prior to 2026-08-10.
 // ============================================================================
 
-Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="84.54.146.177", port=51883, secure=false, username="openhabian", password="harv123", clientID="oh5dev" ]
+Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="100.77.244.57", port=1883, secure=false, username="openhabian", password="harv123", clientID="oh5dev" ]
 //Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="127.0.0.1", port=1883, secure=false, username="openhabian", password="harv123", clientID="oh3srv" ]
 
 {
@@ -618,11 +618,5 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="84.54.146.177", por
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_18/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_18/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_18/LWT" ]
-    }
-    Thing topic flap_actuator_19 "flap_actuator_19" @ "Tunnels" {
-    Channels:
-//  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_19/TARGET_POSITION" ]
-        Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_19/CURRENT_POSITION"]
-        Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_19/LWT" ]
     }
 }

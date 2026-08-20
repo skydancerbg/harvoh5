@@ -4978,10 +4978,10 @@
                     "name": "",
                     "sizeX": 1.0,
                     "sizeY": 1.0,
-                    "item": "FlapActuator_19_Current",
+                    "item": "FlapActuator_8_Current",
                     "row": 0.0,
                     "col": 7.0,
-                    "template": "<div style=\"text-align:center;line-height:1.02;padding:1px 0\"><div style=\"font-size:11px;color:#B0BEC5;font-weight:600;letter-spacing:.03em;white-space:nowrap;overflow:hidden\">КЛАПА 8</div><div ng-style=\"{'color': (itemValue('FlapActuator_19_Current')>=0 && itemValue('FlapActuator_19_Current')<=200) ? '#4FC3F7' : '#FF5252'}\" style=\"font-size:30px;font-weight:800\">{{itemValue('FlapActuator_19_Current')}}<span ng-if=\"itemValue('FlapActuator_19_Current')>=0 && itemValue('FlapActuator_19_Current')<=200\" style=\"font-size:13px;font-weight:600\">&nbsp;mm</span></div></div>"
+                    "template": "<div style=\"text-align:center;line-height:1.02;padding:1px 0\"><div style=\"font-size:11px;color:#B0BEC5;font-weight:600;letter-spacing:.03em;white-space:nowrap;overflow:hidden\">КЛАПА 8</div><div ng-style=\"{'color': (itemValue('FlapActuator_8_Current')>=0 && itemValue('FlapActuator_8_Current')<=200) ? '#4FC3F7' : '#FF5252'}\" style=\"font-size:30px;font-weight:800\">{{itemValue('FlapActuator_8_Current')}}<span ng-if=\"itemValue('FlapActuator_8_Current')>=0 && itemValue('FlapActuator_8_Current')<=200\" style=\"font-size:13px;font-weight:600\">&nbsp;mm</span></div></div>"
                   }
                 },
                 {
@@ -5222,7 +5222,7 @@
                     "name": "Желана позиция:",
                     "sizeX": 1.0,
                     "sizeY": 3.0,
-                    "item": "FlapActuator_19_Target",
+                    "item": "FlapActuator_8_Target",
                     "vertical": true,
                     "floor": 0.0,
                     "ceil": 200.0,
@@ -5572,10 +5572,10 @@
                     "name": "",
                     "sizeX": 3.0,
                     "sizeY": 3.0,
-                    "item": "FlapActuator_19_Current",
+                    "item": "FlapActuator_8_Current",
                     "row": 13.0,
                     "col": 9.0,
-                    "template": "<div style=\"text-align:center;line-height:1.02;padding:1px 0\"><div style=\"font-size:15px;color:#B0BEC5;font-weight:600;letter-spacing:.03em;white-space:nowrap;overflow:hidden\">8 Текуща</div><div ng-style=\"{'color': (itemValue('FlapActuator_19_Current')>=0 && itemValue('FlapActuator_19_Current')<=200) ? '#4FC3F7' : '#FF5252'}\" style=\"font-size:46px;font-weight:800\">{{itemValue('FlapActuator_19_Current')}}<span ng-if=\"itemValue('FlapActuator_19_Current')>=0 && itemValue('FlapActuator_19_Current')<=200\" style=\"font-size:18px;font-weight:600\">&nbsp;mm</span></div></div>"
+                    "template": "<div style=\"text-align:center;line-height:1.02;padding:1px 0\"><div style=\"font-size:15px;color:#B0BEC5;font-weight:600;letter-spacing:.03em;white-space:nowrap;overflow:hidden\">8 Текуща</div><div ng-style=\"{'color': (itemValue('FlapActuator_8_Current')>=0 && itemValue('FlapActuator_8_Current')<=200) ? '#4FC3F7' : '#FF5252'}\" style=\"font-size:46px;font-weight:800\">{{itemValue('FlapActuator_8_Current')}}<span ng-if=\"itemValue('FlapActuator_8_Current')>=0 && itemValue('FlapActuator_8_Current')<=200\" style=\"font-size:18px;font-weight:600\">&nbsp;mm</span></div></div>"
                   }
                 },
                 {
@@ -5632,7 +5632,7 @@
                     "name": "Желана",
                     "sizeX": 3.0,
                     "sizeY": 10.0,
-                    "item": "FlapActuator_19_Target",
+                    "item": "FlapActuator_8_Target",
                     "vertical": true,
                     "floor": 0.0,
                     "ceil": 200.0,

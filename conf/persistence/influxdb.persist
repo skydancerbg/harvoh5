@@ -5,5 +5,6 @@ Strategies {
 
 Items {
     gPersist_On_Change_1minute* : strategy = everyChange, everyMinute
+    gPersist_1minute_only* : strategy = everyMinute
     gPersist_On_Every_Change* : strategy = everyChange, restoreOnStartup
 }

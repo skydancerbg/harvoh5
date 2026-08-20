@@ -9,7 +9,7 @@
 //  Item is only ever written by an operator dragging the slider: it sits in
 //  gPersist_On_Change_1minute, which has NO restoreOnStartup, and on OH5 its
 //  MQTT channel is commented out entirely (read-only mode).  So after every
-//  restart all 19 Targets are NULL, and a slider bound to NULL renders as
+//  restart all 18 Targets are NULL, and a slider bound to NULL renders as
 //  "NaNmm" pinned to the bottom of its travel -- on all eighteen at once.
 //
 //  THE FIX
@@ -23,16 +23,60 @@
 //  on production where those channels are live, and seeding must never drive
 //  anything.
 //
-//  ONLY when the reading is a plausible position, 0..200 mm.  Seven of the
-//  nineteen pots have reported impossible values (-51, 274, 490) and five are
-//  offline entirely.  Inventing a position for those would put a confident
-//  number under a flap nobody can see -- worse than an obviously broken display.
+//  ONLY when the reading is a plausible position, 0..200 mm.  Pots do report
+//  impossible values (-51, 274, 490), and units do go offline.  Inventing a
+//  position for those would put a confident number under a flap nobody can see
+//  -- worse than an obviously broken display.
 //  Those sliders stay NaN, and the redesigned tile above them says so in red.
 //
 //  Runs at startup, at season start, AND on the minute tick -- the last one so
 //  that a flap which comes back online has its slider populated within a minute
-//  instead of at the next restart.  It only ever acts on a NULL Target, so it
+//  instead of at the next restart.  It only ever acts on an unset Target, so it
 //  can never overwrite an operator's setting.
+//
+//  THE STARTUP NAME-RESOLUTION ERROR -- BENIGN, SELF-HEALING, AND NOT WORTH A THIRD FIX
+//  ------------------------------------------------------------------------------------
+//  On openHAB 3.1 the DSL interpreter intermittently fails to resolve a name on this
+//  rule's FIRST execution after a restart.  Three production restarts on 2026-08-20
+//  each showed it, on a DIFFERENT name every time:
+//
+//      The name 'NULL' cannot be resolved to an item or type;      line 47
+//      The name 'FlapActuator_4_Current' cannot be resolved ...;   line 114
+//      The name 'FlapActuator_1_Current' cannot be resolved ...;   line 82
+//
+//  The bytes on those lines are plain ASCII and identical in shape to lines that
+//  resolve fine elsewhere in the same config, and the next minute tick always runs
+//  clean and seeds every flap.  It is the interpreter under startup load, not a defect
+//  in this file.  OH5 (5.1.4) has never shown it in any restart.
+//
+//  TWO FIXES WERE TRIED HERE AND NEITHER WORKS.  Do not try a third without new
+//  evidence -- the cause is in the interpreter, not in anything this file can say:
+//
+//    1. Swapping `== NULL || == UNDEF` for `!(... instanceof DecimalType)`.  All that
+//       did was move which name failed first, from the NULL literal to an Item.  (The
+//       instanceof form was kept anyway: it is exactly equivalent for a plain Number
+//       Item, and it is the same check used one line further in.)
+//
+//    2. The try/catch around each flap below.  It does NOT catch this.  Verified on
+//       production 2026-08-20 10:19: the failing reference sat two lines inside flap 1's
+//       own `try` block (lines 80/82 as the file stood then, before this note was added)
+//       and the error still aborted the whole rule.  openHAB
+//       raises this by aborting script evaluation, not by throwing a Java exception
+//       into the script's own frame, so a DSL catch clause never sees it.
+//
+//  The try/catch is kept because it is still correct defensive structure for ordinary
+//  exceptions -- a bad state conversion in one flap should not cost the other
+//  seventeen -- and `deferred` counts those.  It will read 0 for the startup error.
+//
+//  WHAT ACTUALLY HAPPENS, AND WHY IT IS ACCEPTABLE: the rule aborts part-way, so some
+//  flaps are seeded and the rest wait.  The next minute tick seeds them.  Net cost is
+//  one ERROR line and some sliders arriving a minute late, once per restart, on a
+//  system that restarts rarely.  Seeding is not safety-critical -- it stops a slider
+//  reading "NaNmm", nothing more.
+//
+//  NOTE the same `== NULL` form is still used in on_startup / season_start /
+//  season_end / temperature_alarm.  Those have never been seen to fail and are not all
+//  generated, so they were left alone deliberately.
 // ============================================================================
 
 rule "Flap sliders - seed target from the reported position"
@@ -41,255 +85,315 @@ when
     Item seasonStart received command ON or
     Item oneMinuteTriggerSwitch changed
 then
-    var int seeded = 0
-    var int blind  = 0
+    var int seeded   = 0
+    var int blind    = 0
+    var int deferred = 0
 
-    if(FlapActuator_1_Target.state == NULL || FlapActuator_1_Target.state == UNDEF) {
-        if(FlapActuator_1_Current.state instanceof DecimalType) {
-            val double p1 = (FlapActuator_1_Current.state as DecimalType).doubleValue
-            if(p1 >= 0.0 && p1 <= 200.0) {
-                FlapActuator_1_Target.postUpdate(p1)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_1_Target.state instanceof DecimalType)) {
+            if(FlapActuator_1_Current.state instanceof DecimalType) {
+                val double p1 = (FlapActuator_1_Current.state as DecimalType).doubleValue
+                if(p1 >= 0.0 && p1 <= 200.0) {
+                    FlapActuator_1_Target.postUpdate(p1)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx1) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_2_Target.state == NULL || FlapActuator_2_Target.state == UNDEF) {
-        if(FlapActuator_2_Current.state instanceof DecimalType) {
-            val double p2 = (FlapActuator_2_Current.state as DecimalType).doubleValue
-            if(p2 >= 0.0 && p2 <= 200.0) {
-                FlapActuator_2_Target.postUpdate(p2)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_2_Target.state instanceof DecimalType)) {
+            if(FlapActuator_2_Current.state instanceof DecimalType) {
+                val double p2 = (FlapActuator_2_Current.state as DecimalType).doubleValue
+                if(p2 >= 0.0 && p2 <= 200.0) {
+                    FlapActuator_2_Target.postUpdate(p2)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx2) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_3_Target.state == NULL || FlapActuator_3_Target.state == UNDEF) {
-        if(FlapActuator_3_Current.state instanceof DecimalType) {
-            val double p3 = (FlapActuator_3_Current.state as DecimalType).doubleValue
-            if(p3 >= 0.0 && p3 <= 200.0) {
-                FlapActuator_3_Target.postUpdate(p3)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_3_Target.state instanceof DecimalType)) {
+            if(FlapActuator_3_Current.state instanceof DecimalType) {
+                val double p3 = (FlapActuator_3_Current.state as DecimalType).doubleValue
+                if(p3 >= 0.0 && p3 <= 200.0) {
+                    FlapActuator_3_Target.postUpdate(p3)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx3) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_4_Target.state == NULL || FlapActuator_4_Target.state == UNDEF) {
-        if(FlapActuator_4_Current.state instanceof DecimalType) {
-            val double p4 = (FlapActuator_4_Current.state as DecimalType).doubleValue
-            if(p4 >= 0.0 && p4 <= 200.0) {
-                FlapActuator_4_Target.postUpdate(p4)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_4_Target.state instanceof DecimalType)) {
+            if(FlapActuator_4_Current.state instanceof DecimalType) {
+                val double p4 = (FlapActuator_4_Current.state as DecimalType).doubleValue
+                if(p4 >= 0.0 && p4 <= 200.0) {
+                    FlapActuator_4_Target.postUpdate(p4)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx4) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_5_Target.state == NULL || FlapActuator_5_Target.state == UNDEF) {
-        if(FlapActuator_5_Current.state instanceof DecimalType) {
-            val double p5 = (FlapActuator_5_Current.state as DecimalType).doubleValue
-            if(p5 >= 0.0 && p5 <= 200.0) {
-                FlapActuator_5_Target.postUpdate(p5)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_5_Target.state instanceof DecimalType)) {
+            if(FlapActuator_5_Current.state instanceof DecimalType) {
+                val double p5 = (FlapActuator_5_Current.state as DecimalType).doubleValue
+                if(p5 >= 0.0 && p5 <= 200.0) {
+                    FlapActuator_5_Target.postUpdate(p5)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx5) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_6_Target.state == NULL || FlapActuator_6_Target.state == UNDEF) {
-        if(FlapActuator_6_Current.state instanceof DecimalType) {
-            val double p6 = (FlapActuator_6_Current.state as DecimalType).doubleValue
-            if(p6 >= 0.0 && p6 <= 200.0) {
-                FlapActuator_6_Target.postUpdate(p6)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_6_Target.state instanceof DecimalType)) {
+            if(FlapActuator_6_Current.state instanceof DecimalType) {
+                val double p6 = (FlapActuator_6_Current.state as DecimalType).doubleValue
+                if(p6 >= 0.0 && p6 <= 200.0) {
+                    FlapActuator_6_Target.postUpdate(p6)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx6) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_7_Target.state == NULL || FlapActuator_7_Target.state == UNDEF) {
-        if(FlapActuator_7_Current.state instanceof DecimalType) {
-            val double p7 = (FlapActuator_7_Current.state as DecimalType).doubleValue
-            if(p7 >= 0.0 && p7 <= 200.0) {
-                FlapActuator_7_Target.postUpdate(p7)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_7_Target.state instanceof DecimalType)) {
+            if(FlapActuator_7_Current.state instanceof DecimalType) {
+                val double p7 = (FlapActuator_7_Current.state as DecimalType).doubleValue
+                if(p7 >= 0.0 && p7 <= 200.0) {
+                    FlapActuator_7_Target.postUpdate(p7)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx7) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_8_Target.state == NULL || FlapActuator_8_Target.state == UNDEF) {
-        if(FlapActuator_8_Current.state instanceof DecimalType) {
-            val double p8 = (FlapActuator_8_Current.state as DecimalType).doubleValue
-            if(p8 >= 0.0 && p8 <= 200.0) {
-                FlapActuator_8_Target.postUpdate(p8)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_8_Target.state instanceof DecimalType)) {
+            if(FlapActuator_8_Current.state instanceof DecimalType) {
+                val double p8 = (FlapActuator_8_Current.state as DecimalType).doubleValue
+                if(p8 >= 0.0 && p8 <= 200.0) {
+                    FlapActuator_8_Target.postUpdate(p8)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx8) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_9_Target.state == NULL || FlapActuator_9_Target.state == UNDEF) {
-        if(FlapActuator_9_Current.state instanceof DecimalType) {
-            val double p9 = (FlapActuator_9_Current.state as DecimalType).doubleValue
-            if(p9 >= 0.0 && p9 <= 200.0) {
-                FlapActuator_9_Target.postUpdate(p9)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_9_Target.state instanceof DecimalType)) {
+            if(FlapActuator_9_Current.state instanceof DecimalType) {
+                val double p9 = (FlapActuator_9_Current.state as DecimalType).doubleValue
+                if(p9 >= 0.0 && p9 <= 200.0) {
+                    FlapActuator_9_Target.postUpdate(p9)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx9) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_10_Target.state == NULL || FlapActuator_10_Target.state == UNDEF) {
-        if(FlapActuator_10_Current.state instanceof DecimalType) {
-            val double p10 = (FlapActuator_10_Current.state as DecimalType).doubleValue
-            if(p10 >= 0.0 && p10 <= 200.0) {
-                FlapActuator_10_Target.postUpdate(p10)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_10_Target.state instanceof DecimalType)) {
+            if(FlapActuator_10_Current.state instanceof DecimalType) {
+                val double p10 = (FlapActuator_10_Current.state as DecimalType).doubleValue
+                if(p10 >= 0.0 && p10 <= 200.0) {
+                    FlapActuator_10_Target.postUpdate(p10)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx10) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_11_Target.state == NULL || FlapActuator_11_Target.state == UNDEF) {
-        if(FlapActuator_11_Current.state instanceof DecimalType) {
-            val double p11 = (FlapActuator_11_Current.state as DecimalType).doubleValue
-            if(p11 >= 0.0 && p11 <= 200.0) {
-                FlapActuator_11_Target.postUpdate(p11)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_11_Target.state instanceof DecimalType)) {
+            if(FlapActuator_11_Current.state instanceof DecimalType) {
+                val double p11 = (FlapActuator_11_Current.state as DecimalType).doubleValue
+                if(p11 >= 0.0 && p11 <= 200.0) {
+                    FlapActuator_11_Target.postUpdate(p11)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx11) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_12_Target.state == NULL || FlapActuator_12_Target.state == UNDEF) {
-        if(FlapActuator_12_Current.state instanceof DecimalType) {
-            val double p12 = (FlapActuator_12_Current.state as DecimalType).doubleValue
-            if(p12 >= 0.0 && p12 <= 200.0) {
-                FlapActuator_12_Target.postUpdate(p12)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_12_Target.state instanceof DecimalType)) {
+            if(FlapActuator_12_Current.state instanceof DecimalType) {
+                val double p12 = (FlapActuator_12_Current.state as DecimalType).doubleValue
+                if(p12 >= 0.0 && p12 <= 200.0) {
+                    FlapActuator_12_Target.postUpdate(p12)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx12) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_13_Target.state == NULL || FlapActuator_13_Target.state == UNDEF) {
-        if(FlapActuator_13_Current.state instanceof DecimalType) {
-            val double p13 = (FlapActuator_13_Current.state as DecimalType).doubleValue
-            if(p13 >= 0.0 && p13 <= 200.0) {
-                FlapActuator_13_Target.postUpdate(p13)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_13_Target.state instanceof DecimalType)) {
+            if(FlapActuator_13_Current.state instanceof DecimalType) {
+                val double p13 = (FlapActuator_13_Current.state as DecimalType).doubleValue
+                if(p13 >= 0.0 && p13 <= 200.0) {
+                    FlapActuator_13_Target.postUpdate(p13)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx13) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_14_Target.state == NULL || FlapActuator_14_Target.state == UNDEF) {
-        if(FlapActuator_14_Current.state instanceof DecimalType) {
-            val double p14 = (FlapActuator_14_Current.state as DecimalType).doubleValue
-            if(p14 >= 0.0 && p14 <= 200.0) {
-                FlapActuator_14_Target.postUpdate(p14)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_14_Target.state instanceof DecimalType)) {
+            if(FlapActuator_14_Current.state instanceof DecimalType) {
+                val double p14 = (FlapActuator_14_Current.state as DecimalType).doubleValue
+                if(p14 >= 0.0 && p14 <= 200.0) {
+                    FlapActuator_14_Target.postUpdate(p14)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx14) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_15_Target.state == NULL || FlapActuator_15_Target.state == UNDEF) {
-        if(FlapActuator_15_Current.state instanceof DecimalType) {
-            val double p15 = (FlapActuator_15_Current.state as DecimalType).doubleValue
-            if(p15 >= 0.0 && p15 <= 200.0) {
-                FlapActuator_15_Target.postUpdate(p15)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_15_Target.state instanceof DecimalType)) {
+            if(FlapActuator_15_Current.state instanceof DecimalType) {
+                val double p15 = (FlapActuator_15_Current.state as DecimalType).doubleValue
+                if(p15 >= 0.0 && p15 <= 200.0) {
+                    FlapActuator_15_Target.postUpdate(p15)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx15) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_16_Target.state == NULL || FlapActuator_16_Target.state == UNDEF) {
-        if(FlapActuator_16_Current.state instanceof DecimalType) {
-            val double p16 = (FlapActuator_16_Current.state as DecimalType).doubleValue
-            if(p16 >= 0.0 && p16 <= 200.0) {
-                FlapActuator_16_Target.postUpdate(p16)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_16_Target.state instanceof DecimalType)) {
+            if(FlapActuator_16_Current.state instanceof DecimalType) {
+                val double p16 = (FlapActuator_16_Current.state as DecimalType).doubleValue
+                if(p16 >= 0.0 && p16 <= 200.0) {
+                    FlapActuator_16_Target.postUpdate(p16)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx16) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_17_Target.state == NULL || FlapActuator_17_Target.state == UNDEF) {
-        if(FlapActuator_17_Current.state instanceof DecimalType) {
-            val double p17 = (FlapActuator_17_Current.state as DecimalType).doubleValue
-            if(p17 >= 0.0 && p17 <= 200.0) {
-                FlapActuator_17_Target.postUpdate(p17)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_17_Target.state instanceof DecimalType)) {
+            if(FlapActuator_17_Current.state instanceof DecimalType) {
+                val double p17 = (FlapActuator_17_Current.state as DecimalType).doubleValue
+                if(p17 >= 0.0 && p17 <= 200.0) {
+                    FlapActuator_17_Target.postUpdate(p17)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
+    } catch(Throwable tx17) {
+        deferred = deferred + 1
     }
-    if(FlapActuator_18_Target.state == NULL || FlapActuator_18_Target.state == UNDEF) {
-        if(FlapActuator_18_Current.state instanceof DecimalType) {
-            val double p18 = (FlapActuator_18_Current.state as DecimalType).doubleValue
-            if(p18 >= 0.0 && p18 <= 200.0) {
-                FlapActuator_18_Target.postUpdate(p18)
-                seeded = seeded + 1
+    try {
+        if(!(FlapActuator_18_Target.state instanceof DecimalType)) {
+            if(FlapActuator_18_Current.state instanceof DecimalType) {
+                val double p18 = (FlapActuator_18_Current.state as DecimalType).doubleValue
+                if(p18 >= 0.0 && p18 <= 200.0) {
+                    FlapActuator_18_Target.postUpdate(p18)
+                    seeded = seeded + 1
+                } else {
+                    blind = blind + 1
+                }
             } else {
                 blind = blind + 1
             }
-        } else {
-            blind = blind + 1
         }
-    }
-    if(FlapActuator_19_Target.state == NULL || FlapActuator_19_Target.state == UNDEF) {
-        if(FlapActuator_19_Current.state instanceof DecimalType) {
-            val double p19 = (FlapActuator_19_Current.state as DecimalType).doubleValue
-            if(p19 >= 0.0 && p19 <= 200.0) {
-                FlapActuator_19_Target.postUpdate(p19)
-                seeded = seeded + 1
-            } else {
-                blind = blind + 1
-            }
-        } else {
-            blind = blind + 1
-        }
+    } catch(Throwable tx18) {
+        deferred = deferred + 1
     }
 
     if(seeded > 0) {
@@ -297,5 +401,8 @@ then
     }
     if(seeded > 0 && blind > 0) {
         logWarn("flap_init", "{} flap(s) still have no usable position - slider stays blank, tile shows red", blind)
+    }
+    if(deferred > 0) {
+        logWarn("flap_init", "{} flap(s) skipped by an unexpected error this pass - retried on the next tick", deferred)
     }
 end
