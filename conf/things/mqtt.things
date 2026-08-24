@@ -516,107 +516,179 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="100.77.244.57", por
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_1/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_1/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_1/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_1/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_1/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_1/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_1/HEALTH" ]
     }
     Thing topic flap_actuator_2 "flap_actuator_2" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_2/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_2/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_2/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_2/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_2/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_2/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_2/HEALTH" ]
     }
     Thing topic flap_actuator_3 "flap_actuator_3" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_3/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_3/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_3/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_3/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_3/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_3/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_3/HEALTH" ]
     }
     Thing topic flap_actuator_4 "flap_actuator_4" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_4/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_4/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_4/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_4/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_4/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_4/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_4/HEALTH" ]
     }
     Thing topic flap_actuator_5 "flap_actuator_5" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_5/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_5/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_5/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_5/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_5/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_5/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_5/HEALTH" ]
     }
     Thing topic flap_actuator_6 "flap_actuator_6" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_6/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_6/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_6/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_6/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_6/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_6/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_6/HEALTH" ]
     }
     Thing topic flap_actuator_7 "flap_actuator_7" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_7/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_7/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_7/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_7/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_7/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_7/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_7/HEALTH" ]
     }
     Thing topic flap_actuator_8 "flap_actuator_8" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_8/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_8/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_8/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_8/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_8/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_8/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_8/HEALTH" ]
     }
     Thing topic flap_actuator_9 "flap_actuator_9" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_9/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_9/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_9/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_9/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_9/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_9/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_9/HEALTH" ]
     }
     Thing topic flap_actuator_10 "flap_actuator_10" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_10/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_10/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_10/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_10/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_10/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_10/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_10/HEALTH" ]
     }
     Thing topic flap_actuator_11 "flap_actuator_11" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_11/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_11/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_11/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_11/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_11/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_11/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_11/HEALTH" ]
     }
     Thing topic flap_actuator_12 "flap_actuator_12" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_12/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_12/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_12/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_12/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_12/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_12/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_12/HEALTH" ]
     }
     Thing topic flap_actuator_13 "flap_actuator_13" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_13/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_13/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_13/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_13/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_13/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_13/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_13/HEALTH" ]
     }
     Thing topic flap_actuator_14 "flap_actuator_14" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_14/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_14/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_14/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_14/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_14/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_14/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_14/HEALTH" ]
     }
     Thing topic flap_actuator_15 "flap_actuator_15" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_15/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_15/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_15/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_15/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_15/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_15/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_15/HEALTH" ]
     }
     Thing topic flap_actuator_16 "flap_actuator_16" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_16/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_16/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_16/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_16/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_16/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_16/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_16/HEALTH" ]
     }
     Thing topic flap_actuator_17 "flap_actuator_17" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_17/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_17/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_17/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_17/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_17/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_17/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_17/HEALTH" ]
     }
     Thing topic flap_actuator_18 "flap_actuator_18" @ "Tunnels" {
     Channels:
 //  [read-only mode] Type number : target_position   "Set position"           [   commandTopic= "cmnd/flap_actuator_18/TARGET_POSITION" ]
         Type number : current_position  "Current position"       [      stateTopic="stat/flap_actuator_18/CURRENT_POSITION"]
         Type string : reachable         "Reachable"              [      stateTopic="tele/flap_actuator_18/LWT" ]
+        Type number : device_target     "Target the device holds" [      stateTopic="tele/flap_actuator_18/STATE", transformationPattern="JSONPATH:$.Target" ]
+        Type string : device_mode       "Controller mode"         [      stateTopic="tele/flap_actuator_18/STATE", transformationPattern="JSONPATH:$.Mode" ]
+        Type number : device_driving    "Relay closed"            [      stateTopic="tele/flap_actuator_18/STATE", transformationPattern="JSONPATH:$.Driving" ]
+        Type string : device_health     "Sensor health"           [      stateTopic="stat/flap_actuator_18/HEALTH" ]
     }
 }
